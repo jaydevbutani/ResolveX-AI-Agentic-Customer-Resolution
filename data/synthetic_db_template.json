@@ -1,0 +1,2905 @@
+{
+  "customers": {
+    "CUST-101": {
+      "customer_id": "CUST-101",
+      "name": "Rahul Sharma",
+      "email": "rahul.sharma@example.in",
+      "phone": "+91-9876543210",
+      "tier": "GOLD",
+      "trust_score": 96,
+      "is_suspicious": false
+    },
+    "CUST-102": {
+      "customer_id": "CUST-102",
+      "name": "Priya Patel",
+      "email": "priya.patel@example.in",
+      "phone": "+91-9876543211",
+      "tier": "SILVER",
+      "trust_score": 92,
+      "is_suspicious": false
+    },
+    "CUST-103": {
+      "customer_id": "CUST-103",
+      "name": "Vikram Malhotra",
+      "email": "vikram.m@example.in",
+      "phone": "+91-9876543212",
+      "tier": "FLAGGED",
+      "trust_score": 32,
+      "is_suspicious": true
+    },
+    "CUST-104": {
+      "customer_id": "CUST-104",
+      "name": "Ananya Iyer",
+      "email": "ananya.iyer@example.in",
+      "phone": "+91-9876543213",
+      "tier": "GOLD",
+      "trust_score": 94,
+      "is_suspicious": false
+    },
+    "CUST-201": {
+      "customer_id": "CUST-201",
+      "name": "Enterprise User 01",
+      "email": "user01@megacorp.in",
+      "phone": "+91-9800000001",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-202": {
+      "customer_id": "CUST-202",
+      "name": "Enterprise User 02",
+      "email": "user02@megacorp.in",
+      "phone": "+91-9800000002",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-203": {
+      "customer_id": "CUST-203",
+      "name": "Enterprise User 03",
+      "email": "user03@megacorp.in",
+      "phone": "+91-9800000003",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-204": {
+      "customer_id": "CUST-204",
+      "name": "Enterprise User 04",
+      "email": "user04@megacorp.in",
+      "phone": "+91-9800000004",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-205": {
+      "customer_id": "CUST-205",
+      "name": "Enterprise User 05",
+      "email": "user05@megacorp.in",
+      "phone": "+91-9800000005",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-206": {
+      "customer_id": "CUST-206",
+      "name": "Enterprise User 06",
+      "email": "user06@megacorp.in",
+      "phone": "+91-9800000006",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-207": {
+      "customer_id": "CUST-207",
+      "name": "Enterprise User 07",
+      "email": "user07@megacorp.in",
+      "phone": "+91-9800000007",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-208": {
+      "customer_id": "CUST-208",
+      "name": "Enterprise User 08",
+      "email": "user08@megacorp.in",
+      "phone": "+91-9800000008",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-209": {
+      "customer_id": "CUST-209",
+      "name": "Enterprise User 09",
+      "email": "user09@megacorp.in",
+      "phone": "+91-9800000009",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-210": {
+      "customer_id": "CUST-210",
+      "name": "Enterprise User 10",
+      "email": "user10@megacorp.in",
+      "phone": "+91-9800000010",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-211": {
+      "customer_id": "CUST-211",
+      "name": "Enterprise User 11",
+      "email": "user11@megacorp.in",
+      "phone": "+91-9800000011",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-212": {
+      "customer_id": "CUST-212",
+      "name": "Enterprise User 12",
+      "email": "user12@megacorp.in",
+      "phone": "+91-9800000012",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-213": {
+      "customer_id": "CUST-213",
+      "name": "Enterprise User 13",
+      "email": "user13@megacorp.in",
+      "phone": "+91-9800000013",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-214": {
+      "customer_id": "CUST-214",
+      "name": "Enterprise User 14",
+      "email": "user14@megacorp.in",
+      "phone": "+91-9800000014",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-215": {
+      "customer_id": "CUST-215",
+      "name": "Enterprise User 15",
+      "email": "user15@megacorp.in",
+      "phone": "+91-9800000015",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-216": {
+      "customer_id": "CUST-216",
+      "name": "Enterprise User 16",
+      "email": "user16@megacorp.in",
+      "phone": "+91-9800000016",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-217": {
+      "customer_id": "CUST-217",
+      "name": "Enterprise User 17",
+      "email": "user17@megacorp.in",
+      "phone": "+91-9800000017",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-218": {
+      "customer_id": "CUST-218",
+      "name": "Enterprise User 18",
+      "email": "user18@megacorp.in",
+      "phone": "+91-9800000018",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-219": {
+      "customer_id": "CUST-219",
+      "name": "Enterprise User 19",
+      "email": "user19@megacorp.in",
+      "phone": "+91-9800000019",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-220": {
+      "customer_id": "CUST-220",
+      "name": "Enterprise User 20",
+      "email": "user20@megacorp.in",
+      "phone": "+91-9800000020",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-221": {
+      "customer_id": "CUST-221",
+      "name": "Enterprise User 21",
+      "email": "user21@megacorp.in",
+      "phone": "+91-9800000021",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-222": {
+      "customer_id": "CUST-222",
+      "name": "Enterprise User 22",
+      "email": "user22@megacorp.in",
+      "phone": "+91-9800000022",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-223": {
+      "customer_id": "CUST-223",
+      "name": "Enterprise User 23",
+      "email": "user23@megacorp.in",
+      "phone": "+91-9800000023",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-224": {
+      "customer_id": "CUST-224",
+      "name": "Enterprise User 24",
+      "email": "user24@megacorp.in",
+      "phone": "+91-9800000024",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-225": {
+      "customer_id": "CUST-225",
+      "name": "Enterprise User 25",
+      "email": "user25@megacorp.in",
+      "phone": "+91-9800000025",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-226": {
+      "customer_id": "CUST-226",
+      "name": "Enterprise User 26",
+      "email": "user26@megacorp.in",
+      "phone": "+91-9800000026",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-227": {
+      "customer_id": "CUST-227",
+      "name": "Enterprise User 27",
+      "email": "user27@megacorp.in",
+      "phone": "+91-9800000027",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-228": {
+      "customer_id": "CUST-228",
+      "name": "Enterprise User 28",
+      "email": "user28@megacorp.in",
+      "phone": "+91-9800000028",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-229": {
+      "customer_id": "CUST-229",
+      "name": "Enterprise User 29",
+      "email": "user29@megacorp.in",
+      "phone": "+91-9800000029",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-230": {
+      "customer_id": "CUST-230",
+      "name": "Enterprise User 30",
+      "email": "user30@megacorp.in",
+      "phone": "+91-9800000030",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-231": {
+      "customer_id": "CUST-231",
+      "name": "Enterprise User 31",
+      "email": "user31@megacorp.in",
+      "phone": "+91-9800000031",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-232": {
+      "customer_id": "CUST-232",
+      "name": "Enterprise User 32",
+      "email": "user32@megacorp.in",
+      "phone": "+91-9800000032",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-233": {
+      "customer_id": "CUST-233",
+      "name": "Enterprise User 33",
+      "email": "user33@megacorp.in",
+      "phone": "+91-9800000033",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-234": {
+      "customer_id": "CUST-234",
+      "name": "Enterprise User 34",
+      "email": "user34@megacorp.in",
+      "phone": "+91-9800000034",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-235": {
+      "customer_id": "CUST-235",
+      "name": "Enterprise User 35",
+      "email": "user35@megacorp.in",
+      "phone": "+91-9800000035",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-236": {
+      "customer_id": "CUST-236",
+      "name": "Enterprise User 36",
+      "email": "user36@megacorp.in",
+      "phone": "+91-9800000036",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-237": {
+      "customer_id": "CUST-237",
+      "name": "Enterprise User 37",
+      "email": "user37@megacorp.in",
+      "phone": "+91-9800000037",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-238": {
+      "customer_id": "CUST-238",
+      "name": "Enterprise User 38",
+      "email": "user38@megacorp.in",
+      "phone": "+91-9800000038",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-239": {
+      "customer_id": "CUST-239",
+      "name": "Enterprise User 39",
+      "email": "user39@megacorp.in",
+      "phone": "+91-9800000039",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-240": {
+      "customer_id": "CUST-240",
+      "name": "Enterprise User 40",
+      "email": "user40@megacorp.in",
+      "phone": "+91-9800000040",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-241": {
+      "customer_id": "CUST-241",
+      "name": "Enterprise User 41",
+      "email": "user41@megacorp.in",
+      "phone": "+91-9800000041",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-242": {
+      "customer_id": "CUST-242",
+      "name": "Enterprise User 42",
+      "email": "user42@megacorp.in",
+      "phone": "+91-9800000042",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-243": {
+      "customer_id": "CUST-243",
+      "name": "Enterprise User 43",
+      "email": "user43@megacorp.in",
+      "phone": "+91-9800000043",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-244": {
+      "customer_id": "CUST-244",
+      "name": "Enterprise User 44",
+      "email": "user44@megacorp.in",
+      "phone": "+91-9800000044",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-245": {
+      "customer_id": "CUST-245",
+      "name": "Enterprise User 45",
+      "email": "user45@megacorp.in",
+      "phone": "+91-9800000045",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-246": {
+      "customer_id": "CUST-246",
+      "name": "Enterprise User 46",
+      "email": "user46@megacorp.in",
+      "phone": "+91-9800000046",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-247": {
+      "customer_id": "CUST-247",
+      "name": "Enterprise User 47",
+      "email": "user47@megacorp.in",
+      "phone": "+91-9800000047",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-248": {
+      "customer_id": "CUST-248",
+      "name": "Enterprise User 48",
+      "email": "user48@megacorp.in",
+      "phone": "+91-9800000048",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-249": {
+      "customer_id": "CUST-249",
+      "name": "Enterprise User 49",
+      "email": "user49@megacorp.in",
+      "phone": "+91-9800000049",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    },
+    "CUST-250": {
+      "customer_id": "CUST-250",
+      "name": "Enterprise User 50",
+      "email": "user50@megacorp.in",
+      "phone": "+91-9800000050",
+      "tier": "STANDARD",
+      "trust_score": 90,
+      "is_suspicious": false
+    }
+  },
+  "transactions": {
+    "TXN-8821": {
+      "transaction_id": "TXN-8821",
+      "customer_id": "CUST-101",
+      "amount": 2499.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-5501",
+      "refund_id": null,
+      "error_code": "NONE",
+      "timestamp": "2026-10-19T14:30:00",
+      "description": "UPI payment received for headphones"
+    },
+    "TXN-8822": {
+      "transaction_id": "TXN-8822",
+      "customer_id": "CUST-102",
+      "amount": 2499.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-5502",
+      "refund_id": "RF-40192",
+      "error_code": "NONE",
+      "timestamp": "2026-10-19T12:00:00",
+      "description": "Payment captured, prior refund already queued"
+    },
+    "TXN-9901": {
+      "transaction_id": "TXN-9901",
+      "customer_id": "CUST-103",
+      "amount": 48500.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "BillDesk",
+      "payment_method": "NetBanking",
+      "order_id": "ORD-5503",
+      "refund_id": null,
+      "error_code": "MISMATCH_DEVICE_IP",
+      "timestamp": "2026-10-19T10:15:00",
+      "description": "High value payment from untrusted proxy IP"
+    },
+    "TXN-3301": {
+      "transaction_id": "TXN-3301",
+      "customer_id": "CUST-104",
+      "amount": 1499.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Stripe",
+      "payment_method": "CreditCard",
+      "order_id": "SUB-101",
+      "refund_id": null,
+      "error_code": "NONE",
+      "timestamp": "2026-10-19T02:00:00",
+      "description": "Subscription automated charge"
+    },
+    "TXN-7001": {
+      "transaction_id": "TXN-7001",
+      "customer_id": "CUST-201",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7001",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:11:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7002": {
+      "transaction_id": "TXN-7002",
+      "customer_id": "CUST-202",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7002",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:12:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7003": {
+      "transaction_id": "TXN-7003",
+      "customer_id": "CUST-203",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7003",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:13:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7004": {
+      "transaction_id": "TXN-7004",
+      "customer_id": "CUST-204",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7004",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:14:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7005": {
+      "transaction_id": "TXN-7005",
+      "customer_id": "CUST-205",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7005",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:15:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7006": {
+      "transaction_id": "TXN-7006",
+      "customer_id": "CUST-206",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7006",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:16:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7007": {
+      "transaction_id": "TXN-7007",
+      "customer_id": "CUST-207",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7007",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:17:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7008": {
+      "transaction_id": "TXN-7008",
+      "customer_id": "CUST-208",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7008",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:18:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7009": {
+      "transaction_id": "TXN-7009",
+      "customer_id": "CUST-209",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7009",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:19:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7010": {
+      "transaction_id": "TXN-7010",
+      "customer_id": "CUST-210",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7010",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:20:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7011": {
+      "transaction_id": "TXN-7011",
+      "customer_id": "CUST-211",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7011",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:21:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7012": {
+      "transaction_id": "TXN-7012",
+      "customer_id": "CUST-212",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7012",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:22:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7013": {
+      "transaction_id": "TXN-7013",
+      "customer_id": "CUST-213",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7013",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:23:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7014": {
+      "transaction_id": "TXN-7014",
+      "customer_id": "CUST-214",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7014",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:24:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7015": {
+      "transaction_id": "TXN-7015",
+      "customer_id": "CUST-215",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7015",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:10:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7016": {
+      "transaction_id": "TXN-7016",
+      "customer_id": "CUST-216",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7016",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:11:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7017": {
+      "transaction_id": "TXN-7017",
+      "customer_id": "CUST-217",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7017",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:12:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7018": {
+      "transaction_id": "TXN-7018",
+      "customer_id": "CUST-218",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7018",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:13:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7019": {
+      "transaction_id": "TXN-7019",
+      "customer_id": "CUST-219",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7019",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:14:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7020": {
+      "transaction_id": "TXN-7020",
+      "customer_id": "CUST-220",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7020",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:15:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7021": {
+      "transaction_id": "TXN-7021",
+      "customer_id": "CUST-221",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7021",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:16:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7022": {
+      "transaction_id": "TXN-7022",
+      "customer_id": "CUST-222",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7022",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:17:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7023": {
+      "transaction_id": "TXN-7023",
+      "customer_id": "CUST-223",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7023",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:18:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7024": {
+      "transaction_id": "TXN-7024",
+      "customer_id": "CUST-224",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7024",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:19:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7025": {
+      "transaction_id": "TXN-7025",
+      "customer_id": "CUST-225",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7025",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:20:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7026": {
+      "transaction_id": "TXN-7026",
+      "customer_id": "CUST-226",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7026",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:21:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7027": {
+      "transaction_id": "TXN-7027",
+      "customer_id": "CUST-227",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7027",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:22:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7028": {
+      "transaction_id": "TXN-7028",
+      "customer_id": "CUST-228",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7028",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:23:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7029": {
+      "transaction_id": "TXN-7029",
+      "customer_id": "CUST-229",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7029",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:24:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7030": {
+      "transaction_id": "TXN-7030",
+      "customer_id": "CUST-230",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7030",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:10:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7031": {
+      "transaction_id": "TXN-7031",
+      "customer_id": "CUST-231",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7031",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:11:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7032": {
+      "transaction_id": "TXN-7032",
+      "customer_id": "CUST-232",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7032",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:12:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7033": {
+      "transaction_id": "TXN-7033",
+      "customer_id": "CUST-233",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7033",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:13:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7034": {
+      "transaction_id": "TXN-7034",
+      "customer_id": "CUST-234",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7034",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:14:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7035": {
+      "transaction_id": "TXN-7035",
+      "customer_id": "CUST-235",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7035",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:15:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7036": {
+      "transaction_id": "TXN-7036",
+      "customer_id": "CUST-236",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7036",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:16:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7037": {
+      "transaction_id": "TXN-7037",
+      "customer_id": "CUST-237",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7037",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:17:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7038": {
+      "transaction_id": "TXN-7038",
+      "customer_id": "CUST-238",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7038",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:18:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7039": {
+      "transaction_id": "TXN-7039",
+      "customer_id": "CUST-239",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7039",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:19:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7040": {
+      "transaction_id": "TXN-7040",
+      "customer_id": "CUST-240",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7040",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:20:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7041": {
+      "transaction_id": "TXN-7041",
+      "customer_id": "CUST-241",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7041",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:21:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7042": {
+      "transaction_id": "TXN-7042",
+      "customer_id": "CUST-242",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7042",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:22:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7043": {
+      "transaction_id": "TXN-7043",
+      "customer_id": "CUST-243",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7043",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:23:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7044": {
+      "transaction_id": "TXN-7044",
+      "customer_id": "CUST-244",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7044",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:24:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7045": {
+      "transaction_id": "TXN-7045",
+      "customer_id": "CUST-245",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7045",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:10:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7046": {
+      "transaction_id": "TXN-7046",
+      "customer_id": "CUST-246",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7046",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:11:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7047": {
+      "transaction_id": "TXN-7047",
+      "customer_id": "CUST-247",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7047",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:12:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7048": {
+      "transaction_id": "TXN-7048",
+      "customer_id": "CUST-248",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7048",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:13:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7049": {
+      "transaction_id": "TXN-7049",
+      "customer_id": "CUST-249",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7049",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:14:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    },
+    "TXN-7050": {
+      "transaction_id": "TXN-7050",
+      "customer_id": "CUST-250",
+      "amount": 1999.0,
+      "currency": "INR",
+      "status": "SUCCESS",
+      "gateway": "Razorpay",
+      "payment_method": "UPI",
+      "order_id": "ORD-7050",
+      "refund_id": null,
+      "error_code": "PG_TIMEOUT_504",
+      "timestamp": "2026-10-19T15:15:00",
+      "description": "Flash Sale Checkout Payment Captured"
+    }
+  },
+  "orders": {
+    "ORD-5501": {
+      "order_id": "ORD-5501",
+      "customer_id": "CUST-101",
+      "transaction_id": "TXN-8821",
+      "items": [
+        {
+          "name": "Acoustic Pro Wireless Earbuds",
+          "qty": 1,
+          "price": 2499.0
+        }
+      ],
+      "total_amount": 2499.0,
+      "status": "FAILED",
+      "failure_reason": "INVENTORY_RESERVATION_TIMEOUT",
+      "created_at": "2026-10-19T14:30:05",
+      "updated_at": "2026-10-19T14:30:05"
+    },
+    "ORD-5502": {
+      "order_id": "ORD-5502",
+      "customer_id": "CUST-102",
+      "transaction_id": "TXN-8822",
+      "items": [
+        {
+          "name": "Smart Fitness Band 7",
+          "qty": 1,
+          "price": 2499.0
+        }
+      ],
+      "total_amount": 2499.0,
+      "status": "FAILED",
+      "failure_reason": "GATEWAY_CALLBACK_TIMEOUT",
+      "created_at": "2026-10-19T12:00:05",
+      "updated_at": "2026-10-19T12:00:05"
+    },
+    "ORD-5503": {
+      "order_id": "ORD-5503",
+      "customer_id": "CUST-103",
+      "transaction_id": "TXN-9901",
+      "items": [
+        {
+          "name": "4K Ultra HD Gaming Monitor 144Hz",
+          "qty": 1,
+          "price": 48500.0
+        }
+      ],
+      "total_amount": 48500.0,
+      "status": "FAILED",
+      "failure_reason": "MANUAL_HOLD_DEVICE_SUSPICIOUS",
+      "created_at": "2026-10-19T10:15:10",
+      "updated_at": "2026-10-19T10:15:10"
+    },
+    "ORD-7001": {
+      "order_id": "ORD-7001",
+      "customer_id": "CUST-201",
+      "transaction_id": "TXN-7001",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:11:05",
+      "updated_at": "2026-10-19T15:11:05"
+    },
+    "ORD-7002": {
+      "order_id": "ORD-7002",
+      "customer_id": "CUST-202",
+      "transaction_id": "TXN-7002",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:12:05",
+      "updated_at": "2026-10-19T15:12:05"
+    },
+    "ORD-7003": {
+      "order_id": "ORD-7003",
+      "customer_id": "CUST-203",
+      "transaction_id": "TXN-7003",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:13:05",
+      "updated_at": "2026-10-19T15:13:05"
+    },
+    "ORD-7004": {
+      "order_id": "ORD-7004",
+      "customer_id": "CUST-204",
+      "transaction_id": "TXN-7004",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:14:05",
+      "updated_at": "2026-10-19T15:14:05"
+    },
+    "ORD-7005": {
+      "order_id": "ORD-7005",
+      "customer_id": "CUST-205",
+      "transaction_id": "TXN-7005",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:15:05",
+      "updated_at": "2026-10-19T15:15:05"
+    },
+    "ORD-7006": {
+      "order_id": "ORD-7006",
+      "customer_id": "CUST-206",
+      "transaction_id": "TXN-7006",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:16:05",
+      "updated_at": "2026-10-19T15:16:05"
+    },
+    "ORD-7007": {
+      "order_id": "ORD-7007",
+      "customer_id": "CUST-207",
+      "transaction_id": "TXN-7007",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:17:05",
+      "updated_at": "2026-10-19T15:17:05"
+    },
+    "ORD-7008": {
+      "order_id": "ORD-7008",
+      "customer_id": "CUST-208",
+      "transaction_id": "TXN-7008",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:18:05",
+      "updated_at": "2026-10-19T15:18:05"
+    },
+    "ORD-7009": {
+      "order_id": "ORD-7009",
+      "customer_id": "CUST-209",
+      "transaction_id": "TXN-7009",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:19:05",
+      "updated_at": "2026-10-19T15:19:05"
+    },
+    "ORD-7010": {
+      "order_id": "ORD-7010",
+      "customer_id": "CUST-210",
+      "transaction_id": "TXN-7010",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:20:05",
+      "updated_at": "2026-10-19T15:20:05"
+    },
+    "ORD-7011": {
+      "order_id": "ORD-7011",
+      "customer_id": "CUST-211",
+      "transaction_id": "TXN-7011",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:21:05",
+      "updated_at": "2026-10-19T15:21:05"
+    },
+    "ORD-7012": {
+      "order_id": "ORD-7012",
+      "customer_id": "CUST-212",
+      "transaction_id": "TXN-7012",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:22:05",
+      "updated_at": "2026-10-19T15:22:05"
+    },
+    "ORD-7013": {
+      "order_id": "ORD-7013",
+      "customer_id": "CUST-213",
+      "transaction_id": "TXN-7013",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:23:05",
+      "updated_at": "2026-10-19T15:23:05"
+    },
+    "ORD-7014": {
+      "order_id": "ORD-7014",
+      "customer_id": "CUST-214",
+      "transaction_id": "TXN-7014",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:24:05",
+      "updated_at": "2026-10-19T15:24:05"
+    },
+    "ORD-7015": {
+      "order_id": "ORD-7015",
+      "customer_id": "CUST-215",
+      "transaction_id": "TXN-7015",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:10:05",
+      "updated_at": "2026-10-19T15:10:05"
+    },
+    "ORD-7016": {
+      "order_id": "ORD-7016",
+      "customer_id": "CUST-216",
+      "transaction_id": "TXN-7016",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:11:05",
+      "updated_at": "2026-10-19T15:11:05"
+    },
+    "ORD-7017": {
+      "order_id": "ORD-7017",
+      "customer_id": "CUST-217",
+      "transaction_id": "TXN-7017",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:12:05",
+      "updated_at": "2026-10-19T15:12:05"
+    },
+    "ORD-7018": {
+      "order_id": "ORD-7018",
+      "customer_id": "CUST-218",
+      "transaction_id": "TXN-7018",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:13:05",
+      "updated_at": "2026-10-19T15:13:05"
+    },
+    "ORD-7019": {
+      "order_id": "ORD-7019",
+      "customer_id": "CUST-219",
+      "transaction_id": "TXN-7019",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:14:05",
+      "updated_at": "2026-10-19T15:14:05"
+    },
+    "ORD-7020": {
+      "order_id": "ORD-7020",
+      "customer_id": "CUST-220",
+      "transaction_id": "TXN-7020",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:15:05",
+      "updated_at": "2026-10-19T15:15:05"
+    },
+    "ORD-7021": {
+      "order_id": "ORD-7021",
+      "customer_id": "CUST-221",
+      "transaction_id": "TXN-7021",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:16:05",
+      "updated_at": "2026-10-19T15:16:05"
+    },
+    "ORD-7022": {
+      "order_id": "ORD-7022",
+      "customer_id": "CUST-222",
+      "transaction_id": "TXN-7022",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:17:05",
+      "updated_at": "2026-10-19T15:17:05"
+    },
+    "ORD-7023": {
+      "order_id": "ORD-7023",
+      "customer_id": "CUST-223",
+      "transaction_id": "TXN-7023",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:18:05",
+      "updated_at": "2026-10-19T15:18:05"
+    },
+    "ORD-7024": {
+      "order_id": "ORD-7024",
+      "customer_id": "CUST-224",
+      "transaction_id": "TXN-7024",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:19:05",
+      "updated_at": "2026-10-19T15:19:05"
+    },
+    "ORD-7025": {
+      "order_id": "ORD-7025",
+      "customer_id": "CUST-225",
+      "transaction_id": "TXN-7025",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:20:05",
+      "updated_at": "2026-10-19T15:20:05"
+    },
+    "ORD-7026": {
+      "order_id": "ORD-7026",
+      "customer_id": "CUST-226",
+      "transaction_id": "TXN-7026",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:21:05",
+      "updated_at": "2026-10-19T15:21:05"
+    },
+    "ORD-7027": {
+      "order_id": "ORD-7027",
+      "customer_id": "CUST-227",
+      "transaction_id": "TXN-7027",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:22:05",
+      "updated_at": "2026-10-19T15:22:05"
+    },
+    "ORD-7028": {
+      "order_id": "ORD-7028",
+      "customer_id": "CUST-228",
+      "transaction_id": "TXN-7028",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:23:05",
+      "updated_at": "2026-10-19T15:23:05"
+    },
+    "ORD-7029": {
+      "order_id": "ORD-7029",
+      "customer_id": "CUST-229",
+      "transaction_id": "TXN-7029",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:24:05",
+      "updated_at": "2026-10-19T15:24:05"
+    },
+    "ORD-7030": {
+      "order_id": "ORD-7030",
+      "customer_id": "CUST-230",
+      "transaction_id": "TXN-7030",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:10:05",
+      "updated_at": "2026-10-19T15:10:05"
+    },
+    "ORD-7031": {
+      "order_id": "ORD-7031",
+      "customer_id": "CUST-231",
+      "transaction_id": "TXN-7031",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:11:05",
+      "updated_at": "2026-10-19T15:11:05"
+    },
+    "ORD-7032": {
+      "order_id": "ORD-7032",
+      "customer_id": "CUST-232",
+      "transaction_id": "TXN-7032",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:12:05",
+      "updated_at": "2026-10-19T15:12:05"
+    },
+    "ORD-7033": {
+      "order_id": "ORD-7033",
+      "customer_id": "CUST-233",
+      "transaction_id": "TXN-7033",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:13:05",
+      "updated_at": "2026-10-19T15:13:05"
+    },
+    "ORD-7034": {
+      "order_id": "ORD-7034",
+      "customer_id": "CUST-234",
+      "transaction_id": "TXN-7034",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:14:05",
+      "updated_at": "2026-10-19T15:14:05"
+    },
+    "ORD-7035": {
+      "order_id": "ORD-7035",
+      "customer_id": "CUST-235",
+      "transaction_id": "TXN-7035",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:15:05",
+      "updated_at": "2026-10-19T15:15:05"
+    },
+    "ORD-7036": {
+      "order_id": "ORD-7036",
+      "customer_id": "CUST-236",
+      "transaction_id": "TXN-7036",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:16:05",
+      "updated_at": "2026-10-19T15:16:05"
+    },
+    "ORD-7037": {
+      "order_id": "ORD-7037",
+      "customer_id": "CUST-237",
+      "transaction_id": "TXN-7037",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:17:05",
+      "updated_at": "2026-10-19T15:17:05"
+    },
+    "ORD-7038": {
+      "order_id": "ORD-7038",
+      "customer_id": "CUST-238",
+      "transaction_id": "TXN-7038",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:18:05",
+      "updated_at": "2026-10-19T15:18:05"
+    },
+    "ORD-7039": {
+      "order_id": "ORD-7039",
+      "customer_id": "CUST-239",
+      "transaction_id": "TXN-7039",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:19:05",
+      "updated_at": "2026-10-19T15:19:05"
+    },
+    "ORD-7040": {
+      "order_id": "ORD-7040",
+      "customer_id": "CUST-240",
+      "transaction_id": "TXN-7040",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:20:05",
+      "updated_at": "2026-10-19T15:20:05"
+    },
+    "ORD-7041": {
+      "order_id": "ORD-7041",
+      "customer_id": "CUST-241",
+      "transaction_id": "TXN-7041",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:21:05",
+      "updated_at": "2026-10-19T15:21:05"
+    },
+    "ORD-7042": {
+      "order_id": "ORD-7042",
+      "customer_id": "CUST-242",
+      "transaction_id": "TXN-7042",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:22:05",
+      "updated_at": "2026-10-19T15:22:05"
+    },
+    "ORD-7043": {
+      "order_id": "ORD-7043",
+      "customer_id": "CUST-243",
+      "transaction_id": "TXN-7043",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:23:05",
+      "updated_at": "2026-10-19T15:23:05"
+    },
+    "ORD-7044": {
+      "order_id": "ORD-7044",
+      "customer_id": "CUST-244",
+      "transaction_id": "TXN-7044",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:24:05",
+      "updated_at": "2026-10-19T15:24:05"
+    },
+    "ORD-7045": {
+      "order_id": "ORD-7045",
+      "customer_id": "CUST-245",
+      "transaction_id": "TXN-7045",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:10:05",
+      "updated_at": "2026-10-19T15:10:05"
+    },
+    "ORD-7046": {
+      "order_id": "ORD-7046",
+      "customer_id": "CUST-246",
+      "transaction_id": "TXN-7046",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:11:05",
+      "updated_at": "2026-10-19T15:11:05"
+    },
+    "ORD-7047": {
+      "order_id": "ORD-7047",
+      "customer_id": "CUST-247",
+      "transaction_id": "TXN-7047",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:12:05",
+      "updated_at": "2026-10-19T15:12:05"
+    },
+    "ORD-7048": {
+      "order_id": "ORD-7048",
+      "customer_id": "CUST-248",
+      "transaction_id": "TXN-7048",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:13:05",
+      "updated_at": "2026-10-19T15:13:05"
+    },
+    "ORD-7049": {
+      "order_id": "ORD-7049",
+      "customer_id": "CUST-249",
+      "transaction_id": "TXN-7049",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:14:05",
+      "updated_at": "2026-10-19T15:14:05"
+    },
+    "ORD-7050": {
+      "order_id": "ORD-7050",
+      "customer_id": "CUST-250",
+      "transaction_id": "TXN-7050",
+      "items": [
+        {
+          "name": "Festive Super Sale Bundle",
+          "qty": 1,
+          "price": 1999.0
+        }
+      ],
+      "total_amount": 1999.0,
+      "status": "FAILED",
+      "failure_reason": "PG_GATEWAY_TIMEOUT",
+      "created_at": "2026-10-19T15:15:05",
+      "updated_at": "2026-10-19T15:15:05"
+    }
+  },
+  "refunds": {
+    "RF-40192": {
+      "refund_id": "RF-40192",
+      "transaction_id": "TXN-8822",
+      "order_id": "ORD-5502",
+      "customer_id": "CUST-102",
+      "amount": 2499.0,
+      "currency": "INR",
+      "status": "PROCESSING",
+      "arn": "ARN-9928172645-UPI",
+      "gateway": "Razorpay",
+      "initiated_at": "2026-10-19T12:05:00",
+      "estimated_credit": "2026-10-20T12:05:00",
+      "notes": "Initiated prior to inquiry; credit expected in bank within 24h"
+    }
+  },
+  "subscriptions": {
+    "SUB-101": {
+      "subscription_id": "SUB-101",
+      "customer_id": "CUST-104",
+      "plan_name": "Pro Annual Plan",
+      "amount": 1499.0,
+      "status": "CANCELLED",
+      "cancelled_at": "2026-10-18T10:00:00",
+      "charged_at": "2026-10-19T02:00:00",
+      "last_transaction_id": "TXN-3301"
+    }
+  },
+  "cases": {
+    "CASE-001": {
+      "case_id": "CASE-001",
+      "customer_id": "CUST-101",
+      "channel": "WEB_COMPLAINT",
+      "issue_type": "MONEY_DEDUCTED_ORDER_FAILED",
+      "description": "\u20b92,499 was deducted but my order failed.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "UNRESOLVED",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T14:32:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-001": {
+      "case_id": "CASE-SYS-001",
+      "customer_id": "CUST-201",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7001 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:13:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-002": {
+      "case_id": "CASE-SYS-002",
+      "customer_id": "CUST-202",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7002 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:14:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-003": {
+      "case_id": "CASE-SYS-003",
+      "customer_id": "CUST-203",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7003 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:15:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-004": {
+      "case_id": "CASE-SYS-004",
+      "customer_id": "CUST-204",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7004 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:16:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-005": {
+      "case_id": "CASE-SYS-005",
+      "customer_id": "CUST-205",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7005 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:17:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-006": {
+      "case_id": "CASE-SYS-006",
+      "customer_id": "CUST-206",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7006 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:18:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-007": {
+      "case_id": "CASE-SYS-007",
+      "customer_id": "CUST-207",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7007 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:19:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-008": {
+      "case_id": "CASE-SYS-008",
+      "customer_id": "CUST-208",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7008 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:20:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-009": {
+      "case_id": "CASE-SYS-009",
+      "customer_id": "CUST-209",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7009 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:21:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-010": {
+      "case_id": "CASE-SYS-010",
+      "customer_id": "CUST-210",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7010 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:22:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-011": {
+      "case_id": "CASE-SYS-011",
+      "customer_id": "CUST-211",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7011 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:23:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-012": {
+      "case_id": "CASE-SYS-012",
+      "customer_id": "CUST-212",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7012 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:24:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-013": {
+      "case_id": "CASE-SYS-013",
+      "customer_id": "CUST-213",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7013 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:25:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-014": {
+      "case_id": "CASE-SYS-014",
+      "customer_id": "CUST-214",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7014 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:26:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-015": {
+      "case_id": "CASE-SYS-015",
+      "customer_id": "CUST-215",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7015 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:12:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-016": {
+      "case_id": "CASE-SYS-016",
+      "customer_id": "CUST-216",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7016 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:13:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-017": {
+      "case_id": "CASE-SYS-017",
+      "customer_id": "CUST-217",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7017 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:14:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-018": {
+      "case_id": "CASE-SYS-018",
+      "customer_id": "CUST-218",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7018 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:15:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-019": {
+      "case_id": "CASE-SYS-019",
+      "customer_id": "CUST-219",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7019 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:16:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-020": {
+      "case_id": "CASE-SYS-020",
+      "customer_id": "CUST-220",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7020 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:17:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-021": {
+      "case_id": "CASE-SYS-021",
+      "customer_id": "CUST-221",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7021 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:18:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-022": {
+      "case_id": "CASE-SYS-022",
+      "customer_id": "CUST-222",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7022 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:19:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-023": {
+      "case_id": "CASE-SYS-023",
+      "customer_id": "CUST-223",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7023 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:20:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-024": {
+      "case_id": "CASE-SYS-024",
+      "customer_id": "CUST-224",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7024 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:21:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-025": {
+      "case_id": "CASE-SYS-025",
+      "customer_id": "CUST-225",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7025 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:22:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-026": {
+      "case_id": "CASE-SYS-026",
+      "customer_id": "CUST-226",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7026 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:23:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-027": {
+      "case_id": "CASE-SYS-027",
+      "customer_id": "CUST-227",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7027 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:24:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-028": {
+      "case_id": "CASE-SYS-028",
+      "customer_id": "CUST-228",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7028 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:25:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-029": {
+      "case_id": "CASE-SYS-029",
+      "customer_id": "CUST-229",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7029 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:26:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-030": {
+      "case_id": "CASE-SYS-030",
+      "customer_id": "CUST-230",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7030 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:12:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-031": {
+      "case_id": "CASE-SYS-031",
+      "customer_id": "CUST-231",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7031 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:13:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-032": {
+      "case_id": "CASE-SYS-032",
+      "customer_id": "CUST-232",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7032 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:14:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-033": {
+      "case_id": "CASE-SYS-033",
+      "customer_id": "CUST-233",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7033 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:15:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-034": {
+      "case_id": "CASE-SYS-034",
+      "customer_id": "CUST-234",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7034 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:16:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-035": {
+      "case_id": "CASE-SYS-035",
+      "customer_id": "CUST-235",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7035 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:17:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-036": {
+      "case_id": "CASE-SYS-036",
+      "customer_id": "CUST-236",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7036 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:18:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-037": {
+      "case_id": "CASE-SYS-037",
+      "customer_id": "CUST-237",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7037 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:19:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-038": {
+      "case_id": "CASE-SYS-038",
+      "customer_id": "CUST-238",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7038 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:20:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-039": {
+      "case_id": "CASE-SYS-039",
+      "customer_id": "CUST-239",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7039 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:21:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-040": {
+      "case_id": "CASE-SYS-040",
+      "customer_id": "CUST-240",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7040 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:22:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-041": {
+      "case_id": "CASE-SYS-041",
+      "customer_id": "CUST-241",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7041 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:23:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-042": {
+      "case_id": "CASE-SYS-042",
+      "customer_id": "CUST-242",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7042 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:24:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-043": {
+      "case_id": "CASE-SYS-043",
+      "customer_id": "CUST-243",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7043 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:25:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-044": {
+      "case_id": "CASE-SYS-044",
+      "customer_id": "CUST-244",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7044 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:26:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-045": {
+      "case_id": "CASE-SYS-045",
+      "customer_id": "CUST-245",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7045 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:12:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-046": {
+      "case_id": "CASE-SYS-046",
+      "customer_id": "CUST-246",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7046 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:13:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-047": {
+      "case_id": "CASE-SYS-047",
+      "customer_id": "CUST-247",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7047 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:14:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-048": {
+      "case_id": "CASE-SYS-048",
+      "customer_id": "CUST-248",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7048 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:15:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-049": {
+      "case_id": "CASE-SYS-049",
+      "customer_id": "CUST-249",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7049 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:16:00",
+      "closed_at": null,
+      "resolution_summary": null
+    },
+    "CASE-SYS-050": {
+      "case_id": "CASE-SYS-050",
+      "customer_id": "CUST-250",
+      "channel": "AUTO_INGEST",
+      "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
+      "description": "\u20b91,999 debited on Razorpay, order ORD-7050 dropped with PG_TIMEOUT_504.",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "resolution_state": "PENDING_CLUSTER_ANALYSIS",
+      "parent_incident_id": null,
+      "created_at": "2026-10-19T15:17:00",
+      "closed_at": null,
+      "resolution_summary": null
+    }
+  },
+  "incidents": {},
+  "notifications": [],
+  "audit_logs": [
+    {
+      "timestamp": "2026-10-19T14:30:00",
+      "actor": "SYSTEM_SEEDS",
+      "action": "DATABASE_INITIALIZATION",
+      "details": "Synthetic enterprise database primed for ResolveX AI testing."
+    }
+  ]
+}

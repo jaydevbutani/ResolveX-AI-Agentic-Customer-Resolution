@@ -1,0 +1,81 @@
+[
+  {
+    "policy_id": "POL-REF-01",
+    "title": "Failed Order with Successful Payment Refund Policy",
+    "category": "REFUND_ELIGIBILITY",
+    "description": "If payment gateway records status SUCCESS, but order creation failed due to inventory timeout or gateway communication drop, the customer is eligible for a 100% autonomous refund to the original payment method.",
+    "conditions": {
+      "payment_status": "SUCCESS",
+      "order_status": "FAILED",
+      "max_autonomous_amount_inr": 25000,
+      "requires_human_approval": false
+    },
+    "action": "INITIATE_FULL_REFUND",
+    "timeline": "Instant initiation; credited within 24-48 business hours via original payment source (UPI/Card/NetBanking)."
+  },
+  {
+    "policy_id": "POL-REF-02",
+    "title": "Duplicate Payment Auto-Reversal Policy",
+    "category": "DUPLICATE_PAYMENT",
+    "description": "If duplicate successful transactions are identified for the same cart or order within 30 minutes, the secondary transaction must be refunded automatically without customer friction.",
+    "conditions": {
+      "duplicate_window_minutes": 30,
+      "payment_status": "SUCCESS",
+      "max_autonomous_amount_inr": 25000,
+      "requires_human_approval": false
+    },
+    "action": "AUTO_REVERSE_SECONDARY_CHARGE",
+    "timeline": "Immediate auto-reversal; notification dispatched via SMS/Email."
+  },
+  {
+    "policy_id": "POL-REF-03",
+    "title": "Duplicate Refund Prevention & Guard Policy",
+    "category": "FINANCIAL_INTEGRITY",
+    "description": "Under no circumstances may a new refund be initiated if an existing refund record for the given transaction is already in INITIATED, PROCESSING, or COMPLETED state. In such cases, query refund status, provide ARN tracking, and reassure the customer.",
+    "conditions": {
+      "existing_refund_statuses": ["INITIATED", "PROCESSING", "COMPLETED"],
+      "action_allowed": "TRACK_STATUS_ONLY",
+      "block_duplicate_action": true
+    },
+    "action": "REJECT_NEW_REFUND_AND_REPLAN_STATUS_UPDATE",
+    "timeline": "Instant tracking lookup."
+  },
+  {
+    "policy_id": "POL-REF-04",
+    "title": "Post-Cancellation Subscription Billing Reversal",
+    "category": "SUBSCRIPTION",
+    "description": "When a subscription fee is deducted subsequent to user cancellation timestamp, the charge is recognized as erroneous billing and qualifies for immediate full refund and entitlement deactivation.",
+    "conditions": {
+      "cancellation_prior_to_charge": true,
+      "max_autonomous_amount_inr": 10000,
+      "requires_human_approval": false
+    },
+    "action": "INITIATE_SUBSCRIPTION_REFUND",
+    "timeline": "Instant automated reversal."
+  },
+  {
+    "policy_id": "POL-ESC-05",
+    "title": "High-Value Transaction & Fraud Risk Escalation Protocol",
+    "category": "ESCALATION_EXCEPTION",
+    "description": "Autonomous financial execution is strictly blocked for transactions exceeding INR 25,000, customers with trust score below 50, detected device/IP spoofing, or conflicting delivery telemetry. Must compile an evidence docket and escalate to Tier-2 Operations Lead.",
+    "conditions": {
+      "amount_threshold_inr": 25000,
+      "min_trust_score": 50,
+      "requires_human_approval": true
+    },
+    "action": "BLOCK_AUTONOMY_AND_ESCALATE_TO_HUMAN",
+    "timeline": "Escalation ticket generated within 3 seconds with priority HIGH."
+  },
+  {
+    "policy_id": "POL-SYS-06",
+    "title": "Systemic Gateway Incident Cluster Protocol",
+    "category": "SYSTEMIC_INCIDENTS",
+    "description": "When 5 or more transaction failures share identical error signatures within a 15-minute window, individual claims must be clustered into a Master Incident. Autonomous batch reversal applies and operations alerting is triggered.",
+    "conditions": {
+      "cluster_threshold_count": 5,
+      "time_window_minutes": 15
+    },
+    "action": "CREATE_PARENT_INCIDENT_AND_LINK_CASES",
+    "timeline": "Batch processing with live status broadcast."
+  }
+]

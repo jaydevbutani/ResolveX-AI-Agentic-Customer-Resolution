@@ -1,0 +1,524 @@
+import os
+import sqlite3
+import hashlib
+import uuid
+import json
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, Any, List, Optional, Tuple
+
+DB_PATH = Path(__file__).resolve().parent.parent.parent / "data" / "resolvex_enterprise.db"
+
+def hash_password(password: str) -> str:
+    """Secure PBKDF2 password hashing with salt."""
+    salt = hashlib.sha256(b"resolvex_enterprise_salt_2026").digest()
+    pwd_hash = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100000)
+    return pwd_hash.hex()
+
+def verify_password(password: str, hashed: str) -> bool:
+    return hash_password(password) == hashed
+
+class SQLiteStore:
+    def __init__(self, db_path: Optional[Path] = None):
+        self.db_path = db_path or DB_PATH
+        self.db_path.parent.mkdir(parents=True, exist_ok=True)
+        self._init_db()
+
+    def get_connection(self) -> sqlite3.Connection:
+        conn = sqlite3.connect(str(self.db_path))
+        conn.row_factory = sqlite3.Row
+        return conn
+
+    def _init_db(self):
+        with self.get_connection() as conn:
+            cur = conn.cursor()
+            
+            # Users table
+            cur.execute("""
+            CREATE TABLE IF NOT EXISTS users (
+                user_id TEXT PRIMARY KEY,
+                username TEXT UNIQUE NOT NULL,
+                email TEXT UNIQUE NOT NULL,
+                password_hash TEXT NOT NULL,
+                role TEXT DEFAULT 'OPERATOR',
+                created_at TEXT NOT NULL
+            )
+            """)
+
+            # Sessions table
+            cur.execute("""
+            CREATE TABLE IF NOT EXISTS sessions (
+                session_id TEXT PRIMARY KEY,
+                user_id TEXT NOT NULL,
+                created_at TEXT NOT NULL,
+                FOREIGN KEY (user_id) REFERENCES users(user_id)
+            )
+            """)
+
+            # Customers table (tenant isolated by user_id)
+            cur.execute("""
+            CREATE TABLE IF NOT EXISTS customers (
+                customer_id TEXT NOT NULL,
+                user_id TEXT NOT NULL,
+                name TEXT NOT NULL,
+                email TEXT NOT NULL,
+                phone TEXT NOT NULL,
+                account_age_months INTEGER NOT NULL,
+                trust_score INTEGER NOT NULL,
+                region TEXT NOT NULL,
+                status TEXT NOT NULL,
+                is_suspicious INTEGER DEFAULT 0,
+                PRIMARY KEY (customer_id, user_id)
+            )
+            """)
+
+            # Transactions table
+            cur.execute("""
+            CREATE TABLE IF NOT EXISTS transactions (
+                transaction_id TEXT NOT NULL,
+                user_id TEXT NOT NULL,
+                customer_id TEXT NOT NULL,
+                order_id TEXT NOT NULL,
+                amount REAL NOT NULL,
+                payment_method TEXT NOT NULL,
+                gateway TEXT NOT NULL,
+                timestamp TEXT NOT NULL,
+                status TEXT NOT NULL,
+                gateway_ref TEXT,
+                error_code TEXT,
+                refund_id TEXT,
+                PRIMARY KEY (transaction_id, user_id)
+            )
+            """)
+
+            # Orders table
+            cur.execute("""
+            CREATE TABLE IF NOT EXISTS orders (
+                order_id TEXT NOT NULL,
+                user_id TEXT NOT NULL,
+                customer_id TEXT NOT NULL,
+                amount REAL NOT NULL,
+                order_status TEXT NOT NULL,
+                payment_status TEXT NOT NULL,
+                creation_timestamp TEXT NOT NULL,
+                fulfilment_status TEXT NOT NULL,
+                cancellation_status TEXT NOT NULL,
+                PRIMARY KEY (order_id, user_id)
+            )
+            """)
+
+            # Refunds table
+            cur.execute("""
+            CREATE TABLE IF NOT EXISTS refunds (
+                refund_id TEXT NOT NULL,
+                user_id TEXT NOT NULL,
+                transaction_id TEXT NOT NULL,
+                amount REAL NOT NULL,
+                status TEXT NOT NULL,
+                initiated_timestamp TEXT NOT NULL,
+                expected_completion TEXT NOT NULL,
+                bank_reference TEXT NOT NULL,
+                initiated_by TEXT NOT NULL,
+                PRIMARY KEY (refund_id, user_id)
+            )
+            """)
+
+            # Support cases table
+            cur.execute("""
+            CREATE TABLE IF NOT EXISTS support_cases (
+                case_id TEXT NOT NULL,
+                user_id TEXT NOT NULL,
+                customer_id TEXT NOT NULL,
+                issue TEXT NOT NULL,
+                category TEXT NOT NULL,
+                severity TEXT NOT NULL,
+                status TEXT NOT NULL,
+                resolution TEXT,
+                created_time TEXT NOT NULL,
+                PRIMARY KEY (case_id, user_id)
+            )
+            """)
+
+            # Incidents table
+            cur.execute("""
+            CREATE TABLE IF NOT EXISTS incidents (
+                incident_id TEXT NOT NULL,
+                user_id TEXT NOT NULL,
+                error_signature TEXT NOT NULL,
+                affected_customers INTEGER NOT NULL,
+                affected_transactions INTEGER NOT NULL,
+                severity TEXT NOT NULL,
+                status TEXT NOT NULL,
+                root_pattern TEXT NOT NULL,
+                remediation_rule TEXT NOT NULL,
+                created_at TEXT NOT NULL,
+                PRIMARY KEY (incident_id, user_id)
+            )
+            """)
+
+            # Chat Sessions table
+            cur.execute("""
+            CREATE TABLE IF NOT EXISTS chat_sessions (
+                session_id TEXT PRIMARY KEY,
+                user_id TEXT NOT NULL,
+                title TEXT DEFAULT 'Customer Inquiry',
+                created_at TEXT NOT NULL,
+                updated_at TEXT NOT NULL,
+                FOREIGN KEY (user_id) REFERENCES users(user_id)
+            )
+            """)
+
+            # Chat Messages table
+            cur.execute("""
+            CREATE TABLE IF NOT EXISTS chat_messages (
+                message_id TEXT PRIMARY KEY,
+                session_id TEXT NOT NULL,
+                user_id TEXT NOT NULL,
+                role TEXT NOT NULL,
+                content TEXT NOT NULL,
+                explanation TEXT,
+                resolution_data TEXT,
+                timestamp TEXT NOT NULL,
+                FOREIGN KEY (user_id) REFERENCES users(user_id)
+            )
+            """)
+
+            conn.commit()
+
+        # Seed default demo accounts if not exist
+        self._seed_demo_accounts()
+
+    def _seed_demo_accounts(self):
+        demo_accounts = [
+            ("USER-DEMO-001", "demo", "demo@resolvex.ai", "STAFF_ARCHITECT"),
+            ("USER-CUST-DEMO", "customer_demo", "customer@example.in", "DEMO_CUSTOMER"),
+            ("USER-OPS-DEMO", "ops_demo", "ops@resolvex.ai", "DEMO_OPERATIONS")
+        ]
+        with self.get_connection() as conn:
+            cur = conn.cursor()
+            for uid, uname, uemail, urole in demo_accounts:
+                cur.execute("SELECT user_id FROM users WHERE username = ?", (uname,))
+                if not cur.fetchone():
+                    cur.execute(
+                        "INSERT INTO users (user_id, username, email, password_hash, role, created_at) VALUES (?, ?, ?, ?, ?, ?)",
+                        (uid, uname, uemail, hash_password("demo123"), urole, datetime.now().isoformat())
+                    )
+            conn.commit()
+
+        # Seed realistic tenant data for all demo accounts
+        for uid, _, _, _ in demo_accounts:
+            self.seed_user_data(uid)
+
+    def seed_user_data(self, user_id: str):
+        """Seeds realistic, extensive synthetic data for a specific user tenant."""
+        with self.get_connection() as conn:
+            cur = conn.cursor()
+            
+            # Check if user already has data
+            cur.execute("SELECT COUNT(*) FROM customers WHERE user_id = ?", (user_id,))
+            if cur.fetchone()[0] > 0:
+                return
+
+            # 1. Seed Core Demonstration Customers (Scenarios 1-4)
+            core_customers = [
+                ("CUST-101", user_id, "Rahul Sharma", "rahul.sharma@example.in", "+91-9876543210", 36, 96, "Mumbai, MH", "ACTIVE", 0),
+                ("CUST-102", user_id, "Priya Patel", "priya.patel@example.in", "+91-9876543211", 24, 92, "Ahmedabad, GJ", "ACTIVE", 0),
+                ("CUST-103", user_id, "Vikram Malhotra", "vikram.m@example.in", "+91-9876543212", 2, 32, "Tor Exit Node 185.220.101.4", "SUSPENDED", 1),
+                ("CUST-104", user_id, "Ananya Iyer", "ananya.iyer@example.in", "+91-9876543213", 18, 94, "Bengaluru, KA", "ACTIVE", 0),
+                ("CUST-105", user_id, "Rohan Verma", "rohan.v@example.in", "+91-9876543214", 42, 98, "Delhi, DL", "ACTIVE", 0),
+            ]
+            
+            # Expand to 60+ realistic synthetic customers
+            regions = ["Delhi, DL", "Bengaluru, KA", "Mumbai, MH", "Hyderabad, TS", "Chennai, TN", "Pune, MH", "Kolkata, WB", "Jaipur, RJ"]
+            names = ["Aarav Gupta", "Sneha Rao", "Kabir Sen", "Meera Nair", "Arjun Das", "Diya Kapoor", "Varun Joshi", "Ishita Saxena"]
+            
+            for i in range(1, 56):
+                cid = f"CUST-2{i:02d}"
+                cname = f"{names[i % len(names)]} {i}"
+                cemail = f"user{i:02d}@megacorp.in"
+                cphone = f"+91-980000{i:04d}"
+                cregion = regions[i % len(regions)]
+                trust = 85 + (i % 14)
+                core_customers.append((cid, user_id, cname, cemail, cphone, 12 + (i % 24), trust, cregion, "ACTIVE", 0))
+
+            cur.executemany("""
+            INSERT OR REPLACE INTO customers (customer_id, user_id, name, email, phone, account_age_months, trust_score, region, status, is_suspicious)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, core_customers)
+
+            # 2. Seed Core Demonstration Transactions
+            core_txns = [
+                ("TXN-8821", user_id, "CUST-101", "ORD-5501", 2499.00, "UPI_AUTO_DEBIT", "RAZORPAY", "2026-10-19T21:14:02", "SUCCESS", "rzp_test_8821a", "PG_TIMEOUT_504", None),
+                ("TXN-8822", user_id, "CUST-102", "ORD-5502", 2499.00, "CREDIT_CARD", "RAZORPAY", "2026-10-19T21:20:15", "SUCCESS", "rzp_test_8822b", None, "RF-40192"),
+                ("TXN-9901", user_id, "CUST-103", "ORD-5503", 48500.00, "NETBANKING_HDFC", "PAYU", "2026-10-19T21:25:30", "SUCCESS", "payu_test_9901c", "TOR_PROXY_FLAG", None),
+                ("TXN-7001", user_id, "CUST-201", "ORD-7001", 1999.00, "UPI_RAZORPAY", "RAZORPAY", "2026-10-19T21:30:00", "SUCCESS", "rzp_test_7001d", "PG_TIMEOUT_504", None),
+            ]
+
+            # Expand to 100+ transactions
+            for i in range(1, 101):
+                tid = f"TXN-7{i:03d}"
+                oid = f"ORD-7{i:03d}"
+                cid = f"CUST-2{(i % 55) + 1:02d}"
+                amt = 1999.00 if i <= 50 else (499.00 + (i * 25))
+                err = "PG_TIMEOUT_504" if i <= 50 else None
+                gate = "RAZORPAY" if i <= 60 else "PAYU"
+                method = "UPI" if i % 2 == 0 else "CARD"
+                core_txns.append((tid, user_id, cid, oid, amt, method, gate, f"2026-10-19T21:{i%60:02d}:00", "SUCCESS", f"gtw_ref_{i:04d}", err, None))
+
+            cur.executemany("""
+            INSERT OR REPLACE INTO transactions (transaction_id, user_id, customer_id, order_id, amount, payment_method, gateway, timestamp, status, gateway_ref, error_code, refund_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, core_txns)
+
+            # 3. Seed Core Orders
+            core_orders = [
+                ("ORD-5501", user_id, "CUST-101", 2499.00, "FAILED", "CAPTURED_NO_ORDER", "2026-10-19T21:14:00", "UNFULFILLED", "NONE"),
+                ("ORD-5502", user_id, "CUST-102", 2499.00, "FAILED_REFUNDED", "REFUNDED", "2026-10-19T21:20:00", "UNFULFILLED", "PROCESSED"),
+                ("ORD-5503", user_id, "CUST-103", 48500.00, "SECURITY_HOLD", "FLAGGED_REVIEW", "2026-10-19T21:25:00", "HELD", "UNDER_REVIEW"),
+                ("ORD-7001", user_id, "CUST-201", 1999.00, "FAILED", "CAPTURED_NO_ORDER", "2026-10-19T21:30:00", "UNFULFILLED", "NONE"),
+            ]
+            for i in range(1, 101):
+                oid = f"ORD-7{i:03d}"
+                cid = f"CUST-2{(i % 55) + 1:02d}"
+                amt = 1999.00 if i <= 50 else (499.00 + (i * 25))
+                ostat = "FAILED" if i <= 50 else "DELIVERED"
+                pstat = "CAPTURED_NO_ORDER" if i <= 50 else "PAID"
+                core_orders.append((oid, user_id, cid, amt, ostat, pstat, f"2026-10-19T21:{i%60:02d}:00", "UNFULFILLED" if i <= 50 else "FULFILLED", "NONE"))
+
+            cur.executemany("""
+            INSERT OR REPLACE INTO orders (order_id, user_id, customer_id, amount, order_status, payment_status, creation_timestamp, fulfilment_status, cancellation_status)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, core_orders)
+
+            # 4. Seed Refunds (including RF-40192 for duplicate protection scenario)
+            core_refunds = [
+                ("RF-40192", user_id, "TXN-8822", 2499.00, "PROCESSING", "2026-10-19T21:22:00", "2026-10-22T18:00:00", "ARN-9928172645-UPI", "Automated Batch")
+            ]
+            cur.executemany("""
+            INSERT OR REPLACE INTO refunds (refund_id, user_id, transaction_id, amount, status, initiated_timestamp, expected_completion, bank_reference, initiated_by)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, core_refunds)
+
+            # 5. Seed Support Cases
+            core_cases = [
+                ("CASE-101", user_id, "CUST-101", "Money deducted ₹2499 but order failed", "PAYMENT_FAILURE", "HIGH", "OPEN", None, "2026-10-19T21:15:00"),
+                ("CASE-102", user_id, "CUST-102", "Second inquiry about refund status for ORD-5502", "REFUND_STATUS", "MEDIUM", "RESOLVED", "ARN-9928172645-UPI provided", "2026-10-19T21:23:00"),
+                ("CASE-103", user_id, "CUST-103", "Order held on security verification ₹48,500", "SECURITY_VERIFICATION", "CRITICAL", "ESCALATED_TIER2", "Pending SecOps docket", "2026-10-19T21:26:00")
+            ]
+            cur.executemany("""
+            INSERT OR REPLACE INTO support_cases (case_id, user_id, customer_id, issue, category, severity, status, resolution, created_time)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, core_cases)
+
+            # 6. Seed Incidents
+            core_incidents = [
+                ("INC-2026-SYS", user_id, "PG_TIMEOUT_504", 50, 50, "HIGH", "CLUSTER_RESOLVED", "Razorpay callback dropout during peak checkout rush", "Auto-remediation rule synthesized and promoted", "2026-10-19T21:32:00")
+            ]
+            cur.executemany("""
+            INSERT OR REPLACE INTO incidents (incident_id, user_id, error_signature, affected_customers, affected_transactions, severity, status, root_pattern, remediation_rule, created_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, core_incidents)
+
+            # 7. Seed Initial Audit Logs
+            audit_entries = [
+                (user_id, "Planner", "PLAN_DECOMPOSE", "2026-10-19T21:14:05", "COMPOSE_DAG", "Formulated 7-stage plan for PG_504", "INITIALIZED"),
+                (user_id, "Research", "POLICY_MATCH", "2026-10-19T21:14:06", "MATCH_POL_REF_01", "Retrieved Instant Auto-Refund Policy", "GATHERED"),
+                (user_id, "Critic", "PRE_VALIDATE", "2026-10-19T21:14:07", "APPROVE", "5/5 safety checks passed. Low risk authorized.", "VALIDATED"),
+            ]
+            cur.executemany("""
+            INSERT INTO audit_logs (user_id, agent, action, timestamp, decision, result, state_transition)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+            """, audit_entries)
+
+            conn.commit()
+
+    # --- Authentication Methods ---
+    def register_user(self, username: str, email: str, password: str) -> Tuple[bool, str, Optional[Dict[str, Any]]]:
+        if not username or not email or not password:
+            return False, "All fields are required.", None
+        if len(password) < 4:
+            return False, "Password must be at least 4 characters.", None
+
+        with self.get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute("SELECT user_id FROM users WHERE username = ? OR email = ?", (username, email))
+            if cur.fetchone():
+                return False, "Username or email already exists.", None
+
+            user_id = f"USER-{uuid.uuid4().hex[:8].upper()}"
+            pwd_hash = hash_password(password)
+            created_at = datetime.now().isoformat()
+
+            cur.execute(
+                "INSERT INTO users (user_id, username, email, password_hash, role, created_at) VALUES (?, ?, ?, ?, ?, ?)",
+                (user_id, username, email, pwd_hash, "OPERATOR", created_at)
+            )
+            conn.commit()
+
+        # Seed isolated tenant dataset for this new user
+        self.seed_user_data(user_id)
+        
+        user_info = {"user_id": user_id, "username": username, "email": email, "role": "OPERATOR"}
+        return True, "Account created successfully.", user_info
+
+    def authenticate_user(self, username_or_email: str, password: str) -> Tuple[bool, str, Optional[Dict[str, Any]]]:
+        with self.get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute(
+                "SELECT user_id, username, email, password_hash, role FROM users WHERE username = ? OR email = ?",
+                (username_or_email, username_or_email)
+            )
+            row = cur.fetchone()
+            if not row:
+                return False, "Invalid credentials.", None
+
+            user_id, username, email, pwd_hash, role = row["user_id"], row["username"], row["email"], row["password_hash"], row["role"]
+            if not verify_password(password, pwd_hash):
+                return False, "Invalid credentials.", None
+
+            session_id = f"SESS-{uuid.uuid4().hex}"
+            cur.execute("INSERT INTO sessions (session_id, user_id, created_at) VALUES (?, ?, ?)", (session_id, user_id, datetime.now().isoformat()))
+            conn.commit()
+
+            return True, "Login successful.", {
+                "user_id": user_id,
+                "username": username,
+                "email": email,
+                "role": role,
+                "session_id": session_id
+            }
+
+    # --- Tenant-Isolated Data Access ---
+    def get_tenant_customers(self, user_id: str, limit: int = 50) -> List[Dict[str, Any]]:
+        with self.get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute("SELECT * FROM customers WHERE user_id = ? LIMIT ?", (user_id, limit))
+            return [dict(r) for r in cur.fetchall()]
+
+    def get_tenant_transactions(self, user_id: str, limit: int = 50) -> List[Dict[str, Any]]:
+        with self.get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute("SELECT * FROM transactions WHERE user_id = ? ORDER BY timestamp DESC LIMIT ?", (user_id, limit))
+            return [dict(r) for r in cur.fetchall()]
+
+    def get_tenant_orders(self, user_id: str, limit: int = 50) -> List[Dict[str, Any]]:
+        with self.get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute("SELECT * FROM orders WHERE user_id = ? ORDER BY creation_timestamp DESC LIMIT ?", (user_id, limit))
+            return [dict(r) for r in cur.fetchall()]
+
+    def get_tenant_refunds(self, user_id: str, limit: int = 50) -> List[Dict[str, Any]]:
+        with self.get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute("SELECT * FROM refunds WHERE user_id = ? ORDER BY initiated_timestamp DESC LIMIT ?", (user_id, limit))
+            return [dict(r) for r in cur.fetchall()]
+
+    def get_tenant_audit_logs(self, user_id: str, limit: int = 50) -> List[Dict[str, Any]]:
+        with self.get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute("SELECT * FROM audit_logs WHERE user_id = ? ORDER BY timestamp DESC LIMIT ?", (user_id, limit))
+            return [dict(r) for r in cur.fetchall()]
+
+    def record_refund(self, user_id: str, txn_id: str, amount: float, bank_arn: str, refund_id: str):
+        with self.get_connection() as conn:
+            cur = conn.cursor()
+            now = datetime.now().isoformat()
+            cur.execute("""
+            INSERT OR REPLACE INTO refunds (refund_id, user_id, transaction_id, amount, status, initiated_timestamp, expected_completion, bank_reference, initiated_by)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (refund_id, user_id, txn_id, amount, "SETTLED_REFUND", now, "3-5 business days", bank_arn, "Executor_Agent"))
+
+            cur.execute("""
+            UPDATE transactions SET status = 'SETTLED_REFUND', refund_id = ? WHERE transaction_id = ? AND user_id = ?
+            """, (refund_id, txn_id, user_id))
+
+            cur.execute("""
+            UPDATE orders SET order_status = 'FAILED_REFUNDED', payment_status = 'REFUNDED'
+            WHERE user_id = ? AND order_id = (SELECT order_id FROM transactions WHERE transaction_id = ? AND user_id = ?)
+            """, (user_id, txn_id, user_id))
+
+            cur.execute("""
+            INSERT INTO audit_logs (user_id, agent, action, timestamp, decision, result, state_transition)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+            """, (user_id, "Executor_Agent", "EXECUTE_REFUND", now, "DISBURSED", f"Refund {refund_id} committed with {bank_arn}", "TRANSACTION_MUTATED"))
+            conn.commit()
+
+    # --- Chat Persistence & Conversational Memory ---
+    def save_chat_message(self, user_id: str, session_id: str, role: str, content: str, 
+                          explanation: Optional[Dict[str, Any]] = None, 
+                          resolution_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        with self.get_connection() as conn:
+            cur = conn.cursor()
+            now = datetime.now().isoformat()
+            
+            # Upsert chat session
+            cur.execute("""
+            INSERT INTO chat_sessions (session_id, user_id, title, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?)
+            ON CONFLICT(session_id) DO UPDATE SET updated_at = excluded.updated_at
+            """, (session_id, user_id, content[:40], now, now))
+
+            # Insert message
+            msg_id = f"MSG-{uuid.uuid4().hex[:10]}"
+            expl_json = json.dumps(explanation) if explanation else None
+            res_json = json.dumps(resolution_data) if resolution_data else None
+
+            cur.execute("""
+            INSERT INTO chat_messages (message_id, session_id, user_id, role, content, explanation, resolution_data, timestamp)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """, (msg_id, session_id, user_id, role, content, expl_json, res_json, now))
+            conn.commit()
+
+            return {
+                "message_id": msg_id,
+                "session_id": session_id,
+                "role": role,
+                "content": content,
+                "explanation": explanation,
+                "resolution_data": resolution_data,
+                "timestamp": now
+            }
+
+    def get_chat_history(self, user_id: str, session_id: str) -> List[Dict[str, Any]]:
+        with self.get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute("""
+            SELECT message_id, session_id, role, content, explanation, resolution_data, timestamp
+            FROM chat_messages
+            WHERE user_id = ? AND session_id = ?
+            ORDER BY timestamp ASC
+            """, (user_id, session_id))
+            rows = cur.fetchall()
+            messages = []
+            for r in rows:
+                m = dict(r)
+                if m.get("explanation"):
+                    try:
+                        m["explanation"] = json.loads(m["explanation"])
+                    except Exception:
+                        pass
+                if m.get("resolution_data"):
+                    try:
+                        m["resolution_data"] = json.loads(m["resolution_data"])
+                    except Exception:
+                        pass
+                messages.append(m)
+            return messages
+
+    def clear_chat_history(self, user_id: str, session_id: str) -> bool:
+        with self.get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute("DELETE FROM chat_messages WHERE user_id = ? AND session_id = ?", (user_id, session_id))
+            cur.execute("DELETE FROM chat_sessions WHERE user_id = ? AND session_id = ?", (user_id, session_id))
+            conn.commit()
+            return True
+
+    def get_user_by_id(self, user_id: str) -> Optional[Dict[str, Any]]:
+        with self.get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute("SELECT user_id, username, email, role, created_at FROM users WHERE user_id = ?", (user_id,))
+            row = cur.fetchone()
+            return dict(row) if row else None
+
+# Global Singleton
+sqlite_store = SQLiteStore()

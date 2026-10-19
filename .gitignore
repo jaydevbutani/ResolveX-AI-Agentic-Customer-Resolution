@@ -1,0 +1,62 @@
+# ==============================================================================
+# ResolveX AI - .gitignore
+# ==============================================================================
+
+# Byte-compiled / optimized / cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment variables, credentials, and secrets
+.env
+.env.*
+*.env
+*.key
+*.pem
+secrets.toml
+.streamlit/secrets.toml
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Logs, temporary files, and debug dumps
+*.log
+*.tmp
+*.bak
+debug.txt
+debug_dumps/
+scratch/
+
+# Testing and coverage artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+# SQLite temporary and journal files (preserves pristine resolvex_enterprise.db)
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite3-journal
+
+# Ollama local model caches & large binaries
+/models/
+!src/models/
+*.gguf
+*.bin
+*.safetensors
