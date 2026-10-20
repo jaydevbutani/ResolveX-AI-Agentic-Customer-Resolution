@@ -253,11 +253,12 @@ class LLMClient:
                 "status": "Ineligible for Automated Refund (Support Case Filed)",
                 "explanation_text": "I couldn't approve this refund automatically. The cancellation was made after the provider's 24-hour cancellation window (RedBus Cancellation Policy — POL-RB-02). I have created a support case for you."
             }
-        elif "WRONG_PRODUCT" in final_status or "DAMAGED_PRODUCT" in final_status or "RETURN" in final_status:
+        elif "WRONG" in final_status.upper() or "DAMAGED" in final_status.upper() or "RETURN" in final_status.upper() or "wrong" in complaint_text.lower() or "damaged" in complaint_text.lower() or "ord-8801" in complaint_text.lower() or "ord-8802" in complaint_text.lower() or case_info.get("scenario_key") in ["wrong-product", "damaged-product"]:
+            ord_id = "ORD-8801" if "8801" in complaint_text else ("ORD-8802" if "8802" in complaint_text else case_info.get("order_id", "ORD-8801"))
             return {
                 "headline": "📦 RETURN / REPLACEMENT INITIATED",
                 "badge": "E-Commerce Protection Policy Active",
-                "your_issue": f"Reported wrong or damaged product for order {case_info.get('order_id', 'ORD-8801')}.",
+                "your_issue": f"Reported wrong or damaged product for order {ord_id}.",
                 "what_we_found": [
                     "✓ Order delivery date verified within 7-day return window",
                     "✓ Incident verified under Amazon Return Policy POL-AMZ-WRONG",
@@ -265,9 +266,9 @@ class LLMClient:
                 ],
                 "what_we_did": "✓ Scheduled doorstep reverse pickup with courier and generated return pickup docket.",
                 "what_happens_next": "Courier pickup scheduled for tomorrow. Replacement or refund will be processed upon pickup scan.",
-                "reference": "Return Pickup #AMZ-RET-8801 • Carrier: Amazon Logistics",
+                "reference": f"Return Pickup #AMZ-RET-{ord_id[-4:]} • Carrier: Amazon Logistics",
                 "status": "Doorstep Return Pickup Scheduled ✓",
-                "explanation_text": "Your return request has been approved. A doorstep pickup has been scheduled with Amazon Logistics, and your replacement or refund will be processed upon pickup scan."
+                "explanation_text": f"Your return request for {ord_id} has been approved. A doorstep pickup has been scheduled with Amazon Logistics, and your replacement or refund will be processed upon pickup scan."
             }
         else:
             return {
@@ -287,27 +288,48 @@ class LLMClient:
                 "explanation_text": f"We confirmed with your payment provider that ₹{amount:,.2f} was deducted without an active order. A full refund of ₹{amount:,.2f} has been credited back to your original payment method (Bank Reference: {arn})."
             }
 
-    def chat_turn(self, user_message: str, chat_history: Optional[List[Dict[str, Any]]] = None, user_id: str = "USER-DEMO-001") -> Dict[str, Any]:
+    def classify_intent(self, text: str) -> Dict[str, Any]:
         """
-        Conversational Multi-Turn Handler with Entity Extraction & Memory:
-        - If ambiguous/missing info: requests specific clarification.
-        - If follow-up provides missing entities: integrates with past turn.
-        - If actionable: prepares execution parameters for multi-agent StateGraph.
+        Lightweight intent gating to distinguish greetings, general queries, and actionable complaints.
+        Prevents conversational phrases like 'hello' or 'thanks' from triggering multi-agent DAGs.
         """
-        msg_clean = user_message.strip()
-        msg_lower = msg_clean.lower()
-        history = chat_history or []
-
-        # Combine current text with previous user messages to preserve multi-turn context
-        combined_text = " ".join([h.get("content", "") for h in history if h.get("role") == "user"] + [msg_clean])
-        combined_lower = combined_text.lower()
-
-        # 1. Informational queries
-        if any(q in msg_lower for q in ["how does", "what is resolvex", "who are you", "what can you do", "features"]):
+        raw = text.strip()
+        lower = raw.lower()
+        
+        # Pure greetings (e.g. "hello", "hi", "hey", "good morning")
+        greeting_words = {"hello", "hi", "hey", "good morning", "good afternoon", "good evening", "howdy", "hola", "namaste"}
+        words = re.findall(r'\b[a-z]+\b', lower)
+        
+        # Check if text is solely or primarily a greeting without issue keywords
+        issue_keywords = ["refund", "order", "cancel", "cancellation", "fail", "failed", "deduct", "deducted", 
+                          "charge", "charged", "return", "broken", "damaged", "issue", "money", "card", "upi", 
+                          "txn", "ord-", "rb-", "mmt-", "ticket", "hotel", "booking", "delayed", "wrong"]
+                          
+        if lower in greeting_words or (len(words) <= 3 and any(w in greeting_words for w in words) and not any(k in lower for k in issue_keywords)):
             return {
-                "needs_clarification": False,
-                "is_informational": True,
-                "actionable": False,
+                "intent": "GREETING",
+                "is_gating_hit": True,
+                "reply": (
+                    "Hi! I'm ResolveX. How can I help you today?\n\n"
+                    "You can ask me about refunds, cancellations, payments, orders, bookings, "
+                    "damaged products, delivery issues, or any other customer issue."
+                )
+            }
+            
+        # Courtesies / acknowledgements (e.g. "thanks", "thank you", "okay", "ok")
+        courtesy_words = {"thanks", "thank you", "thx", "appreciate it", "cool", "okay", "ok", "got it", "understood", "sure", "awesome", "perfect"}
+        if lower in courtesy_words or (len(words) <= 2 and any(w in courtesy_words for w in words)):
+            return {
+                "intent": "COURTESY",
+                "is_gating_hit": True,
+                "reply": "You're very welcome! I'm here whenever you need assistance with orders, refunds, or service issues."
+            }
+            
+        # General informational questions about ResolveX
+        if any(q in lower for q in ["how does resolvex work", "what is resolvex", "who are you", "what can you do", "features", "how do you work"]):
+            return {
+                "intent": "GENERAL_QUESTION",
+                "is_gating_hit": True,
                 "reply": (
                     "👋 **I am ResolveX AI**, an autonomous multi-agent customer issue resolution engine.\n\n"
                     "Unlike standard chatbots that only file tickets, ResolveX actively investigates across "
@@ -319,6 +341,35 @@ class LLMClient:
                     "How can I assist you with your order or transaction today?"
                 )
             }
+            
+        return {"intent": "ISSUE_REPORT", "is_gating_hit": False, "reply": None}
+
+    def chat_turn(self, user_message: str, chat_history: Optional[List[Dict[str, Any]]] = None, user_id: str = "USER-DEMO-001") -> Dict[str, Any]:
+        """
+        Conversational Multi-Turn Handler with Entity Extraction & Memory:
+        - If greeting/general inquiry: handles gracefully via lightweight intent gate.
+        - If ambiguous/missing info: requests specific clarification.
+        - If follow-up provides missing entities: integrates with past turn.
+        - If actionable: prepares execution parameters for multi-agent StateGraph.
+        """
+        msg_clean = user_message.strip()
+        msg_lower = msg_clean.lower()
+        history = chat_history or []
+
+        # 1. Intent Gate: Greetings & General Questions
+        gate = self.classify_intent(msg_clean)
+        if gate["is_gating_hit"]:
+            return {
+                "needs_clarification": False,
+                "is_informational": True,
+                "actionable": False,
+                "intent": gate["intent"],
+                "reply": gate["reply"]
+            }
+
+        # Combine current text with previous user messages to preserve multi-turn context
+        combined_text = " ".join([h.get("content", "") for h in history if h.get("role") == "user"] + [msg_clean])
+        combined_lower = combined_text.lower()
 
         # 2. Extract entities across conversation
         amt_match = re.search(r'(?:₹|rs\.?|inr|amount[:\s]+)?\s*([\d,]+(?:\.\d+)?)', combined_text, re.IGNORECASE)

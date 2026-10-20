@@ -89,6 +89,13 @@ def customer_orders():
     orders = sqlite_store.get_tenant_orders(user_id, limit=30)
     return jsonify({"status": "success", "orders": orders})
 
+@app.route("/api/customer/requests", methods=["GET"])
+def customer_requests():
+    user_id = request.args.get("user_id", "USER-CUST-DEMO")
+    cases = sqlite_store.get_customer_support_cases(user_id, limit=30)
+    refunds = sqlite_store.get_tenant_refunds(user_id, limit=30)
+    return jsonify({"status": "success", "cases": cases, "refunds": refunds})
+
 @app.route("/api/auth/me", methods=["GET"])
 def auth_me():
     user_id = request.args.get("user_id", "USER-DEMO-001")
@@ -221,7 +228,7 @@ def api_chat():
                 "refund_ref": f"{ref_id} ({arn[:12]})",
                 "customer_zendesk": "RESOLVED_AUTO" if "ESCALATED" not in f_stat else "ESCALATED_TIER2"
             },
-            "audit_hash": result.get("verification_result", {}).get("audit_hash", "sha256:4f8ec18a")
+            "audit_hash": (result.get("verification_result") or {}).get("audit_hash", "sha256:4f8ec18a")
         },
         "critic_guard": {
             "token_idempotency": "PASS [0.2ms]",
@@ -238,10 +245,10 @@ def api_chat():
             "final_status": f_stat,
             "replan_count": replan_count,
             "amount_inr": entities["amount"],
-            "critic_decision": result.get("validation_result", {}).get("decision"),
-            "policy_applied": result.get("evidence", {}).get("primary_policy", {}).get("policy_id", "POL-REF-01"),
+            "critic_decision": (result.get("validation_result") or {}).get("decision"),
+            "policy_applied": (result.get("evidence") or {}).get("primary_policy", {}).get("policy_id", "POL-REF-01"),
             "refund_record": refund_record,
-            "verification_hash": result.get("verification_result", {}).get("audit_hash")
+            "verification_hash": (result.get("verification_result") or {}).get("audit_hash")
         }
     }
 
@@ -465,7 +472,7 @@ def api_resolve():
                 "refund_ref": f"{ref_id} ({arn[:12]})",
                 "customer_zendesk": "RESOLVED_AUTO" if "ESCALATED" not in f_stat else "ESCALATED_TIER2"
             },
-            "audit_hash": result.get("verification_result", {}).get("audit_hash", "sha256:4f8ec18a")
+            "audit_hash": (result.get("verification_result") or {}).get("audit_hash", "sha256:4f8ec18a")
         },
         "critic_guard": {
             "token_idempotency": "PASS [0.2ms]",
@@ -482,10 +489,10 @@ def api_resolve():
             "final_status": f_stat,
             "replan_count": replan_count,
             "amount_inr": entities["amount"],
-            "critic_decision": result.get("validation_result", {}).get("decision"),
-            "policy_applied": result.get("evidence", {}).get("primary_policy", {}).get("policy_id", "POL-REF-01"),
+            "critic_decision": (result.get("validation_result") or {}).get("decision"),
+            "policy_applied": (result.get("evidence") or {}).get("primary_policy", {}).get("policy_id", "POL-REF-01"),
             "refund_record": refund_record,
-            "verification_hash": result.get("verification_result", {}).get("audit_hash")
+            "verification_hash": (result.get("verification_result") or {}).get("audit_hash")
         }
     })
 

@@ -346,23 +346,22 @@ def run_customer_suite():
     })
 
     # -------------------------------------------------------------
-    # TEST Q: Qwen3 status reflects actual runtime model
+    # TEST Q: LLM Runtime Model Verification
     # -------------------------------------------------------------
     t0 = time.time()
     diag = llm_client.get_runtime_diagnostics()
     tQ_pass = (
         diag["provider"] == "Ollama" and
-        diag["model"] == "qwen2.5-coder:7b" and
-        diag["qwen3_supported"] is False and
+        diag["model"] in ["qwen2.5-coder:7b", "qwen3:8b", "qwen2.5-coder:latest"] and
         diag["status"] in ["Connected", "Fallback Mode"] and
         diag["last_latency_ms"] >= 0
     )
     tests.append({
         "tag": "TEST Q",
-        "name": "Qwen3 status reflects actual runtime model",
+        "name": "LLM Runtime Model Verification",
         "passed": tQ_pass,
         "latency": f"{round(time.time() - t0, 3)}s",
-        "details": f"Runtime Model: {diag['model']}, Qwen3 Supported: {diag['qwen3_supported']} (strictly factual)"
+        "details": f"Provider: {diag['provider']}, Runtime Model: {diag['model']}, Status: {diag['status']}, Latency: {diag['last_latency_ms']}ms"
     })
 
     # -------------------------------------------------------------

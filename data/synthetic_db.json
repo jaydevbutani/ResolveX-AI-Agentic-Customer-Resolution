@@ -497,7 +497,7 @@
       "gateway": "Razorpay",
       "payment_method": "UPI",
       "order_id": "ORD-5501",
-      "refund_id": "RF-84B1EA",
+      "refund_id": "RF-035F4E",
       "error_code": "NONE",
       "timestamp": "2026-10-19T14:30:00",
       "description": "UPI payment received for headphones"
@@ -2163,17 +2163,17 @@
       "estimated_credit": "2026-10-20T12:05:00",
       "notes": "Initiated prior to inquiry; credit expected in bank within 24h"
     },
-    "RF-84B1EA": {
-      "refund_id": "RF-84B1EA",
+    "RF-035F4E": {
+      "refund_id": "RF-035F4E",
       "transaction_id": "TXN-8821",
       "order_id": "ORD-5501",
       "customer_id": "CUST-101",
       "amount": 2499.0,
       "currency": "INR",
       "status": "SUCCESS",
-      "arn": "ARN-UPI-D4A8EAF3",
+      "arn": "ARN-UPI-ABA787C4",
       "gateway": "Razorpay",
-      "initiated_at": "2026-10-20T22:01:38.159990",
+      "initiated_at": "2026-10-21T00:35:02.753947",
       "estimated_credit": "Instant / Within 24-48 hours",
       "notes": "Autonomous Agent Resolution"
     }
@@ -2202,8 +2202,8 @@
       "resolution_state": "UNRESOLVED",
       "parent_incident_id": null,
       "created_at": "2026-10-19T14:32:00",
-      "closed_at": "2026-10-20T23:01:43.632833",
-      "resolution_summary": "Inquiry resolved. Customer informed of existing active refund RF-84B1EA (ARN: ARN-UPI-D4A8EAF3)."
+      "closed_at": "2026-10-21T00:47:35.862518",
+      "resolution_summary": "Inquiry resolved. Customer informed of existing active refund RF-035F4E (ARN: ARN-UPI-ABA787C4)."
     },
     "CASE-SYS-001": {
       "case_id": "CASE-SYS-001",
@@ -2211,10 +2211,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7001 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:13:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2225,10 +2225,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7002 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:14:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2239,10 +2239,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7003 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:15:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2253,10 +2253,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7004 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:16:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2267,10 +2267,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7005 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:17:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2281,10 +2281,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7006 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:18:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2295,10 +2295,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7007 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:19:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2309,10 +2309,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7008 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:20:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2323,10 +2323,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7009 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:21:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2337,10 +2337,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7010 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:22:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2351,10 +2351,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7011 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:23:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2365,10 +2365,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7012 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:24:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2379,10 +2379,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7013 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:25:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2393,10 +2393,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7014 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:26:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2407,10 +2407,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7015 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:12:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2421,10 +2421,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7016 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:13:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2435,10 +2435,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7017 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:14:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2449,10 +2449,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7018 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:15:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2463,10 +2463,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7019 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:16:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2477,10 +2477,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7020 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:17:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2491,10 +2491,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7021 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:18:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2505,10 +2505,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7022 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:19:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2519,10 +2519,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7023 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:20:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2533,10 +2533,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7024 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:21:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2547,10 +2547,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7025 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:22:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2561,10 +2561,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7026 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:23:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2575,10 +2575,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7027 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:24:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2589,10 +2589,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7028 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:25:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2603,10 +2603,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7029 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:26:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2617,10 +2617,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7030 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:12:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2631,10 +2631,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7031 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:13:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2645,10 +2645,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7032 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:14:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2659,10 +2659,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7033 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:15:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2673,10 +2673,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7034 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:16:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2687,10 +2687,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7035 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:17:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2701,10 +2701,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7036 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:18:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2715,10 +2715,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7037 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:19:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2729,10 +2729,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7038 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:20:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2743,10 +2743,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7039 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:21:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2757,10 +2757,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7040 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:22:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2771,10 +2771,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7041 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:23:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2785,10 +2785,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7042 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:24:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2799,10 +2799,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7043 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:25:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2813,10 +2813,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7044 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:26:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2827,10 +2827,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7045 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:12:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2841,10 +2841,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7046 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:13:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2855,10 +2855,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7047 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:14:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2869,10 +2869,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7048 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:15:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2883,10 +2883,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7049 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:16:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2897,10 +2897,10 @@
       "channel": "AUTO_INGEST",
       "issue_type": "PAYMENT_CAPTURE_WITHOUT_ORDER",
       "description": "\u20b91,999 debited on Razorpay, order ORD-7050 dropped with PG_TIMEOUT_504.",
-      "status": "LINKED_TO_INCIDENT",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "PENDING_CLUSTER_ANALYSIS",
-      "parent_incident_id": "INC-2026-5C5C",
+      "parent_incident_id": null,
       "created_at": "2026-10-19T15:17:00",
       "closed_at": null,
       "resolution_summary": null
@@ -2909,242 +2909,396 @@
       "case_id": "CASE-102",
       "status": "RESOLVED",
       "resolution_summary": "Existing refund ARN provided",
-      "created_at": "2026-10-20T22:01:58.746633",
+      "created_at": "2026-10-21T00:35:05.058189",
       "parent_incident_id": null,
-      "closed_at": "2026-10-20T23:01:43.550300"
+      "closed_at": "2026-10-21T00:47:35.789111"
     },
     "CASE-103": {
       "case_id": "CASE-103",
       "status": "ESCALATED_TO_HUMAN",
       "resolution_summary": "ESCALATED TO TIER-2 HUMAN LEAD. Reason: Transaction \u20b92,499.00 exceeds \u20b925,000 threshold and untrusted IP flag",
-      "created_at": "2026-10-20T22:02:22.241942",
+      "created_at": "2026-10-21T00:35:07.288103",
       "parent_incident_id": null
     }
   },
-  "incidents": {
-    "INC-2026-3074": {
-      "incident_id": "INC-2026-3074",
-      "title": "Gateway Callback Outage",
-      "description": "Bulk 504 timeouts",
-      "severity": "CRITICAL",
-      "status": "OPEN",
-      "affected_count": 50,
-      "linked_case_ids": [],
-      "created_at": "2026-10-19T23:44:43.530824"
-    },
-    "INC-2026-E73D": {
-      "incident_id": "INC-2026-E73D",
-      "title": "Systemic Gateway Outage: PG_TIMEOUT_504 Payment-Order Mismatch",
-      "description": "Automated cluster identified 50 transactions failing with PG_TIMEOUT_504. Triggering bulk remediation.",
-      "severity": "HIGH",
-      "status": "OPEN",
-      "affected_count": 50,
-      "linked_case_ids": [
-        "CASE-SYS-001",
-        "CASE-SYS-002",
-        "CASE-SYS-003",
-        "CASE-SYS-004",
-        "CASE-SYS-005",
-        "CASE-SYS-006",
-        "CASE-SYS-007",
-        "CASE-SYS-008",
-        "CASE-SYS-009",
-        "CASE-SYS-010",
-        "CASE-SYS-011",
-        "CASE-SYS-012",
-        "CASE-SYS-013",
-        "CASE-SYS-014",
-        "CASE-SYS-015",
-        "CASE-SYS-016",
-        "CASE-SYS-017",
-        "CASE-SYS-018",
-        "CASE-SYS-019",
-        "CASE-SYS-020",
-        "CASE-SYS-021",
-        "CASE-SYS-022",
-        "CASE-SYS-023",
-        "CASE-SYS-024",
-        "CASE-SYS-025",
-        "CASE-SYS-026",
-        "CASE-SYS-027",
-        "CASE-SYS-028",
-        "CASE-SYS-029",
-        "CASE-SYS-030",
-        "CASE-SYS-031",
-        "CASE-SYS-032",
-        "CASE-SYS-033",
-        "CASE-SYS-034",
-        "CASE-SYS-035",
-        "CASE-SYS-036",
-        "CASE-SYS-037",
-        "CASE-SYS-038",
-        "CASE-SYS-039",
-        "CASE-SYS-040",
-        "CASE-SYS-041",
-        "CASE-SYS-042",
-        "CASE-SYS-043",
-        "CASE-SYS-044",
-        "CASE-SYS-045",
-        "CASE-SYS-046",
-        "CASE-SYS-047",
-        "CASE-SYS-048",
-        "CASE-SYS-049",
-        "CASE-SYS-050"
-      ],
-      "created_at": "2026-10-19T23:44:43.580335"
-    },
-    "INC-2026-A168": {
-      "incident_id": "INC-2026-A168",
-      "title": "Gateway Callback Outage",
-      "description": "Bulk 504 timeouts",
-      "severity": "CRITICAL",
-      "status": "OPEN",
-      "affected_count": 50,
-      "linked_case_ids": [],
-      "created_at": "2026-10-20T22:04:11.203997"
-    },
-    "INC-2026-5C5C": {
-      "incident_id": "INC-2026-5C5C",
-      "title": "Systemic Gateway Outage: PG_TIMEOUT_504 Payment-Order Mismatch",
-      "description": "Automated cluster identified 50 transactions failing with PG_TIMEOUT_504. Triggering bulk remediation.",
-      "severity": "HIGH",
-      "status": "OPEN",
-      "affected_count": 50,
-      "linked_case_ids": [
-        "CASE-SYS-001",
-        "CASE-SYS-002",
-        "CASE-SYS-003",
-        "CASE-SYS-004",
-        "CASE-SYS-005",
-        "CASE-SYS-006",
-        "CASE-SYS-007",
-        "CASE-SYS-008",
-        "CASE-SYS-009",
-        "CASE-SYS-010",
-        "CASE-SYS-011",
-        "CASE-SYS-012",
-        "CASE-SYS-013",
-        "CASE-SYS-014",
-        "CASE-SYS-015",
-        "CASE-SYS-016",
-        "CASE-SYS-017",
-        "CASE-SYS-018",
-        "CASE-SYS-019",
-        "CASE-SYS-020",
-        "CASE-SYS-021",
-        "CASE-SYS-022",
-        "CASE-SYS-023",
-        "CASE-SYS-024",
-        "CASE-SYS-025",
-        "CASE-SYS-026",
-        "CASE-SYS-027",
-        "CASE-SYS-028",
-        "CASE-SYS-029",
-        "CASE-SYS-030",
-        "CASE-SYS-031",
-        "CASE-SYS-032",
-        "CASE-SYS-033",
-        "CASE-SYS-034",
-        "CASE-SYS-035",
-        "CASE-SYS-036",
-        "CASE-SYS-037",
-        "CASE-SYS-038",
-        "CASE-SYS-039",
-        "CASE-SYS-040",
-        "CASE-SYS-041",
-        "CASE-SYS-042",
-        "CASE-SYS-043",
-        "CASE-SYS-044",
-        "CASE-SYS-045",
-        "CASE-SYS-046",
-        "CASE-SYS-047",
-        "CASE-SYS-048",
-        "CASE-SYS-049",
-        "CASE-SYS-050"
-      ],
-      "created_at": "2026-10-20T22:04:11.277745"
-    }
-  },
+  "incidents": {},
   "notifications": [
     {
-      "notification_id": "NOTIF-2AB5D0",
-      "customer_id": "BROADCAST-GROUP",
-      "channel": "IN_APP_BANNER",
-      "subject": "Temporary Payment Delay Notice",
-      "message": "We detected a payment gateway synchronization issue. All 50 affected orders are being automatically reversed within 2 hours.",
-      "sent_at": "2026-10-19T23:44:43.593335",
+      "notification_id": "NOTIF-DF11BA",
+      "customer_id": "CUST-103",
+      "channel": "SMS",
+      "subject": "Inquiry Under Senior Review",
+      "message": "ResolveX Update: Your inquiry has been routed to our Senior Operations Lead for specialized review. Reference: CASE-001",
+      "sent_at": "2026-10-21T00:32:31.748798",
       "status": "DELIVERED"
     },
     {
-      "notification_id": "NOTIF-7C099A",
+      "notification_id": "NOTIF-9CA114",
       "customer_id": "CUST-101",
       "channel": "SMS",
       "subject": "Refund Confirmation",
       "message": "Your refund has been initiated.",
-      "sent_at": "2026-10-20T22:01:38.166996",
+      "sent_at": "2026-10-21T00:35:02.759423",
       "status": "DELIVERED"
     },
     {
-      "notification_id": "NOTIF-091082",
+      "notification_id": "NOTIF-27A2E5",
       "customer_id": "CUST-101",
       "channel": "SMS",
       "subject": "Refund Initiated Successfully",
-      "message": "ResolveX Update: \u20b92,499.00 refund initiated to your original payment method. Ref: ARN-UPI-D4A8EAF3. Funds reflect in 24-48h.",
-      "sent_at": "2026-10-20T22:01:38.243008",
+      "message": "ResolveX Update: \u20b92,499.00 refund initiated to your original payment method. Ref: ARN-UPI-ABA787C4. Funds reflect in 24-48h.",
+      "sent_at": "2026-10-21T00:35:02.826303",
       "status": "DELIVERED"
     },
     {
-      "notification_id": "NOTIF-0A021A",
+      "notification_id": "NOTIF-6CB36D",
       "customer_id": "CUST-102",
       "channel": "SMS",
       "subject": "Refund Status",
       "message": "Refund is processing",
-      "sent_at": "2026-10-20T22:01:58.756695",
+      "sent_at": "2026-10-21T00:35:05.062612",
       "status": "DELIVERED"
     },
     {
-      "notification_id": "NOTIF-7E4AD8",
+      "notification_id": "NOTIF-0DC3C4",
       "customer_id": "CUST-102",
       "channel": "SMS",
       "subject": "Refund Status Tracking Update",
       "message": "ResolveX Update: Your refund RF-40192 is already processing under bank ARN ARN-9928172645-UPI. Expected credit: Within 24 hours.",
-      "sent_at": "2026-10-20T22:01:58.841061",
+      "sent_at": "2026-10-21T00:35:05.114748",
       "status": "DELIVERED"
     },
     {
-      "notification_id": "NOTIF-574AB8",
+      "notification_id": "NOTIF-17F7FE",
       "customer_id": "CUST-102",
       "channel": "SMS",
       "subject": "Refund Initiated Successfully",
       "message": "ResolveX Update: \u20b92,499.00 refund initiated to your original payment method. Ref: ARN-9928172645-UPI. Funds reflect in 24-48h.",
-      "sent_at": "2026-10-20T22:02:22.319201",
+      "sent_at": "2026-10-21T00:35:07.361212",
       "status": "DELIVERED"
     },
     {
-      "notification_id": "NOTIF-33EBA9",
-      "customer_id": "BROADCAST-GROUP",
-      "channel": "IN_APP_BANNER",
-      "subject": "Temporary Payment Delay Notice",
-      "message": "We detected a payment gateway synchronization issue. All 50 affected orders are being automatically reversed within 2 hours.",
-      "sent_at": "2026-10-20T22:04:11.290251",
+      "notification_id": "NOTIF-1989FB",
+      "customer_id": "CUST-102",
+      "channel": "SMS",
+      "subject": "Refund Initiated Successfully",
+      "message": "ResolveX Update: \u20b92,499.00 refund initiated to your original payment method. Ref: ARN-9928172645-UPI. Funds reflect in 24-48h.",
+      "sent_at": "2026-10-21T00:35:11.732398",
       "status": "DELIVERED"
     },
     {
-      "notification_id": "NOTIF-7A3435",
+      "notification_id": "NOTIF-1EF394",
+      "customer_id": "CUST-102",
+      "channel": "SMS",
+      "subject": "Refund Initiated Successfully",
+      "message": "ResolveX Update: \u20b92,499.00 refund initiated to your original payment method. Ref: ARN-9928172645-UPI. Funds reflect in 24-48h.",
+      "sent_at": "2026-10-21T00:35:14.017548",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-A43D90",
+      "customer_id": "CUST-103",
+      "channel": "SMS",
+      "subject": "Inquiry Under Senior Review",
+      "message": "ResolveX Update: Your inquiry has been routed to our Senior Operations Lead for specialized review. Reference: CASE-001",
+      "sent_at": "2026-10-21T00:35:41.591046",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-3D1117",
+      "customer_id": "CUST-101",
+      "channel": "SMS",
+      "subject": "Refund Initiated Successfully",
+      "message": "ResolveX Update: \u20b98,801.00 refund initiated to your original payment method. Ref: ARN-SUCCESS. Funds reflect in 24-48h.",
+      "sent_at": "2026-10-21T00:36:40.527752",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-3C3C8C",
       "customer_id": "CUST-101",
       "channel": "SMS",
       "subject": "Refund Status",
       "message": "Refund is processing",
-      "sent_at": "2026-10-20T23:01:43.560295",
+      "sent_at": "2026-10-21T00:38:42.252703",
       "status": "DELIVERED"
     },
     {
-      "notification_id": "NOTIF-B86578",
+      "notification_id": "NOTIF-B262FE",
       "customer_id": "CUST-101",
       "channel": "SMS",
       "subject": "Refund Status Tracking Update",
-      "message": "ResolveX Update: Your refund RF-84B1EA is already processing under bank ARN ARN-UPI-D4A8EAF3. Expected credit: Within 24 hours.",
-      "sent_at": "2026-10-20T23:01:43.637832",
+      "message": "ResolveX Update: Your refund RF-035F4E is already processing under bank ARN ARN-UPI-ABA787C4. Expected credit: Within 24 hours.",
+      "sent_at": "2026-10-21T00:38:42.316392",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-13DA15",
+      "customer_id": "CUST-102",
+      "channel": "SMS",
+      "subject": "Refund Status",
+      "message": "Refund is processing",
+      "sent_at": "2026-10-21T00:38:44.575305",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-589ABB",
+      "customer_id": "CUST-102",
+      "channel": "SMS",
+      "subject": "Refund Status Tracking Update",
+      "message": "ResolveX Update: Your refund RF-40192 is already processing under bank ARN ARN-9928172645-UPI. Expected credit: Within 24 hours.",
+      "sent_at": "2026-10-21T00:38:44.631560",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-7B49A7",
+      "customer_id": "CUST-102",
+      "channel": "SMS",
+      "subject": "Refund Initiated Successfully",
+      "message": "ResolveX Update: \u20b92,499.00 refund initiated to your original payment method. Ref: ARN-9928172645-UPI. Funds reflect in 24-48h.",
+      "sent_at": "2026-10-21T00:38:46.907332",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-454126",
+      "customer_id": "CUST-102",
+      "channel": "SMS",
+      "subject": "Refund Initiated Successfully",
+      "message": "ResolveX Update: \u20b92,499.00 refund initiated to your original payment method. Ref: ARN-9928172645-UPI. Funds reflect in 24-48h.",
+      "sent_at": "2026-10-21T00:38:51.203435",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-F4BB88",
+      "customer_id": "CUST-102",
+      "channel": "SMS",
+      "subject": "Refund Initiated Successfully",
+      "message": "ResolveX Update: \u20b92,499.00 refund initiated to your original payment method. Ref: ARN-9928172645-UPI. Funds reflect in 24-48h.",
+      "sent_at": "2026-10-21T00:38:53.467457",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-B36FC3",
+      "customer_id": "CUST-103",
+      "channel": "SMS",
+      "subject": "Inquiry Under Senior Review",
+      "message": "ResolveX Update: Your inquiry has been routed to our Senior Operations Lead for specialized review. Reference: CASE-001",
+      "sent_at": "2026-10-21T00:39:21.559874",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-A84593",
+      "customer_id": "CUST-101",
+      "channel": "SMS",
+      "subject": "Refund Status",
+      "message": "Refund is processing",
+      "sent_at": "2026-10-21T00:39:37.725784",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-E0DF58",
+      "customer_id": "CUST-101",
+      "channel": "SMS",
+      "subject": "Refund Status Tracking Update",
+      "message": "ResolveX Update: Your refund RF-035F4E is already processing under bank ARN ARN-UPI-ABA787C4. Expected credit: Within 24 hours.",
+      "sent_at": "2026-10-21T00:39:37.780381",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-EAA1BC",
+      "customer_id": "CUST-103",
+      "channel": "SMS",
+      "subject": "Inquiry Under Senior Review",
+      "message": "ResolveX Update: Your inquiry has been routed to our Senior Operations Lead for specialized review. Reference: CASE-001",
+      "sent_at": "2026-10-21T00:39:39.962729",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-7F3B4E",
+      "customer_id": "CUST-101",
+      "channel": "SMS",
+      "subject": "Refund Initiated Successfully",
+      "message": "ResolveX Update: \u20b98,801.00 refund initiated to your original payment method. Ref: ARN-SUCCESS. Funds reflect in 24-48h.",
+      "sent_at": "2026-10-21T00:39:42.185211",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-B2496E",
+      "customer_id": "CUST-101",
+      "channel": "SMS",
+      "subject": "Refund Status",
+      "message": "Refund is processing",
+      "sent_at": "2026-10-21T00:43:07.959837",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-EB2897",
+      "customer_id": "CUST-101",
+      "channel": "SMS",
+      "subject": "Refund Status Tracking Update",
+      "message": "ResolveX Update: Your refund RF-035F4E is already processing under bank ARN ARN-UPI-ABA787C4. Expected credit: Within 24 hours.",
+      "sent_at": "2026-10-21T00:43:08.022233",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-5F67F8",
+      "customer_id": "CUST-102",
+      "channel": "SMS",
+      "subject": "Refund Status",
+      "message": "Refund is processing",
+      "sent_at": "2026-10-21T00:43:10.333783",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-CF41B8",
+      "customer_id": "CUST-102",
+      "channel": "SMS",
+      "subject": "Refund Status Tracking Update",
+      "message": "ResolveX Update: Your refund RF-40192 is already processing under bank ARN ARN-9928172645-UPI. Expected credit: Within 24 hours.",
+      "sent_at": "2026-10-21T00:43:10.416249",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-E13B17",
+      "customer_id": "CUST-103",
+      "channel": "SMS",
+      "subject": "Inquiry Under Senior Review",
+      "message": "ResolveX Update: Your inquiry has been routed to our Senior Operations Lead for specialized review. Reference: CASE-001",
+      "sent_at": "2026-10-21T00:43:12.638367",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-0B53CC",
+      "customer_id": "CUST-101",
+      "channel": "SMS",
+      "subject": "Refund Initiated Successfully",
+      "message": "ResolveX Update: \u20b98,801.00 refund initiated to your original payment method. Ref: ARN-SUCCESS. Funds reflect in 24-48h.",
+      "sent_at": "2026-10-21T00:43:16.980401",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-FDF127",
+      "customer_id": "CUST-101",
+      "channel": "SMS",
+      "subject": "Refund Initiated Successfully",
+      "message": "ResolveX Update: \u20b98,802.00 refund initiated to your original payment method. Ref: ARN-SUCCESS. Funds reflect in 24-48h.",
+      "sent_at": "2026-10-21T00:43:19.267585",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-C42EDD",
+      "customer_id": "CUST-101",
+      "channel": "SMS",
+      "subject": "Refund Status",
+      "message": "Refund is processing",
+      "sent_at": "2026-10-21T00:44:49.293445",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-C28617",
+      "customer_id": "CUST-101",
+      "channel": "SMS",
+      "subject": "Refund Status Tracking Update",
+      "message": "ResolveX Update: Your refund RF-035F4E is already processing under bank ARN ARN-UPI-ABA787C4. Expected credit: Within 24 hours.",
+      "sent_at": "2026-10-21T00:44:49.343189",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-10823C",
+      "customer_id": "CUST-102",
+      "channel": "SMS",
+      "subject": "Refund Status",
+      "message": "Refund is processing",
+      "sent_at": "2026-10-21T00:44:51.565121",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-021E0C",
+      "customer_id": "CUST-102",
+      "channel": "SMS",
+      "subject": "Refund Status Tracking Update",
+      "message": "ResolveX Update: Your refund RF-40192 is already processing under bank ARN ARN-9928172645-UPI. Expected credit: Within 24 hours.",
+      "sent_at": "2026-10-21T00:44:51.625378",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-C9D1C5",
+      "customer_id": "CUST-103",
+      "channel": "SMS",
+      "subject": "Inquiry Under Senior Review",
+      "message": "ResolveX Update: Your inquiry has been routed to our Senior Operations Lead for specialized review. Reference: CASE-001",
+      "sent_at": "2026-10-21T00:44:53.791860",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-01D9C5",
+      "customer_id": "CUST-101",
+      "channel": "SMS",
+      "subject": "Refund Initiated Successfully",
+      "message": "ResolveX Update: \u20b98,801.00 refund initiated to your original payment method. Ref: ARN-SUCCESS. Funds reflect in 24-48h.",
+      "sent_at": "2026-10-21T00:44:58.073821",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-121F6D",
+      "customer_id": "CUST-101",
+      "channel": "SMS",
+      "subject": "Refund Initiated Successfully",
+      "message": "ResolveX Update: \u20b98,802.00 refund initiated to your original payment method. Ref: ARN-SUCCESS. Funds reflect in 24-48h.",
+      "sent_at": "2026-10-21T00:45:00.286975",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-C87DFD",
+      "customer_id": "CUST-101",
+      "channel": "SMS",
+      "subject": "Refund Status",
+      "message": "Refund is processing",
+      "sent_at": "2026-10-21T00:46:08.660287",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-060087",
+      "customer_id": "CUST-101",
+      "channel": "SMS",
+      "subject": "Refund Status Tracking Update",
+      "message": "ResolveX Update: Your refund RF-035F4E is already processing under bank ARN ARN-UPI-ABA787C4. Expected credit: Within 24 hours.",
+      "sent_at": "2026-10-21T00:46:08.719728",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-30F809",
+      "customer_id": "CUST-101",
+      "channel": "SMS",
+      "subject": "Refund Status",
+      "message": "Refund is processing",
+      "sent_at": "2026-10-21T00:46:14.091610",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-FAC075",
+      "customer_id": "CUST-101",
+      "channel": "SMS",
+      "subject": "Refund Status Tracking Update",
+      "message": "ResolveX Update: Your refund RF-035F4E is already processing under bank ARN ARN-UPI-ABA787C4. Expected credit: Within 24 hours.",
+      "sent_at": "2026-10-21T00:46:14.142988",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-3E4FF0",
+      "customer_id": "CUST-101",
+      "channel": "SMS",
+      "subject": "Refund Status",
+      "message": "Refund is processing",
+      "sent_at": "2026-10-21T00:47:35.795219",
+      "status": "DELIVERED"
+    },
+    {
+      "notification_id": "NOTIF-FA82CB",
+      "customer_id": "CUST-101",
+      "channel": "SMS",
+      "subject": "Refund Status Tracking Update",
+      "message": "ResolveX Update: Your refund RF-035F4E is already processing under bank ARN ARN-UPI-ABA787C4. Expected credit: Within 24 hours.",
+      "sent_at": "2026-10-21T00:47:35.869510",
       "status": "DELIVERED"
     }
   ],
@@ -3156,157 +3310,577 @@
       "details": "Synthetic enterprise database primed for ResolveX AI testing."
     },
     {
-      "timestamp": "2026-10-19T23:44:43.530824",
+      "timestamp": "2026-10-21T00:32:31.742800",
       "actor": "Business_Automation_Agent",
-      "action": "CREATE_INCIDENT",
-      "details": "Incident INC-2026-3074 opened: Gateway Callback Outage (50 affected)"
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as ESCALATED_TO_HUMAN"
     },
     {
-      "timestamp": "2026-10-19T23:44:43.580335",
-      "actor": "Business_Automation_Agent",
-      "action": "CREATE_INCIDENT",
-      "details": "Incident INC-2026-E73D opened: Systemic Gateway Outage: PG_TIMEOUT_504 Payment-Order Mismatch (50 affected)"
-    },
-    {
-      "timestamp": "2026-10-19T23:44:43.587332",
-      "actor": "Business_Automation_Agent",
-      "action": "LINK_CASES",
-      "details": "Linked 50 cases to incident INC-2026-E73D"
-    },
-    {
-      "timestamp": "2026-10-19T23:44:43.593335",
+      "timestamp": "2026-10-21T00:32:31.748798",
       "actor": "Business_Automation_Agent",
       "action": "SEND_NOTIFICATION",
-      "details": "Dispatched IN_APP_BANNER notification to BROADCAST-GROUP: Temporary Payment Delay Notice"
+      "details": "Dispatched SMS notification to CUST-103: Inquiry Under Senior Review"
     },
     {
-      "timestamp": "2026-10-19T23:44:43.613339",
-      "actor": "Software_Development_Agent",
-      "action": "DEPLOY_RULE",
-      "details": "Promoted rule RULE-AUTO-10192344 to production with 100.0% accuracy."
-    },
-    {
-      "timestamp": "2026-10-20T22:01:38.159990",
+      "timestamp": "2026-10-21T00:35:02.753947",
       "actor": "Executor_Agent",
       "action": "INITIATE_REFUND",
-      "details": "Refund RF-84B1EA created for 2499.0 INR on txn TXN-8821"
+      "details": "Refund RF-035F4E created for 2499.0 INR on txn TXN-8821"
     },
     {
-      "timestamp": "2026-10-20T22:01:38.166996",
+      "timestamp": "2026-10-21T00:35:02.759423",
       "actor": "Business_Automation_Agent",
       "action": "SEND_NOTIFICATION",
       "details": "Dispatched SMS notification to CUST-101: Refund Confirmation"
     },
     {
-      "timestamp": "2026-10-20T22:01:38.237866",
+      "timestamp": "2026-10-21T00:35:02.820653",
       "actor": "Business_Automation_Agent",
       "action": "UPDATE_CASE",
       "details": "Case CASE-001 marked as RESOLVED"
     },
     {
-      "timestamp": "2026-10-20T22:01:38.243008",
+      "timestamp": "2026-10-21T00:35:02.826303",
       "actor": "Business_Automation_Agent",
       "action": "SEND_NOTIFICATION",
       "details": "Dispatched SMS notification to CUST-101: Refund Initiated Successfully"
     },
     {
-      "timestamp": "2026-10-20T22:01:58.746633",
+      "timestamp": "2026-10-21T00:35:05.058189",
       "actor": "Business_Automation_Agent",
       "action": "UPDATE_CASE",
       "details": "Case CASE-102 marked as RESOLVED"
     },
     {
-      "timestamp": "2026-10-20T22:01:58.756695",
+      "timestamp": "2026-10-21T00:35:05.062612",
       "actor": "Business_Automation_Agent",
       "action": "SEND_NOTIFICATION",
       "details": "Dispatched SMS notification to CUST-102: Refund Status"
     },
     {
-      "timestamp": "2026-10-20T22:01:58.835534",
+      "timestamp": "2026-10-21T00:35:05.109634",
       "actor": "Business_Automation_Agent",
       "action": "UPDATE_CASE",
       "details": "Case CASE-001 marked as RESOLVED"
     },
     {
-      "timestamp": "2026-10-20T22:01:58.842052",
+      "timestamp": "2026-10-21T00:35:05.114748",
       "actor": "Business_Automation_Agent",
       "action": "SEND_NOTIFICATION",
       "details": "Dispatched SMS notification to CUST-102: Refund Status Tracking Update"
     },
     {
-      "timestamp": "2026-10-20T22:02:22.241942",
+      "timestamp": "2026-10-21T00:35:07.288103",
       "actor": "Critic_Agent",
       "action": "UPDATE_CASE",
       "details": "Case CASE-103 marked as ESCALATED_TO_HUMAN"
     },
     {
-      "timestamp": "2026-10-20T22:02:22.249318",
+      "timestamp": "2026-10-21T00:35:07.296102",
       "actor": "Critic_Agent",
       "action": "HUMAN_ESCALATION",
       "details": "Case CASE-103 blocked from autonomous resolution. Reason: Transaction \u20b92,499.00 exceeds \u20b925,000 threshold and untrusted IP flag"
     },
     {
-      "timestamp": "2026-10-20T22:02:22.312690",
+      "timestamp": "2026-10-21T00:35:07.356212",
       "actor": "Business_Automation_Agent",
       "action": "UPDATE_CASE",
       "details": "Case CASE-001 marked as RESOLVED"
     },
     {
-      "timestamp": "2026-10-20T22:02:22.319201",
+      "timestamp": "2026-10-21T00:35:07.361212",
       "actor": "Business_Automation_Agent",
       "action": "SEND_NOTIFICATION",
       "details": "Dispatched SMS notification to CUST-102: Refund Initiated Successfully"
     },
     {
-      "timestamp": "2026-10-20T22:04:11.203997",
-      "actor": "Business_Automation_Agent",
-      "action": "CREATE_INCIDENT",
-      "details": "Incident INC-2026-A168 opened: Gateway Callback Outage (50 affected)"
-    },
-    {
-      "timestamp": "2026-10-20T22:04:11.277745",
-      "actor": "Business_Automation_Agent",
-      "action": "CREATE_INCIDENT",
-      "details": "Incident INC-2026-5C5C opened: Systemic Gateway Outage: PG_TIMEOUT_504 Payment-Order Mismatch (50 affected)"
-    },
-    {
-      "timestamp": "2026-10-20T22:04:11.284744",
-      "actor": "Business_Automation_Agent",
-      "action": "LINK_CASES",
-      "details": "Linked 50 cases to incident INC-2026-5C5C"
-    },
-    {
-      "timestamp": "2026-10-20T22:04:11.290251",
-      "actor": "Business_Automation_Agent",
-      "action": "SEND_NOTIFICATION",
-      "details": "Dispatched IN_APP_BANNER notification to BROADCAST-GROUP: Temporary Payment Delay Notice"
-    },
-    {
-      "timestamp": "2026-10-20T22:04:11.309906",
-      "actor": "Software_Development_Agent",
-      "action": "DEPLOY_RULE",
-      "details": "Promoted rule RULE-AUTO-10202204 to production with 100.0% accuracy."
-    },
-    {
-      "timestamp": "2026-10-20T23:01:43.550300",
-      "actor": "Business_Automation_Agent",
+      "timestamp": "2026-10-21T00:35:11.646952",
+      "actor": "Critic_Agent",
       "action": "UPDATE_CASE",
-      "details": "Case CASE-102 marked as RESOLVED"
+      "details": "Case CASE-103 marked as ESCALATED_TO_HUMAN"
     },
     {
-      "timestamp": "2026-10-20T23:01:43.560295",
-      "actor": "Business_Automation_Agent",
-      "action": "SEND_NOTIFICATION",
-      "details": "Dispatched SMS notification to CUST-101: Refund Status"
+      "timestamp": "2026-10-21T00:35:11.656470",
+      "actor": "Critic_Agent",
+      "action": "HUMAN_ESCALATION",
+      "details": "Case CASE-103 blocked from autonomous resolution. Reason: Transaction \u20b92,499.00 exceeds \u20b925,000 threshold and untrusted IP flag"
     },
     {
-      "timestamp": "2026-10-20T23:01:43.632833",
+      "timestamp": "2026-10-21T00:35:11.724399",
       "actor": "Business_Automation_Agent",
       "action": "UPDATE_CASE",
       "details": "Case CASE-001 marked as RESOLVED"
     },
     {
-      "timestamp": "2026-10-20T23:01:43.637832",
+      "timestamp": "2026-10-21T00:35:11.732398",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-102: Refund Initiated Successfully"
+    },
+    {
+      "timestamp": "2026-10-21T00:35:13.929205",
+      "actor": "Critic_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-103 marked as ESCALATED_TO_HUMAN"
+    },
+    {
+      "timestamp": "2026-10-21T00:35:13.937201",
+      "actor": "Critic_Agent",
+      "action": "HUMAN_ESCALATION",
+      "details": "Case CASE-103 blocked from autonomous resolution. Reason: Transaction \u20b92,499.00 exceeds \u20b925,000 threshold and untrusted IP flag"
+    },
+    {
+      "timestamp": "2026-10-21T00:35:14.006546",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:35:14.017548",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-102: Refund Initiated Successfully"
+    },
+    {
+      "timestamp": "2026-10-21T00:35:41.586047",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as ESCALATED_TO_HUMAN"
+    },
+    {
+      "timestamp": "2026-10-21T00:35:41.591046",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-103: Inquiry Under Senior Review"
+    },
+    {
+      "timestamp": "2026-10-21T00:36:40.521760",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:36:40.527752",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-101: Refund Initiated Successfully"
+    },
+    {
+      "timestamp": "2026-10-21T00:38:42.247360",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-102 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:38:42.252703",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-101: Refund Status"
+    },
+    {
+      "timestamp": "2026-10-21T00:38:42.308391",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:38:42.316392",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-101: Refund Status Tracking Update"
+    },
+    {
+      "timestamp": "2026-10-21T00:38:44.566296",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-102 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:38:44.575305",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-102: Refund Status"
+    },
+    {
+      "timestamp": "2026-10-21T00:38:44.624565",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:38:44.631560",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-102: Refund Status Tracking Update"
+    },
+    {
+      "timestamp": "2026-10-21T00:38:46.845320",
+      "actor": "Critic_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-103 marked as ESCALATED_TO_HUMAN"
+    },
+    {
+      "timestamp": "2026-10-21T00:38:46.853325",
+      "actor": "Critic_Agent",
+      "action": "HUMAN_ESCALATION",
+      "details": "Case CASE-103 blocked from autonomous resolution. Reason: Transaction \u20b92,499.00 exceeds \u20b925,000 threshold and untrusted IP flag"
+    },
+    {
+      "timestamp": "2026-10-21T00:38:46.900427",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:38:46.907332",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-102: Refund Initiated Successfully"
+    },
+    {
+      "timestamp": "2026-10-21T00:38:51.142996",
+      "actor": "Critic_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-103 marked as ESCALATED_TO_HUMAN"
+    },
+    {
+      "timestamp": "2026-10-21T00:38:51.152021",
+      "actor": "Critic_Agent",
+      "action": "HUMAN_ESCALATION",
+      "details": "Case CASE-103 blocked from autonomous resolution. Reason: Transaction \u20b92,499.00 exceeds \u20b925,000 threshold and untrusted IP flag"
+    },
+    {
+      "timestamp": "2026-10-21T00:38:51.197442",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:38:51.203435",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-102: Refund Initiated Successfully"
+    },
+    {
+      "timestamp": "2026-10-21T00:38:53.404433",
+      "actor": "Critic_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-103 marked as ESCALATED_TO_HUMAN"
+    },
+    {
+      "timestamp": "2026-10-21T00:38:53.411443",
+      "actor": "Critic_Agent",
+      "action": "HUMAN_ESCALATION",
+      "details": "Case CASE-103 blocked from autonomous resolution. Reason: Transaction \u20b92,499.00 exceeds \u20b925,000 threshold and untrusted IP flag"
+    },
+    {
+      "timestamp": "2026-10-21T00:38:53.457308",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:38:53.467457",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-102: Refund Initiated Successfully"
+    },
+    {
+      "timestamp": "2026-10-21T00:39:21.554874",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as ESCALATED_TO_HUMAN"
+    },
+    {
+      "timestamp": "2026-10-21T00:39:21.559874",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-103: Inquiry Under Senior Review"
+    },
+    {
+      "timestamp": "2026-10-21T00:39:37.716789",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-102 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:39:37.725784",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-101: Refund Status"
+    },
+    {
+      "timestamp": "2026-10-21T00:39:37.775297",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:39:37.780381",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-101: Refund Status Tracking Update"
+    },
+    {
+      "timestamp": "2026-10-21T00:39:39.957729",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as ESCALATED_TO_HUMAN"
+    },
+    {
+      "timestamp": "2026-10-21T00:39:39.962729",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-103: Inquiry Under Senior Review"
+    },
+    {
+      "timestamp": "2026-10-21T00:39:42.179142",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:39:42.185211",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-101: Refund Initiated Successfully"
+    },
+    {
+      "timestamp": "2026-10-21T00:43:07.952308",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-102 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:43:07.959837",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-101: Refund Status"
+    },
+    {
+      "timestamp": "2026-10-21T00:43:08.017719",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:43:08.022233",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-101: Refund Status Tracking Update"
+    },
+    {
+      "timestamp": "2026-10-21T00:43:10.325784",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-102 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:43:10.333783",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-102: Refund Status"
+    },
+    {
+      "timestamp": "2026-10-21T00:43:10.410250",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:43:10.416249",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-102: Refund Status Tracking Update"
+    },
+    {
+      "timestamp": "2026-10-21T00:43:12.632363",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as ESCALATED_TO_HUMAN"
+    },
+    {
+      "timestamp": "2026-10-21T00:43:12.638367",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-103: Inquiry Under Senior Review"
+    },
+    {
+      "timestamp": "2026-10-21T00:43:16.970311",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:43:16.980401",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-101: Refund Initiated Successfully"
+    },
+    {
+      "timestamp": "2026-10-21T00:43:19.262588",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:43:19.267585",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-101: Refund Initiated Successfully"
+    },
+    {
+      "timestamp": "2026-10-21T00:44:49.288448",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-102 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:44:49.293445",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-101: Refund Status"
+    },
+    {
+      "timestamp": "2026-10-21T00:44:49.338028",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:44:49.343189",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-101: Refund Status Tracking Update"
+    },
+    {
+      "timestamp": "2026-10-21T00:44:51.559128",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-102 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:44:51.565121",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-102: Refund Status"
+    },
+    {
+      "timestamp": "2026-10-21T00:44:51.619264",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:44:51.625378",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-102: Refund Status Tracking Update"
+    },
+    {
+      "timestamp": "2026-10-21T00:44:53.785868",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as ESCALATED_TO_HUMAN"
+    },
+    {
+      "timestamp": "2026-10-21T00:44:53.791860",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-103: Inquiry Under Senior Review"
+    },
+    {
+      "timestamp": "2026-10-21T00:44:58.067821",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:44:58.073821",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-101: Refund Initiated Successfully"
+    },
+    {
+      "timestamp": "2026-10-21T00:45:00.280467",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:45:00.286975",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-101: Refund Initiated Successfully"
+    },
+    {
+      "timestamp": "2026-10-21T00:46:08.649517",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-102 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:46:08.660287",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-101: Refund Status"
+    },
+    {
+      "timestamp": "2026-10-21T00:46:08.711318",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:46:08.719728",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-101: Refund Status Tracking Update"
+    },
+    {
+      "timestamp": "2026-10-21T00:46:14.079963",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-102 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:46:14.091610",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-101: Refund Status"
+    },
+    {
+      "timestamp": "2026-10-21T00:46:14.136988",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:46:14.142988",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-101: Refund Status Tracking Update"
+    },
+    {
+      "timestamp": "2026-10-21T00:47:35.789111",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-102 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:47:35.795219",
+      "actor": "Business_Automation_Agent",
+      "action": "SEND_NOTIFICATION",
+      "details": "Dispatched SMS notification to CUST-101: Refund Status"
+    },
+    {
+      "timestamp": "2026-10-21T00:47:35.862518",
+      "actor": "Business_Automation_Agent",
+      "action": "UPDATE_CASE",
+      "details": "Case CASE-001 marked as RESOLVED"
+    },
+    {
+      "timestamp": "2026-10-21T00:47:35.869510",
       "actor": "Business_Automation_Agent",
       "action": "SEND_NOTIFICATION",
       "details": "Dispatched SMS notification to CUST-101: Refund Status Tracking Update"
