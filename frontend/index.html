@@ -247,10 +247,32 @@
             <div class="flex-grow border-t border-slate-200"></div>
           </div>
 
-          <button type="button" onclick="startGuestSession()" class="w-full py-2.5 px-4 rounded-full bg-slate-900 hover:bg-slate-800 text-secondary-fixed text-xs font-grotesk font-bold transition-all shadow-sm flex items-center justify-center gap-2">
+          <button type="button" id="btn-guest-login" onclick="startGuestSession()" class="w-full py-2.5 px-4 rounded-full bg-slate-900 hover:bg-slate-800 text-secondary-fixed text-xs font-grotesk font-bold transition-all shadow-sm flex items-center justify-center gap-2">
             <span class="material-symbols-outlined text-[16px]">play_arrow</span>
             <span>Continue as Guest / Try Demo</span>
           </button>
+
+          <!-- Fast 1-Click Demo Profiles -->
+          <div class="flex flex-col gap-2 pt-2 border-t border-slate-100">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Quick Demo Profiles:</span>
+              <span class="text-[10px] text-secondary font-semibold">1-Click Sign In</span>
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+              <button type="button" id="btn-quick-demo" onclick="quickLogin('customer_demo', 'demo123')" class="py-2 px-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-grotesk font-bold transition-all border border-slate-200 flex flex-col items-center gap-0.5 text-center shadow-sm">
+                <span>👤 Rahul</span>
+                <span class="text-[9px] text-slate-500 font-normal">Demo Cust</span>
+              </button>
+              <button type="button" id="btn-quick-jaydev" onclick="quickLogin('jaydev', 'demo123')" class="py-2 px-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-grotesk font-bold transition-all border border-slate-200 flex flex-col items-center gap-0.5 text-center shadow-sm">
+                <span>👤 Jaydev</span>
+                <span class="text-[9px] text-slate-500 font-normal">12 Orders</span>
+              </button>
+              <button type="button" id="btn-quick-rajvi" onclick="quickLogin('rajvi', 'demo123')" class="py-2 px-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-grotesk font-bold transition-all border border-slate-200 flex flex-col items-center gap-0.5 text-center shadow-sm">
+                <span>👤 Rajvi</span>
+                <span class="text-[9px] text-slate-500 font-normal">10 Orders</span>
+              </button>
+            </div>
+          </div>
 
           <div class="text-[11px] text-slate-500 text-center pt-1 leading-relaxed">
             Your account data, orders, and resolution history are strictly isolated and private.
@@ -3135,116 +3157,7 @@
 
 
 
-    // --- Live Agent Contribution Trace Controller ---
-    function updateAgentContributionTrace(contribs) {
-      if (!contribs) return;
-      const map = {
-        planner: 'trace-planner',
-        research: 'trace-research',
-        critic: 'trace-critic',
-        executor: 'trace-executor',
-        business_automation: 'trace-ba',
-        software_dev: 'trace-sda'
-      };
-
-      for (const [key, prefix] of Object.entries(map)) {
-        const data = contribs[key];
-        if (!data) continue;
-
-        const statEl = document.getElementById(`${prefix}-status`);
-        const actEl = document.getElementById(`${prefix}-action`);
-        const evEl = document.getElementById(`${prefix}-evidence`);
-        const outEl = document.getElementById(`${prefix}-output`);
-        const timeEl = document.getElementById(`${prefix}-time`);
-
-        if (statEl) {
-          statEl.innerText = data.status;
-          const s = (data.status || '').toUpperCase();
-          if (s.includes('REPLAN')) {
-            statEl.className = "font-grotesk text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300";
-          } else if (s.includes('BLOCKED') || s.includes('HALT') || s.includes('REJECT') || s.includes('ESCALAT')) {
-            statEl.className = "font-grotesk text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-900 border border-rose-300";
-          } else if (s.includes('STANDBY')) {
-            statEl.className = "font-grotesk text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200";
-          } else if (s.includes('RULE')) {
-            statEl.className = "font-grotesk text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-900 border border-purple-300";
-          } else {
-            statEl.className = "font-grotesk text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed";
-          }
-        }
-        if (actEl) actEl.innerText = data.action || "";
-        if (evEl) evEl.innerText = data.evidence || "";
-        if (outEl) outEl.innerText = data.output || "";
-        if (timeEl) timeEl.innerText = data.time || "";
-      }
-    }
-
-    // --- Categorized Customer Issues Controller ---
-    const issueCategories = {
-      payments: [
-        { label: "💳 Money deducted, transaction failed (504)", prompt: "₹2,499 was deducted from my account but order failed with Gateway Timeout 504." },
-        { label: "💳 Charged twice for same order", prompt: "I was charged twice for order ORD-5502. Please verify and resolve the duplicate deduction." },
-        { label: "💳 Payment pending confirmation", prompt: "Payment of ₹1,250 is pending for over 30 minutes on my account." }
-      ],
-      travel: [
-        { label: "🚌 Bus ticket cancellation (Full refund)", prompt: "Please cancel my RedBus Volvo ticket #ORD-9001 and issue a full refund under policy POL-RB-01." },
-        { label: "🚌 Missed bus inquiry (<4h window)", prompt: "Bus has already left, but I missed it due to traffic. Please refund my ticket #ORD-9002 immediately." },
-        { label: "✈️ Flight cancellation / disruption", prompt: "My flight ticket #ORD-JD-101 was cancelled by the airline. Requesting immediate refund." },
-        { label: "🏨 Hotel booking cancellation", prompt: "I need to cancel my hotel reservation #ORD-JD-106 within the free cancellation window." }
-      ],
-      ecommerce: [
-        { label: "📦 Wrong product delivered (Sony headphones)", prompt: "I received an optical mouse instead of Sony WH-1000XM5 wireless headphones on Order #ORD-9004. Please dispatch correct replacement." },
-        { label: "📦 Damaged product (Monitor cracked screen)", prompt: "My LG 27-inch 4K monitor arrived with a completely shattered display panel on Order #ORD-9005. Requesting immediate replacement." },
-        { label: "📦 Missing item from parcel", prompt: "One item was missing from my delivery package for order ORD-JD-105." },
-        { label: "📦 Return & refund request (7-day window)", prompt: "I want to return order ORD-JD-102 within the 7-day return window." }
-      ],
-      food: [
-        { label: "🍲 Food spilled in transit", prompt: "Food delivery from Swiggy arrived damaged with gravy spilled completely inside the bag on Order #ORD-9006." },
-        { label: "🍲 Missing food items", prompt: "Items were missing from my food delivery order #ORD-JD-103." },
-        { label: "🍲 Wrong food delivered", prompt: "The restaurant sent completely wrong food items for order #ORD-JD-107." },
-        { label: "🍲 Restaurant cancelled order", prompt: "The restaurant cancelled my food delivery order after payment was debited." }
-      ],
-      subscriptions: [
-        { label: "🔄 Unexpected Prime annual renewal", prompt: "My Amazon Prime annual renewal of ₹1,499 was auto-debited without notification. I have not used benefits, please cancel and refund." },
-        { label: "🔄 Duplicate subscription charge", prompt: "My streaming subscription was charged twice this month." },
-        { label: "🔄 Subscription cancellation & refund", prompt: "I want to cancel my active membership on #ORD-JD-109 and stop future billing." }
-      ],
-      digital: [
-        { label: "📱 JioFiber recharge deducted but uncredited", prompt: "My JioFiber annual recharge of ₹14,148 was deducted from my account on #ORD-JD-110 but service was not credited." },
-        { label: "📱 Fastag toll auto-recharge timeout", prompt: "Fastag toll auto-recharge of ₹1,000 on #ORD-JD-108 was debited but uncredited (PG_TIMEOUT_504)." }
-      ],
-      ticketing: [
-        { label: "🎟️ Ticket confirmation missing", prompt: "Payment debited but movie ticket booking confirmation was not generated." },
-        { label: "🎟️ Event ticket cancellation & refund", prompt: "I want to cancel my event ticket booking and request an automated refund." }
-      ],
-      services: [
-        { label: "🛠️ Urban Company pro did not arrive", prompt: "Urban Company service professional did not show up for my home cleaning appointment #ORD-JD-111." },
-        { label: "🛠️ Service quality issue", prompt: "The home maintenance service completed yesterday on #ORD-RV-106 was unsatisfactory." }
-      ]
-    };
-
-    function selectIssueCategory(cat) {
-      document.querySelectorAll('.cat-pill').forEach(btn => {
-        if (btn.id === `cat-tab-${cat}`) {
-          btn.className = "cat-pill px-3 py-1 rounded-full text-xs font-grotesk font-bold bg-slate-900 text-secondary-fixed shadow-sm flex items-center gap-1";
-        } else {
-          btn.className = "cat-pill px-3 py-1 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1";
-        }
-      });
-
-      const container = document.getElementById('issue-chips-container');
-      if (!container) return;
-      const items = issueCategories[cat] || issueCategories.payments;
-      container.innerHTML = items.map(item => `
-        <button type="button" onclick="applyPromptChip('${escapeHtml(item.prompt)}')" class="px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-medium transition-all border border-slate-200/80 shadow-sm flex items-center gap-1.5 hover:border-slate-300">
-          <span>${escapeHtml(item.label)}</span>
-        </button>
-      `).join('');
-    }
-
-
-
-    const scenarioDataExtra = {
+const scenarioDataExtra = {
       'travel-cancel': {
         title: "Scenario: Travel Cancellation (RedBus >24h)",
         desc: "Customer requests cancellation of RedBus Volvo ticket 48 hours prior to departure. Eligible for 100% autonomous refund under Policy POL-RB-01.",
@@ -3334,12 +3247,17 @@
       if (targetInput) targetInput.focus();
     }
 
-    function fillDemoCredentials(u, p) {
+    function quickLogin(u, p) {
       setAuthTab('customer');
       const idInp = document.getElementById('landing-ident');
       const pwInp = document.getElementById('landing-pwd');
       if (idInp) idInp.value = u;
       if (pwInp) pwInp.value = p;
+      handleCustomerLogin();
+    }
+
+    function fillDemoCredentials(u, p) {
+      quickLogin(u, p);
     }
 
     async function startGuestSession() {

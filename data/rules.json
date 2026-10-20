@@ -1229,5 +1229,53 @@
     "tested_cases": 54,
     "created_by": "Software_Development_Agent",
     "timestamp": "2026-10-21T02:58:47.904157"
+  },
+  {
+    "rule_id": "RULE-AUTO-10210311",
+    "name": "Auto-Remediation: PG_TIMEOUT_504 Gateway Callback Dropout",
+    "description": "Declarative rule to auto-reverse trapped payments experiencing PG_TIMEOUT_504 without manual ticket logging.",
+    "condition": {
+      "payment_status": "SUCCESS",
+      "order_status": "FAILED",
+      "error_code": "PG_TIMEOUT_504"
+    },
+    "action": "AUTO_REVERSE_REFUND",
+    "status": "ACTIVE",
+    "accuracy_score": 1.0,
+    "tested_cases": 54,
+    "created_by": "Software_Development_Agent",
+    "timestamp": "2026-10-21T03:11:20.467367"
+  },
+  {
+    "rule_id": "RULE-AUTO-10210311",
+    "name": "Auto-Remediation: PG_TIMEOUT_504 Gateway Callback Dropout",
+    "description": "Declarative rule to auto-reverse trapped payments experiencing PG_TIMEOUT_504 without manual ticket logging.",
+    "condition": {
+      "payment_status": "SUCCESS",
+      "order_status": "FAILED",
+      "error_code": "PG_TIMEOUT_504"
+    },
+    "action": "AUTO_REVERSE_REFUND",
+    "status": "ACTIVE",
+    "accuracy_score": 1.0,
+    "tested_cases": 54,
+    "created_by": "Software_Development_Agent",
+    "timestamp": "2026-10-21T03:11:23.752884"
+  },
+  {
+    "rule_id": "RULE-AUTO-10210311",
+    "name": "Auto-Remediation: PG_TIMEOUT_504 Gateway Callback Dropout",
+    "description": "Declarative rule to auto-reverse trapped payments experiencing PG_TIMEOUT_504 without manual ticket logging.",
+    "condition": {
+      "payment_status": "SUCCESS",
+      "order_status": "FAILED",
+      "error_code": "PG_TIMEOUT_504"
+    },
+    "action": "AUTO_REVERSE_REFUND",
+    "status": "ACTIVE",
+    "accuracy_score": 1.0,
+    "tested_cases": 54,
+    "created_by": "Software_Development_Agent",
+    "timestamp": "2026-10-21T03:11:23.781504"
   }
 ]

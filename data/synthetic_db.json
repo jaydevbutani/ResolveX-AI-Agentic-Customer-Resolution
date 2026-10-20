@@ -497,7 +497,7 @@
       "gateway": "Razorpay",
       "payment_method": "UPI",
       "order_id": "ORD-5501",
-      "refund_id": "RF-265B69",
+      "refund_id": null,
       "error_code": "NONE",
       "timestamp": "2026-10-19T14:30:00",
       "description": "UPI payment received for headphones"
@@ -2162,20 +2162,6 @@
       "initiated_at": "2026-10-19T12:05:00",
       "estimated_credit": "2026-10-20T12:05:00",
       "notes": "Initiated prior to inquiry; credit expected in bank within 24h"
-    },
-    "RF-265B69": {
-      "refund_id": "RF-265B69",
-      "transaction_id": "TXN-8821",
-      "order_id": "ORD-5501",
-      "customer_id": "CUST-101",
-      "amount": 2499.0,
-      "currency": "INR",
-      "status": "SUCCESS",
-      "arn": "ARN-UPI-49D85224",
-      "gateway": "Razorpay",
-      "initiated_at": "2026-10-21T02:58:48.190274",
-      "estimated_credit": "Instant / Within 24-48 hours",
-      "notes": "Autonomous Agent Resolution"
     }
   },
   "subscriptions": {
@@ -2197,13 +2183,13 @@
       "channel": "WEB_COMPLAINT",
       "issue_type": "MONEY_DEDUCTED_ORDER_FAILED",
       "description": "\u20b92,499 was deducted but my order failed.",
-      "status": "RESOLVED",
+      "status": "OPEN",
       "priority": "HIGH",
       "resolution_state": "UNRESOLVED",
       "parent_incident_id": null,
       "created_at": "2026-10-19T14:32:00",
-      "closed_at": "2026-10-21T02:58:48.472086",
-      "resolution_summary": "Inquiry resolved. Customer informed of existing active refund RF-40192 (ARN: ARN-9928172645-UPI)."
+      "closed_at": null,
+      "resolution_summary": null
     },
     "CASE-SYS-001": {
       "case_id": "CASE-SYS-001",
@@ -2904,108 +2890,16 @@
       "created_at": "2026-10-19T15:17:00",
       "closed_at": null,
       "resolution_summary": null
-    },
-    "CASE-102": {
-      "case_id": "CASE-102",
-      "status": "RESOLVED",
-      "resolution_summary": "Existing refund ARN provided",
-      "created_at": "2026-10-21T02:58:48.410200",
-      "parent_incident_id": null
     }
   },
   "incidents": {},
-  "notifications": [
-    {
-      "notification_id": "NOTIF-C7269C",
-      "customer_id": "CUST-101",
-      "channel": "SMS",
-      "subject": "Refund Confirmation",
-      "message": "Your refund has been initiated.",
-      "sent_at": "2026-10-21T02:58:48.194795",
-      "status": "DELIVERED"
-    },
-    {
-      "notification_id": "NOTIF-979D38",
-      "customer_id": "CUST-101",
-      "channel": "SMS",
-      "subject": "Refund Initiated Successfully",
-      "message": "ResolveX Update: \u20b92,499.00 refund initiated to your original payment method. Ref: ARN-UPI-49D85224. Funds reflect in 24-48h.",
-      "sent_at": "2026-10-21T02:58:48.243367",
-      "status": "DELIVERED"
-    },
-    {
-      "notification_id": "NOTIF-70AF67",
-      "customer_id": "CUST-101",
-      "channel": "SMS",
-      "subject": "Refund Status",
-      "message": "Refund is processing",
-      "sent_at": "2026-10-21T02:58:48.415727",
-      "status": "DELIVERED"
-    },
-    {
-      "notification_id": "NOTIF-73F822",
-      "customer_id": "CUST-101",
-      "channel": "SMS",
-      "subject": "Refund Status Tracking Update",
-      "message": "ResolveX Update: Your refund RF-40192 is already processing under bank ARN ARN-9928172645-UPI. Expected credit: Within 24 hours.",
-      "sent_at": "2026-10-21T02:58:48.477336",
-      "status": "DELIVERED"
-    }
-  ],
+  "notifications": [],
   "audit_logs": [
     {
       "timestamp": "2026-10-19T14:30:00",
       "actor": "SYSTEM_SEEDS",
       "action": "DATABASE_INITIALIZATION",
       "details": "Synthetic enterprise database primed for ResolveX AI testing."
-    },
-    {
-      "timestamp": "2026-10-21T02:58:48.190274",
-      "actor": "Executor_Agent",
-      "action": "INITIATE_REFUND",
-      "details": "Refund RF-265B69 created for 2499.0 INR on txn TXN-8821"
-    },
-    {
-      "timestamp": "2026-10-21T02:58:48.194795",
-      "actor": "Business_Automation_Agent",
-      "action": "SEND_NOTIFICATION",
-      "details": "Dispatched SMS notification to CUST-101: Refund Confirmation"
-    },
-    {
-      "timestamp": "2026-10-21T02:58:48.237858",
-      "actor": "Business_Automation_Agent",
-      "action": "UPDATE_CASE",
-      "details": "Case CASE-001 marked as RESOLVED"
-    },
-    {
-      "timestamp": "2026-10-21T02:58:48.243367",
-      "actor": "Business_Automation_Agent",
-      "action": "SEND_NOTIFICATION",
-      "details": "Dispatched SMS notification to CUST-101: Refund Initiated Successfully"
-    },
-    {
-      "timestamp": "2026-10-21T02:58:48.410200",
-      "actor": "Business_Automation_Agent",
-      "action": "UPDATE_CASE",
-      "details": "Case CASE-102 marked as RESOLVED"
-    },
-    {
-      "timestamp": "2026-10-21T02:58:48.415727",
-      "actor": "Business_Automation_Agent",
-      "action": "SEND_NOTIFICATION",
-      "details": "Dispatched SMS notification to CUST-101: Refund Status"
-    },
-    {
-      "timestamp": "2026-10-21T02:58:48.472086",
-      "actor": "Business_Automation_Agent",
-      "action": "UPDATE_CASE",
-      "details": "Case CASE-001 marked as RESOLVED"
-    },
-    {
-      "timestamp": "2026-10-21T02:58:48.477336",
-      "actor": "Business_Automation_Agent",
-      "action": "SEND_NOTIFICATION",
-      "details": "Dispatched SMS notification to CUST-101: Refund Status Tracking Update"
     }
   ]
 }
