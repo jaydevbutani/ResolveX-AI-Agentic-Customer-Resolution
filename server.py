@@ -66,6 +66,10 @@ def auth_guest():
 
 @app.route("/api/auth/logout", methods=["POST"])
 def auth_logout():
+    data = request.json or {}
+    sess_id = data.get("session_id")
+    if sess_id:
+        sqlite_store.delete_session(sess_id)
     return jsonify({"status": "success", "message": "Session terminated cleanly. Local storage cleared."})
 
 @app.route("/api/auth/reset-demo", methods=["POST"])
@@ -371,6 +375,72 @@ SCENARIO_SPECS = {
         "transaction_id": "TXN-7001",
         "order_id": "ORD-7001",
         "amount": 1999.0
+    },
+    "travel-cancel": {
+        "key": "travel-cancel",
+        "name": "Travel Cancellation (RedBus >24h)",
+        "tag": "Autonomous Travel Refund",
+        "description": "Customer requests cancellation of RedBus Volvo ticket 48 hours prior to departure. Eligible for 100% autonomous refund under Policy POL-RB-01.",
+        "sample_input": "Please cancel my RedBus ticket for tomorrow morning (Order #ORD-9001). Need full refund under travel cancellation policy.",
+        "customer_id": "CUST-101",
+        "transaction_id": "TXN-8824",
+        "order_id": "ORD-9001",
+        "amount": 2499.0
+    },
+    "travel-ineligible": {
+        "key": "travel-ineligible",
+        "name": "Travel Cancellation (RedBus <4h Ineligible)",
+        "tag": "Policy Restriction & Concession",
+        "description": "Customer requests refund after bus has departed or within 4 hours. Ineligible for automatic refund under Policy POL-RB-02; safely escalates for concession review.",
+        "sample_input": "Bus has already left, but I missed it due to traffic. Please refund my ticket #ORD-9002 immediately.",
+        "customer_id": "CUST-101",
+        "transaction_id": "TXN-8829",
+        "order_id": "ORD-9002",
+        "amount": 1850.0
+    },
+    "wrong-product": {
+        "key": "wrong-product",
+        "name": "Wrong Product Received (Amazon)",
+        "tag": "Doorstep Pickup & Replacement",
+        "description": "Customer received wireless mouse instead of Sony WH-1000XM5 headphones on Order #ORD-9004. Autonomous doorstep replacement scheduled under Policy POL-AMZ-WRONG.",
+        "sample_input": "I received an optical mouse instead of Sony WH-1000XM5 wireless headphones on Order #ORD-9004. Please dispatch correct replacement.",
+        "customer_id": "CUST-101",
+        "transaction_id": "TXN-8830",
+        "order_id": "ORD-9004",
+        "amount": 24990.0
+    },
+    "damaged-product": {
+        "key": "damaged-product",
+        "name": "Damaged In Transit (Flipkart)",
+        "tag": "Damaged Item Replacement",
+        "description": "Customer received LG 27-inch 4K monitor with cracked display panel on Order #ORD-9005. Free doorstep replacement scheduled under Policy POL-FK-DAMAGED.",
+        "sample_input": "My LG 27-inch 4K monitor arrived with a completely shattered display panel on Order #ORD-9005. Requesting immediate replacement.",
+        "customer_id": "CUST-101",
+        "transaction_id": "TXN-8831",
+        "order_id": "ORD-9005",
+        "amount": 28500.0
+    },
+    "food-spill": {
+        "key": "food-spill",
+        "name": "Food Delivery Spillage (Swiggy)",
+        "tag": "Instant Wallet Credit",
+        "description": "Customer received food delivery with container spilled inside packaging on Order #ORD-9006. Instant credit issued to Swiggy Money wallet under Policy POL-SWIGGY-SPILL.",
+        "sample_input": "Food delivery from Swiggy arrived damaged with gravy spilled completely inside the bag on Order #ORD-9006.",
+        "customer_id": "CUST-101",
+        "transaction_id": "TXN-8832",
+        "order_id": "ORD-9006",
+        "amount": 650.0
+    },
+    "subscription-renewal": {
+        "key": "subscription-renewal",
+        "name": "Unused Subscription Renewal",
+        "tag": "Prorated Dispute Refund",
+        "description": "Customer disputes annual renewal of ₹1,499 auto-debited without usage on Order #ORD-9007. Cancellation and full refund executed under Policy POL-SUB-01.",
+        "sample_input": "My Amazon Prime annual renewal of ₹1,499 was auto-debited without notification. I have not used benefits, please cancel and refund.",
+        "customer_id": "CUST-101",
+        "transaction_id": "TXN-8833",
+        "order_id": "ORD-9007",
+        "amount": 1499.0
     }
 }
 

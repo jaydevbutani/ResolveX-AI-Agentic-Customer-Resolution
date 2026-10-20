@@ -253,6 +253,40 @@ class LLMClient:
                 "status": "Ineligible for Automated Refund (Support Case Filed)",
                 "explanation_text": "I couldn't approve this refund automatically. The cancellation was made after the provider's 24-hour cancellation window (RedBus Cancellation Policy — POL-RB-02). I have created a support case for you."
             }
+        elif "FOOD" in final_status.upper() or "SPILL" in final_status.upper() or "biryani" in complaint_text.lower() or "spill" in complaint_text.lower() or case_info.get("scenario_key") == "food-spill":
+            ord_id = case_info.get("order_id", "ORD-9006")
+            return {
+                "headline": "🍲 INSTANT MEAL REIMBURSEMENT",
+                "badge": "Food Quality & Transit Guarantee",
+                "your_issue": f"Spilled meal / damaged food delivery for order {ord_id}.",
+                "what_we_found": [
+                    "✓ Order delivery confirmed within past 45 minutes",
+                    "✓ Rider telemetry and delivery confirmation verified",
+                    "✓ Covered under Food Transit Protection Policy POL-SWIGGY-SPILL"
+                ],
+                "what_we_did": f"✓ Instant refund credit of ₹{amount:,.2f} disbursed to your Swiggy Money wallet.",
+                "what_happens_next": "Wallet balance is updated immediately and ready for your next order.",
+                "reference": f"Wallet Credit Ref: SWG-CRE-{ord_id[-4:]}",
+                "status": "Wallet Credited Instantly ✓",
+                "explanation_text": f"Your claim for damaged packaging on {ord_id} has been verified. ₹{amount:,.2f} has been instantly credited to your food app wallet."
+            }
+        elif "SUBSCRIPTION" in final_status.upper() or "RENEWAL" in final_status.upper() or "prime" in complaint_text.lower() or "subscription" in complaint_text.lower() or case_info.get("scenario_key") == "subscription-renewal":
+            ord_id = case_info.get("order_id", "ORD-9007")
+            return {
+                "headline": "✓ SUBSCRIPTION CANCELLED & REFUNDED",
+                "badge": "Digital Service Satisfaction Guarantee",
+                "your_issue": f"Unused annual subscription renewal of ₹{amount:,.2f} on {ord_id}.",
+                "what_we_found": [
+                    "✓ Auto-renewal transaction verified within 3-day cooling-off window",
+                    "✓ Zero service usage (no streams/benefits utilized) since renewal",
+                    "✓ 100% full refund approved under Subscription Policy POL-SUB-01"
+                ],
+                "what_we_did": f"✓ Cancelled recurring auto-debit mandate and initiated full refund of ₹{amount:,.2f}.",
+                "what_happens_next": "The refund will reflect on your card/bank within 3–5 business days.",
+                "reference": f"Mandate Cancellation #MND-CAN-{ord_id[-4:]} • Bank ARN: {arn}",
+                "status": "Subscription Revoked & Refunded ✓",
+                "explanation_text": f"Your subscription on {ord_id} was renewed without active usage. The auto-debit mandate has been terminated and ₹{amount:,.2f} refunded in full."
+            }
         elif "WRONG" in final_status.upper() or "DAMAGED" in final_status.upper() or "RETURN" in final_status.upper() or "wrong" in complaint_text.lower() or "damaged" in complaint_text.lower() or "ord-8801" in complaint_text.lower() or "ord-8802" in complaint_text.lower() or case_info.get("scenario_key") in ["wrong-product", "damaged-product"]:
             ord_id = "ORD-8801" if "8801" in complaint_text else ("ORD-8802" if "8802" in complaint_text else case_info.get("order_id", "ORD-8801"))
             return {

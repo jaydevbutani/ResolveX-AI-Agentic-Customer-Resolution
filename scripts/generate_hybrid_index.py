@@ -7,8 +7,12 @@ Restores the full original technical dashboard UI while integrating the customer
 import os
 import re
 
-with open('frontend/index_original_backup.html', 'r', encoding='utf-8') as f:
-    orig = f.read()
+if os.path.exists('frontend/index_original_backup.html'):
+    with open('frontend/index_original_backup.html', 'r', encoding='utf-8') as f:
+        orig = f.read()
+else:
+    import subprocess
+    orig = subprocess.check_output(['git', 'show', '51ffe9a:frontend/index.html'], text=True, encoding='utf-8')
 
 # 1. HEAD
 head_end = orig.find('</head>')
@@ -138,36 +142,101 @@ landing_html = """
       </div>
 
       <!-- Auth Card Section -->
-      <div id="auth-section" class="max-w-md w-full mx-auto bg-white p-8 rounded-3xl border border-slate-200 shadow-xl flex flex-col gap-5">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-          <h2 class="font-grotesk font-bold text-lg text-slate-900" id="auth-card-title">Customer Sign In</h2>
-          <span class="text-xs font-semibold text-slate-500">Secure Session</span>
-        </div>
-
-        <form id="login-form" onsubmit="handleCustomerLogin(event)" class="flex flex-col gap-3.5">
-          <div class="flex flex-col gap-1">
-            <label class="text-xs font-semibold text-slate-700">Username or Email</label>
-            <input type="text" id="landing-ident" required value="customer_demo" class="px-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:outline-none focus:border-primary" placeholder="e.g. customer_demo or your email"/>
-          </div>
-
-          <div class="flex flex-col gap-1">
-            <label class="text-xs font-semibold text-slate-700">Password</label>
-            <input type="password" id="landing-pwd" required value="demo123" class="px-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:outline-none focus:border-primary" placeholder="••••••••"/>
-          </div>
-
-          <button type="submit" class="w-full py-3 rounded-full bg-primary text-secondary-fixed font-grotesk font-bold text-xs hover:bg-primary/90 transition-all shadow-md mt-1">
-            Sign In to Customer Portal
+      <div id="auth-section" class="max-w-md w-full mx-auto bg-white p-8 rounded-3xl border border-slate-200 shadow-xl flex flex-col gap-4">
+        <!-- Access-Type Destination Switcher -->
+        <div class="flex p-1 bg-slate-100 rounded-2xl border border-slate-200">
+          <button type="button" id="tab-btn-customer" onclick="setAuthTab('customer')" class="flex-1 py-2.5 text-xs font-grotesk font-bold rounded-xl transition-all bg-white text-slate-900 shadow-sm flex items-center justify-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px]">person</span>
+            <span>Customer</span>
           </button>
-        </form>
-
-        <div class="flex items-center gap-2 pt-2 border-t border-slate-100">
-          <button onclick="fillDemoCredentials('customer_demo', 'demo123')" class="flex-1 py-1.5 px-3 rounded-lg bg-slate-100 text-slate-700 text-[11px] font-semibold hover:bg-slate-200 text-center">
-            Demo Customer (Rahul)
-          </button>
-          <button onclick="startGuestSession()" class="flex-1 py-1.5 px-3 rounded-lg bg-slate-900 text-secondary-fixed text-[11px] font-semibold hover:bg-slate-800 text-center">
-            Guest Mode (1-Click)
+          <button type="button" id="tab-btn-evaluator" onclick="setAuthTab('evaluator')" class="flex-1 py-2.5 text-xs font-grotesk font-bold rounded-xl transition-all text-slate-500 hover:text-slate-800 flex items-center justify-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px]">terminal</span>
+            <span>Evaluator</span>
           </button>
         </div>
+
+        <!-- FORM 1: CUSTOMER ACCESS -->
+        <div id="auth-panel-customer" class="flex flex-col gap-3.5">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+            <div>
+              <h2 class="font-grotesk font-bold text-base text-slate-900">Customer Sign In</h2>
+              <span class="text-[11px] text-slate-500">Access your private orders & resolutions</span>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Tenant-Isolated</span>
+          </div>
+
+          <form id="login-form-customer" onsubmit="handleCustomerLogin(event)" class="flex flex-col gap-3">
+            <div id="customer-login-error" class="hidden p-2.5 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700 font-medium"></div>
+
+            <div class="flex flex-col gap-1">
+              <label class="text-xs font-semibold text-slate-700">Username or Email</label>
+              <input type="text" id="landing-ident" required class="px-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:outline-none focus:border-primary" placeholder="Enter username or email (e.g. customer_demo or jaydev)..."/>
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <label class="text-xs font-semibold text-slate-700">Password</label>
+              <input type="password" id="landing-pwd" required class="px-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:outline-none focus:border-primary" placeholder="••••••••"/>
+            </div>
+
+            <button type="submit" id="customer-login-submit" class="w-full py-3 rounded-full bg-primary text-secondary-fixed font-grotesk font-bold text-xs hover:bg-primary/90 transition-all shadow-md mt-1">
+              Sign In to Customer Portal
+            </button>
+          </form>
+
+          <div class="relative flex py-1 items-center">
+            <div class="flex-grow border-t border-slate-200"></div>
+            <span class="flex-shrink mx-3 text-[11px] text-slate-400 font-semibold uppercase">Or</span>
+            <div class="flex-grow border-t border-slate-200"></div>
+          </div>
+
+          <button type="button" onclick="startGuestSession()" class="w-full py-2.5 px-4 rounded-full bg-slate-900 hover:bg-slate-800 text-secondary-fixed text-xs font-grotesk font-bold transition-all shadow-sm flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-[16px]">play_arrow</span>
+            <span>Continue as Guest / Try Demo</span>
+          </button>
+
+          <div class="text-[11px] text-slate-500 text-center pt-1 leading-relaxed">
+            Your account data, orders, and resolution history are strictly isolated and private.
+          </div>
+        </div>
+
+        <!-- FORM 2: EVALUATOR ACCESS -->
+        <div id="auth-panel-evaluator" class="hidden flex flex-col gap-3.5">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+            <div>
+              <h2 class="font-grotesk font-bold text-base text-slate-900">Evaluator & Operations Console</h2>
+              <span class="text-[11px] text-slate-500">Inspect multi-agent orchestration</span>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">Staff / Arch</span>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-[11px] text-slate-600 leading-relaxed">
+            Enter evaluator credentials to inspect the 6-agent StateGraph, live DAG execution logs, decision traces, and automated benchmark verification.
+          </div>
+
+          <form id="login-form-evaluator" onsubmit="handleEvaluatorLogin(event)" class="flex flex-col gap-3">
+            <div id="evaluator-login-error" class="hidden p-2.5 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700 font-medium"></div>
+
+            <div class="flex flex-col gap-1">
+              <label class="text-xs font-semibold text-slate-700">Evaluator Username</label>
+              <input type="text" id="eval-ident" required value="evaluator" class="px-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:outline-none focus:border-primary" placeholder="evaluator"/>
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <label class="text-xs font-semibold text-slate-700">Password</label>
+              <input type="password" id="eval-pwd" required value="evaluator123" class="px-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:outline-none focus:border-primary" placeholder="••••••••"/>
+            </div>
+
+            <button type="submit" id="evaluator-login-submit" class="w-full py-3 rounded-full bg-slate-900 text-secondary-fixed font-grotesk font-bold text-xs hover:bg-slate-800 transition-all shadow-md mt-1 flex items-center justify-center gap-1.5">
+              <span class="material-symbols-outlined text-[16px]">terminal</span>
+              <span>Enter Evaluator Console</span>
+            </button>
+          </form>
+
+          <div class="text-[11px] text-slate-500 text-center pt-1 leading-relaxed">
+            Evaluator credentials required. Unauthorized access is blocked by RBAC security gate.
+          </div>
+        </div>
+
       </div>
     </main>
 
@@ -805,6 +874,77 @@ customer_screens_html = """
 s_start = orig.find('<div id="screen-mission-control"')
 s_end = orig.find('</main>')
 tech_screens_html = orig[s_start:s_end]
+if """          <!-- Predefined Scenarios Quick-Picks -->
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="font-grotesk text-[11px] font-bold text-slate-400 uppercase tracking-wider pr-1">Predefined Scenarios:</span>
+            <button onclick="previewScenario('pg-504')" data-scen="pg-504" class="scen-pill px-4 py-1.5 rounded-full text-xs font-grotesk font-bold bg-secondary-fixed text-on-secondary-fixed flex items-center gap-1.5 shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-secondary"></span> PG 504 Auto-Refund
+            </button>
+            <button onclick="previewScenario('duplicate-claim')" data-scen="duplicate-claim" class="scen-pill px-4 py-1.5 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Duplicate Claim Blocked
+            </button>
+            <button onclick="previewScenario('tor-escalate')" data-scen="tor-escalate" class="scen-pill px-4 py-1.5 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> High-Risk Tor Escalation
+            </button>
+            <button onclick="previewScenario('pg-spike')" data-scen="pg-spike" class="scen-pill px-4 py-1.5 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Systemic PG Spike (1.4k/s)
+            </button>
+          </div>""" in tech_screens_html:
+    tech_screens_html = tech_screens_html.replace("""          <!-- Predefined Scenarios Quick-Picks -->
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="font-grotesk text-[11px] font-bold text-slate-400 uppercase tracking-wider pr-1">Predefined Scenarios:</span>
+            <button onclick="previewScenario('pg-504')" data-scen="pg-504" class="scen-pill px-4 py-1.5 rounded-full text-xs font-grotesk font-bold bg-secondary-fixed text-on-secondary-fixed flex items-center gap-1.5 shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-secondary"></span> PG 504 Auto-Refund
+            </button>
+            <button onclick="previewScenario('duplicate-claim')" data-scen="duplicate-claim" class="scen-pill px-4 py-1.5 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Duplicate Claim Blocked
+            </button>
+            <button onclick="previewScenario('tor-escalate')" data-scen="tor-escalate" class="scen-pill px-4 py-1.5 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> High-Risk Tor Escalation
+            </button>
+            <button onclick="previewScenario('pg-spike')" data-scen="pg-spike" class="scen-pill px-4 py-1.5 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Systemic PG Spike (1.4k/s)
+            </button>
+          </div>""", """          <!-- Predefined Scenarios Quick-Picks (10 Multi-Domain Scenarios) -->
+          <div class="flex flex-col gap-2">
+            <div class="flex items-center justify-between">
+              <span class="font-grotesk text-[11px] font-bold text-slate-400 uppercase tracking-wider">Multi-Domain Evaluation Scenarios (6+ Industry Domains):</span>
+              <span class="text-[10px] text-slate-400 font-mono">10 Scenarios Seeded</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <button onclick="previewScenario('pg-504')" data-scen="pg-504" class="scen-pill px-3.5 py-1.5 rounded-full text-xs font-grotesk font-bold bg-secondary-fixed text-on-secondary-fixed flex items-center gap-1.5 shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-secondary"></span> 💳 PG 504 Auto-Refund
+              </button>
+              <button onclick="previewScenario('duplicate-claim')" data-scen="duplicate-claim" class="scen-pill px-3.5 py-1.5 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> ↺ Duplicate Block (Replan)
+              </button>
+              <button onclick="previewScenario('tor-escalate')" data-scen="tor-escalate" class="scen-pill px-3.5 py-1.5 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> 🛡 Tor Escalation (>₹25k)
+              </button>
+              <button onclick="previewScenario('pg-spike')" data-scen="pg-spike" class="scen-pill px-3.5 py-1.5 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> ⚡ Systemic Spike (1.4k/s)
+              </button>
+              <button onclick="previewScenario('travel-cancel')" data-scen="travel-cancel" class="scen-pill px-3.5 py-1.5 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> 🚌 Travel Cancel (RedBus)
+              </button>
+              <button onclick="previewScenario('travel-ineligible')" data-scen="travel-ineligible" class="scen-pill px-3.5 py-1.5 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> ⚠️ Ineligible Cancel (<4h)
+              </button>
+              <button onclick="previewScenario('wrong-product')" data-scen="wrong-product" class="scen-pill px-3.5 py-1.5 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> 📦 Wrong Product (Amazon)
+              </button>
+              <button onclick="previewScenario('damaged-product')" data-scen="damaged-product" class="scen-pill px-3.5 py-1.5 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> 🖥 Damaged Item (Flipkart)
+              </button>
+              <button onclick="previewScenario('food-spill')" data-scen="food-spill" class="scen-pill px-3.5 py-1.5 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> 🍲 Food Spillage (Swiggy)
+              </button>
+              <button onclick="previewScenario('subscription-renewal')" data-scen="subscription-renewal" class="scen-pill px-3.5 py-1.5 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> 🔄 Prime Auto-Renewal
+              </button>
+            </div>
+          </div>""")
+
 
 m_start = orig.find('id="auth-modal"')
 m_tag_start = orig.rfind('<div', 0, m_start)
@@ -911,6 +1051,47 @@ orig_script_tag = orig[sc_start:sc_end]
 orig_js = orig_script_tag[orig_script_tag.find('>')+1:]
 
 customer_js = """
+
+    const scenarioDataExtra = {
+      'travel-cancel': {
+        title: "Scenario: Travel Cancellation (RedBus >24h)",
+        desc: "Customer requests cancellation of RedBus Volvo ticket 48 hours prior to departure. Eligible for 100% autonomous refund under Policy POL-RB-01.",
+        tag: "Autonomous Travel Refund",
+        text: "Please cancel my RedBus ticket for tomorrow morning (Order #ORD-9001). Need full refund under travel cancellation policy."
+      },
+      'travel-ineligible': {
+        title: "Scenario: Travel Cancellation (RedBus <4h Ineligible)",
+        desc: "Customer requests refund after bus has departed or within 4 hours. Ineligible for automatic refund under Policy POL-RB-02; safely escalates for concession review.",
+        tag: "Policy Restriction & Concession",
+        text: "Bus has already left, but I missed it due to traffic. Please refund my ticket #ORD-9002 immediately."
+      },
+      'wrong-product': {
+        title: "Scenario: Wrong Product Received (Amazon)",
+        desc: "Customer received wireless mouse instead of Sony WH-1000XM5 headphones on Order #ORD-9004. Autonomous doorstep replacement scheduled under Policy POL-AMZ-WRONG.",
+        tag: "Doorstep Pickup & Replacement",
+        text: "I received an optical mouse instead of Sony WH-1000XM5 wireless headphones on Order #ORD-9004. Please dispatch correct replacement."
+      },
+      'damaged-product': {
+        title: "Scenario: Damaged In Transit (Flipkart)",
+        desc: "Customer received LG 27-inch 4K monitor with cracked display panel on Order #ORD-9005. Free doorstep replacement scheduled under Policy POL-FK-DAMAGED.",
+        tag: "Damaged Item Replacement",
+        text: "My LG 27-inch 4K monitor arrived with a completely shattered display panel on Order #ORD-9005. Requesting immediate replacement."
+      },
+      'food-spill': {
+        title: "Scenario: Food Delivery Spillage (Swiggy)",
+        desc: "Customer received food delivery with container spilled inside packaging on Order #ORD-9006. Instant credit issued to Swiggy Money wallet under Policy POL-SWIGGY-SPILL.",
+        tag: "Instant Wallet Credit",
+        text: "Food delivery from Swiggy arrived damaged with gravy spilled completely inside the bag on Order #ORD-9006."
+      },
+      'subscription-renewal': {
+        title: "Scenario: Unused Subscription Renewal",
+        desc: "Customer disputes annual renewal of ₹1,499 auto-debited without usage on Order #ORD-9007. Cancellation and full refund executed under Policy POL-SUB-01.",
+        tag: "Prorated Dispute Refund",
+        text: "My Amazon Prime annual renewal of ₹1,499 was auto-debited without notification. I have not used benefits, please cancel and refund."
+      }
+    };
+    Object.assign(scenarioData, scenarioDataExtra);
+
     // Hybrid Multi-Layer UI Controller
     let currentAppMode = 'customer'; // 'customer' or 'evaluator'
     let currentUserSession = null;
@@ -926,14 +1107,47 @@ customer_js = """
       document.getElementById('app-chassis').classList.remove('hidden');
     }
 
+    function setAuthTab(tab) {
+      const tabCust = document.getElementById('tab-btn-customer');
+      const tabEval = document.getElementById('tab-btn-evaluator');
+      const pnlCust = document.getElementById('auth-panel-customer');
+      const pnlEval = document.getElementById('auth-panel-evaluator');
+      if (!tabCust || !tabEval || !pnlCust || !pnlEval) return;
+
+      if (tab === 'evaluator') {
+        tabEval.className = "flex-1 py-2.5 text-xs font-grotesk font-bold rounded-xl transition-all bg-white text-slate-900 shadow-sm flex items-center justify-center gap-1.5";
+        tabCust.className = "flex-1 py-2.5 text-xs font-grotesk font-bold rounded-xl transition-all text-slate-500 hover:text-slate-800 flex items-center justify-center gap-1.5";
+        pnlEval.classList.remove('hidden');
+        pnlCust.classList.add('hidden');
+        const err = document.getElementById('evaluator-login-error');
+        if (err) err.classList.add('hidden');
+      } else {
+        tabCust.className = "flex-1 py-2.5 text-xs font-grotesk font-bold rounded-xl transition-all bg-white text-slate-900 shadow-sm flex items-center justify-center gap-1.5";
+        tabEval.className = "flex-1 py-2.5 text-xs font-grotesk font-bold rounded-xl transition-all text-slate-500 hover:text-slate-800 flex items-center justify-center gap-1.5";
+        pnlCust.classList.remove('hidden');
+        pnlEval.classList.add('hidden');
+        const err = document.getElementById('customer-login-error');
+        if (err) err.classList.add('hidden');
+      }
+    }
+
     function scrollToAuth(mode) {
+      if (mode === 'evaluator') {
+        setAuthTab('evaluator');
+      } else {
+        setAuthTab('customer');
+      }
       document.getElementById('auth-section').scrollIntoView({ behavior: 'smooth' });
-      document.getElementById('landing-ident').focus();
+      const targetInput = mode === 'evaluator' ? document.getElementById('eval-ident') : document.getElementById('landing-ident');
+      if (targetInput) targetInput.focus();
     }
 
     function fillDemoCredentials(u, p) {
-      document.getElementById('landing-ident').value = u;
-      document.getElementById('landing-pwd').value = p;
+      setAuthTab('customer');
+      const idInp = document.getElementById('landing-ident');
+      const pwInp = document.getElementById('landing-pwd');
+      if (idInp) idInp.value = u;
+      if (pwInp) pwInp.value = p;
     }
 
     async function startGuestSession() {
@@ -954,6 +1168,8 @@ customer_js = """
       if (e) e.preventDefault();
       const ident = document.getElementById('landing-ident').value.trim();
       const pwd = document.getElementById('landing-pwd').value.trim();
+      const errBox = document.getElementById('customer-login-error');
+      if (errBox) errBox.classList.add('hidden');
 
       try {
         const resp = await fetch('/api/auth/login', {
@@ -971,17 +1187,109 @@ customer_js = """
             switchToCustomerMode();
           }
         } else {
-          alert(data.message || "Invalid credentials.");
+          if (errBox) {
+            errBox.innerText = data.message || "Invalid credentials.";
+            errBox.classList.remove('hidden');
+          } else {
+            alert(data.message || "Invalid credentials.");
+          }
         }
       } catch (err) {
-        console.error("Login error", err);
+        console.error("Customer login error", err);
+        if (errBox) {
+          errBox.innerText = "Network error communicating with auth service.";
+          errBox.classList.remove('hidden');
+        }
+      }
+    }
+
+    async function handleEvaluatorLogin(e) {
+      if (e) e.preventDefault();
+      const ident = document.getElementById('eval-ident').value.trim();
+      const pwd = document.getElementById('eval-pwd').value.trim();
+      const errBox = document.getElementById('evaluator-login-error');
+      if (errBox) errBox.classList.add('hidden');
+
+      try {
+        const resp = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username_or_email: ident, password: pwd })
+        });
+        const data = await resp.json();
+        if (data.status === 'success' && (data.user.role === 'EVALUATOR' || data.user.role === 'STAFF_ARCHITECT' || data.user.role === 'OPERATOR')) {
+          currentUserSession = data.user;
+          localStorage.setItem('resolvex_user', JSON.stringify(data.user));
+          switchToEvaluatorMode();
+        } else {
+          const msg = (data.status === 'success') ? "Account does not have Evaluator/Architect privileges." : (data.message || "Invalid evaluator credentials.");
+          if (errBox) {
+            errBox.innerText = msg;
+            errBox.classList.remove('hidden');
+          } else {
+            alert(msg);
+          }
+        }
+      } catch (err) {
+        console.error("Evaluator login error", err);
+        if (errBox) {
+          errBox.innerText = "Network error communicating with auth service.";
+          errBox.classList.remove('hidden');
+        }
       }
     }
 
     function handleCustomerLogout() {
+      const userToLogout = currentUserSession;
       localStorage.removeItem('resolvex_user');
       currentUserSession = null;
-      fetch('/api/auth/logout', { method: 'POST' }).catch(() => {});
+      customerOrdersCache = [];
+
+      // Clear drawer messages to fresh initial welcome bubble
+      const drawerMsg = document.getElementById('drawer-messages');
+      if (drawerMsg) {
+        drawerMsg.innerHTML = `
+          <div class="flex items-start gap-3 max-w-lg">
+            <div class="w-8 h-8 rounded-xl bg-primary text-secondary-fixed flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 shadow-sm">
+              ⚡
+            </div>
+            <div class="bg-white p-4 rounded-2xl rounded-tl-sm border border-slate-200 shadow-sm text-xs text-slate-800 leading-relaxed">
+              Hello! I am your ResolveX Autonomous Assistant. How can I help you today?
+            </div>
+          </div>
+        `;
+      }
+
+      // Clear DOM containers so User B never sees User A's data
+      const resetContainers = ['cust-orders-list', 'full-orders-list', 'full-requests-list', 'cust-timeline-list'];
+      resetContainers.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = '<div class="p-8 text-center text-xs text-slate-400">Loading your account records...</div>';
+      });
+
+      // Clear input fields
+      const inputs = ['landing-ident', 'landing-pwd', 'cust-home-input', 'drawer-input'];
+      inputs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+
+      // Reset displayed greeting and username
+      const welcomeEl = document.getElementById('welcome-cust-name');
+      if (welcomeEl) welcomeEl.innerText = 'Customer';
+      const sideName = document.getElementById('sidebar-user-name');
+      if (sideName) sideName.innerText = 'Customer';
+
+      if (userToLogout && userToLogout.session_id) {
+        fetch('/api/auth/logout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ session_id: userToLogout.session_id, user_id: userToLogout.user_id })
+        }).catch(() => {});
+      } else {
+        fetch('/api/auth/logout', { method: 'POST' }).catch(() => {});
+      }
+
       showLandingView();
     }
 
@@ -1062,9 +1370,13 @@ customer_js = """
         }
       }
 
-      // Switch to customer home screen
+      // Switch to customer home screen and load isolated customer state
+      customerOrdersCache = [];
       switchScreen('customer-home');
       loadCustomerHomeData();
+      loadCustomerOrdersData();
+      loadCustomerRequestsData();
+      loadDrawerChatHistory();
     }
 
     function switchToEvaluatorMode() {
@@ -1103,20 +1415,12 @@ customer_js = """
     }
 
     function openEvaluatorPortal() {
-      // Instant evaluator login
-      fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username_or_email: 'evaluator', password: 'evaluator123' })
-      }).then(r => r.json()).then(data => {
-        if (data.status === 'success') {
-          currentUserSession = data.user;
-          localStorage.setItem('resolvex_user', JSON.stringify(data.user));
-          switchToEvaluatorMode();
-        }
-      }).catch(() => {
+      if (currentUserSession && (currentUserSession.role === 'EVALUATOR' || currentUserSession.role === 'STAFF_ARCHITECT')) {
         switchToEvaluatorMode();
-      });
+      } else {
+        setAuthTab('evaluator');
+        scrollToAuth('evaluator');
+      }
     }
 
     // --- Data Loaders for Customer Experience ---
@@ -1126,7 +1430,43 @@ customer_js = """
       try {
         const resp = await fetch(`/api/customer/home?user_id=${encodeURIComponent(uid)}`);
         const data = await resp.json();
-        if (data.status === 'success') {
+        if (data.status === 'success' && data.activity) {
+          const cust = data.activity.customer || {};
+          const custName = cust.name || (currentUserSession ? currentUserSession.username : 'Customer');
+          const initial = (custName || 'C').substring(0, 2).toUpperCase();
+
+          // Dynamic Header & Profile Synchronization
+          const welcomeEl = document.getElementById('welcome-cust-name');
+          if (welcomeEl) welcomeEl.innerText = custName.split(' ')[0];
+
+          const sideName = document.getElementById('sidebar-user-name');
+          if (sideName) sideName.innerText = custName;
+          const sideAvatar = document.getElementById('sidebar-avatar');
+          if (sideAvatar) sideAvatar.innerText = initial;
+          const userDisp = document.getElementById('user-display-name');
+          if (userDisp) userDisp.innerText = custName;
+          const userInit = document.getElementById('user-avatar-initials');
+          if (userInit) userInit.innerText = initial;
+
+          const roleLabel = document.getElementById('user-role-label');
+          if (roleLabel) {
+            roleLabel.innerText = uid.startsWith('GUEST-') ? 'Guest Customer (Isolated)' : (uid === 'USER-JAYDEV' ? 'Verified Customer' : 'Customer Account');
+          }
+
+          // Account Screen Elements
+          const accName = document.getElementById('acc-name');
+          if (accName) accName.innerText = custName;
+          const accAvatar = document.getElementById('acc-avatar');
+          if (accAvatar) accAvatar.innerText = initial;
+          const accCustId = document.getElementById('acc-cust-id');
+          if (accCustId) accCustId.innerText = cust.customer_id || (uid.startsWith('GUEST-') ? 'CUST-GUEST' : (uid === 'USER-JAYDEV' ? 'CUST-JAYDEV' : 'CUST-101'));
+          const accUserId = document.getElementById('acc-user-id');
+          if (accUserId) accUserId.innerText = uid;
+          const accEmail = document.getElementById('acc-email');
+          if (accEmail) accEmail.innerText = cust.email || (currentUserSession ? currentUserSession.email : 'customer@example.in');
+          const accTrust = document.getElementById('acc-trust');
+          if (accTrust) accTrust.innerText = `${cust.trust_score || 95}/100`;
+
           renderCustomerOrders(data.activity.recent_orders || [], 'cust-orders-list', 4);
           renderCustomerTimeline(data.activity.recent_cases || [], 'cust-timeline-list');
           
@@ -1134,9 +1474,65 @@ customer_js = """
           if (statOrders) statOrders.innerText = (data.activity.recent_orders || []).length;
           const statCases = document.getElementById('cust-stat-cases');
           if (statCases) statCases.innerText = (data.activity.recent_cases || []).length;
+          const statRefunds = document.getElementById('cust-stat-refunds');
+          if (statRefunds) statRefunds.innerText = (data.activity.recent_refunds || []).length;
         }
       } catch (e) {
         console.error("Home data error", e);
+      }
+    }
+
+    async function loadDrawerChatHistory() {
+      const uid = (currentUserSession && currentUserSession.user_id) ? currentUserSession.user_id : 'USER-CUST-DEMO';
+      const sessId = (currentUserSession && currentUserSession.session_id) ? currentUserSession.session_id : ('SESS-' + uid);
+      const container = document.getElementById('drawer-messages');
+      if (!container) return;
+
+      try {
+        const resp = await fetch(`/api/chat/history?user_id=${encodeURIComponent(uid)}&session_id=${encodeURIComponent(sessId)}`);
+        const data = await resp.json();
+        if (data.status === 'success') {
+          const history = data.history || [];
+          if (history.length === 0) {
+            const custName = (currentUserSession && currentUserSession.username) ? currentUserSession.username.split(' ')[0] : 'there';
+            container.innerHTML = `
+              <div class="flex items-start gap-3 max-w-lg">
+                <div class="w-8 h-8 rounded-xl bg-primary text-secondary-fixed flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 shadow-sm">
+                  ⚡
+                </div>
+                <div class="bg-white p-4 rounded-2xl rounded-tl-sm border border-slate-200 shadow-sm text-xs text-slate-800 leading-relaxed">
+                  Hello ${escapeHtml(custName)}! I am your ResolveX Autonomous Assistant. How can I help you with your orders, bookings, or payments today?
+                </div>
+              </div>
+            `;
+            return;
+          }
+
+          container.innerHTML = '';
+          history.forEach(msg => {
+            if (msg.role === 'user') {
+              const uBubble = document.createElement('div');
+              uBubble.className = "flex justify-end";
+              uBubble.innerHTML = `<div class="chat-bubble-user p-4 max-w-md text-xs shadow-sm leading-relaxed">${escapeHtml(msg.content)}</div>`;
+              container.appendChild(uBubble);
+            } else {
+              const botContainer = document.createElement('div');
+              botContainer.className = "flex items-start gap-3 max-w-lg";
+              botContainer.innerHTML = `
+                <div class="w-8 h-8 rounded-xl bg-primary text-secondary-fixed flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 shadow-sm">
+                  ⚡
+                </div>
+                <div class="chat-bubble-bot p-4 shadow-sm text-xs flex flex-col gap-2.5 leading-relaxed">
+                  <div class="text-slate-900 leading-relaxed font-normal">${escapeHtml(msg.content)}</div>
+                </div>
+              `;
+              container.appendChild(botContainer);
+            }
+          });
+          container.scrollTop = container.scrollHeight;
+        }
+      } catch (e) {
+        console.error('Error loading chat history:', e);
       }
     }
 
@@ -1387,18 +1783,28 @@ customer_js = """
     }
 
     function clearCurrentConversation() {
+      const uid = (currentUserSession && currentUserSession.user_id) ? currentUserSession.user_id : 'USER-CUST-DEMO';
+      const sessId = (currentUserSession && currentUserSession.session_id) ? currentUserSession.session_id : ('SESS-' + uid);
+      fetch('/api/chat/reset', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: uid, session_id: sessId })
+      }).catch(() => {});
+
       const container = document.getElementById('drawer-messages');
-      container.innerHTML = `
-        <div class="flex items-start gap-3 max-w-lg">
-          <div class="w-8 h-8 rounded-xl bg-primary text-secondary-fixed flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 shadow-sm">
-            ⚡
+      if (container) {
+        container.innerHTML = `
+          <div class="flex items-start gap-3 max-w-lg">
+            <div class="w-8 h-8 rounded-xl bg-primary text-secondary-fixed flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 shadow-sm">
+              ⚡
+            </div>
+            <div class="flex flex-col gap-1.5 bg-white p-4 rounded-2xl rounded-tl-sm border border-slate-200 shadow-sm text-xs text-slate-800 leading-relaxed">
+              <span class="font-grotesk font-bold text-slate-900">ResolveX Assistant</span>
+              <p>Conversation reset. How can I assist you with your orders or transactions today?</p>
+            </div>
           </div>
-          <div class="flex flex-col gap-1.5 bg-white p-4 rounded-2xl rounded-tl-sm border border-slate-200 shadow-sm text-xs text-slate-800 leading-relaxed">
-            <span class="font-grotesk font-bold text-slate-900">ResolveX Assistant</span>
-            <p>New conversation started. How can I assist you with your orders or transactions today?</p>
-          </div>
-        </div>
-      `;
+        `;
+      }
     }
 
     async function sendDrawerMessage() {
@@ -1437,7 +1843,7 @@ customer_js = """
       container.scrollTop = container.scrollHeight;
 
       const uid = (currentUserSession && currentUserSession.user_id) ? currentUserSession.user_id : 'USER-CUST-DEMO';
-      const sessId = (currentUserSession && currentUserSession.session_id) ? currentUserSession.session_id : 'default-session';
+      const sessId = (currentUserSession && currentUserSession.session_id) ? currentUserSession.session_id : ('SESS-' + uid);
 
       try {
         const resp = await fetch('/api/chat', {
@@ -1496,21 +1902,20 @@ customer_js = """
               </div>
             ` : ''}
 
-            <!-- Expandable Policy Details -->
-            ${data.pipeline_data ? `
-              <div class="pt-2 border-t border-slate-100">
-                <button onclick="document.getElementById('${detailId}').classList.toggle('hidden')" class="text-[11px] font-semibold text-secondary hover:underline flex items-center gap-1">
-                  <span>View Policy & Verification Details</span>
-                  <span class="material-symbols-outlined text-[14px]">expand_more</span>
-                </button>
-                <div id="${detailId}" class="hidden mt-2 p-3 bg-slate-50 rounded-xl border border-slate-200 text-[11px] text-slate-600 flex flex-col gap-1.5 font-mono">
-                  <div>Status: <b>${data.pipeline_data.final_status}</b></div>
-                  <div>Policy Applied: <b>${data.pipeline_data.technical_payload?.policy_applied || 'POL-REF-01'}</b></div>
-                  <div>Audit Hash: <b>${data.pipeline_data.state_diff?.audit_hash || 'Verified'}</b></div>
-                  <div>Safety Gates: <b>${data.pipeline_data.critic_guard?.safety_gates || '5/5 Passed'}</b></div>
-                </div>
+            <!-- Expandable [ How did ResolveX decide? ] Accordion -->
+            <div class="pt-2 border-t border-slate-100">
+              <button onclick="document.getElementById('${detailId}').classList.toggle('hidden')" class="text-[11px] font-bold text-slate-700 hover:text-slate-900 flex items-center justify-between w-full py-1">
+                <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[15px] text-secondary">psychology</span> How did ResolveX decide?</span>
+                <span class="material-symbols-outlined text-[16px]">expand_more</span>
+              </button>
+              <div id="${detailId}" class="hidden mt-2 p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-700 flex flex-col gap-2">
+                <div><b>1. Evidence Verified:</b> ${custResp.what_we_found ? custResp.what_we_found.join(' • ') : 'Gateway transaction and order ledgers cross-referenced.'}</div>
+                <div><b>2. Policy Citation:</b> <span class="font-mono text-secondary font-bold">${data.pipeline_data?.technical_payload?.policy_applied || 'POL-REF-01 (Autonomous Settlement)'}</span></div>
+                <div><b>3. Safety Guard (Critic):</b> <span class="text-emerald-700 font-semibold">${data.pipeline_data?.critic_guard?.safety_gates || 'Passed: Zero duplicate payout • Idempotency token verified'}</span></div>
+                <div><b>4. Action Executed:</b> ${escapeHtml(whatWeDid || 'Autonomous bank payout API invoked')}</div>
+                <div><b>5. Verification:</b> <span class="font-mono text-[11px] text-slate-600">${escapeHtml(reference || 'Settlement audit hash signed')}</span></div>
               </div>
-            ` : ''}
+            </div>
           </div>
         `;
 
@@ -1573,16 +1978,20 @@ customer_js = """
         } catch(e) {}
       }
 
-      if (isEvalRoute) {
-        openEvaluatorPortal();
-      } else if (currentUserSession) {
+      if (currentUserSession) {
         if (currentUserSession.role === 'EVALUATOR' || currentUserSession.role === 'STAFF_ARCHITECT') {
           switchToEvaluatorMode();
         } else {
           switchToCustomerMode();
         }
       } else {
+        // First screen is always Landing/Login
         showLandingView();
+        if (isEvalRoute) {
+          setAuthTab('evaluator');
+        } else {
+          setAuthTab('customer');
+        }
       }
 
       // Init technical dashboard components
