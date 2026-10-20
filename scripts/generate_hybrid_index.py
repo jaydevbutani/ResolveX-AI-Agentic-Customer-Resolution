@@ -381,13 +381,7 @@ sidebar_html = """
         </div>
       </div>
 
-      <!-- Quick Switcher in Sidebar Footer -->
-      <div class="pt-1">
-        <button id="sidebar-switch-mode-btn" onclick="toggleModeSwitch()" class="w-full py-2 px-3 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-grotesk font-semibold text-slate-300 hover:text-white flex items-center justify-center gap-2 transition-all border border-white/10">
-          <span class="material-symbols-outlined text-[16px]">swap_horiz</span>
-          <span id="sidebar-switch-mode-text">Switch to Evaluator Console</span>
-        </button>
-      </div>
+
     </div>
   </aside>
 """
@@ -431,10 +425,10 @@ header_html = """
       </div>
 
       <div class="flex items-center gap-3">
-        <!-- Switch View Button -->
-        <button onclick="toggleModeSwitch()" id="header-switch-view-btn" class="px-3.5 py-1.5 rounded-full font-grotesk font-semibold text-xs bg-slate-900 text-secondary-fixed hover:bg-slate-800 transition-all flex items-center gap-1.5 shadow-sm">
-          <span class="material-symbols-outlined text-[15px]">terminal</span>
-          <span id="header-switch-view-label">Evaluator Mission Control</span>
+        <!-- Exactly One Evaluator / Customer Switch Button -->
+        <button onclick="toggleModeSwitch()" id="header-switch-view-btn" class="hidden px-3.5 py-1.5 rounded-full font-grotesk font-semibold text-xs bg-slate-900 text-secondary-fixed hover:bg-slate-800 transition-all flex items-center gap-1.5 shadow-sm">
+          <span class="material-symbols-outlined text-[15px]">swap_horiz</span>
+          <span id="header-switch-view-label">Switch to Customer View</span>
         </button>
 
         <!-- Live Clock -->
@@ -495,21 +489,56 @@ customer_screens_html = """
             </button>
           </div>
 
-          <!-- Predefined Demonstration Scenarios Chips -->
-          <div class="flex flex-wrap items-center gap-2 pt-1">
-            <span class="text-[11px] font-semibold text-slate-500">Popular issues:</span>
-            <button onclick="applyPromptChip('₹2,499 was deducted from my account but my order failed (Gateway Timeout 504).')" class="px-3 py-1 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs transition-colors">
-              💳 Payment Deducted, Order Failed
-            </button>
-            <button onclick="applyPromptChip('I want a refund for my RedBus booking RB-10291.')" class="px-3 py-1 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs transition-colors">
-              🚌 RedBus Booking Cancellation
-            </button>
-            <button onclick="applyPromptChip('I received the wrong product for Amazon order ORD-8801.')" class="px-3 py-1 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs transition-colors">
-              📦 Wrong Item Delivered (Amazon)
-            </button>
-            <button onclick="applyPromptChip('Customer submitted second claim for ₹2,499 on Order #ORD-5502.')" class="px-3 py-1 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs transition-colors">
-              🔄 Track Existing Refund (Duplicate Guard)
-            </button>
+                    <!-- Functional 8-Category Customer Issue Selector -->
+          <div class="flex flex-col gap-2.5 pt-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-grotesk font-bold text-slate-700 flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px] text-secondary">category</span>
+                <span>Select Issue by Category:</span>
+              </span>
+              <span class="text-[10px] text-slate-400 font-medium">Click any issue to initiate instant multi-agent resolution</span>
+            </div>
+
+            <!-- Category Tabs Bar (8 Categories) -->
+            <div class="flex flex-wrap items-center gap-1.5 pb-1" id="issue-category-tabs">
+              <button type="button" onclick="selectIssueCategory('payments')" id="cat-tab-payments" class="cat-pill px-3 py-1 rounded-full text-xs font-grotesk font-bold bg-slate-900 text-secondary-fixed shadow-sm flex items-center gap-1">
+                <span>💳</span> <span>Payments</span>
+              </button>
+              <button type="button" onclick="selectIssueCategory('travel')" id="cat-tab-travel" class="cat-pill px-3 py-1 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1">
+                <span>🚌</span> <span>Travel</span>
+              </button>
+              <button type="button" onclick="selectIssueCategory('ecommerce')" id="cat-tab-ecommerce" class="cat-pill px-3 py-1 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1">
+                <span>📦</span> <span>E-Commerce</span>
+              </button>
+              <button type="button" onclick="selectIssueCategory('food')" id="cat-tab-food" class="cat-pill px-3 py-1 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1">
+                <span>🍲</span> <span>Food Delivery</span>
+              </button>
+              <button type="button" onclick="selectIssueCategory('subscriptions')" id="cat-tab-subscriptions" class="cat-pill px-3 py-1 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1">
+                <span>🔄</span> <span>Subscriptions</span>
+              </button>
+              <button type="button" onclick="selectIssueCategory('digital')" id="cat-tab-digital" class="cat-pill px-3 py-1 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1">
+                <span>📱</span> <span>Digital Services</span>
+              </button>
+              <button type="button" onclick="selectIssueCategory('ticketing')" id="cat-tab-ticketing" class="cat-pill px-3 py-1 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1">
+                <span>🎟️</span> <span>Ticketing</span>
+              </button>
+              <button type="button" onclick="selectIssueCategory('services')" id="cat-tab-services" class="cat-pill px-3 py-1 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1">
+                <span>🛠️</span> <span>Service Bookings</span>
+              </button>
+            </div>
+
+            <!-- Dynamic Category Issues List -->
+            <div id="issue-chips-container" class="flex flex-wrap items-center gap-2 pt-1">
+              <button type="button" onclick="applyPromptChip('₹2,499 was deducted from my account but my order failed (Gateway Timeout 504).')" class="px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-medium transition-all border border-slate-200/80 shadow-sm flex items-center gap-1.5">
+                <span>💳 Money deducted, transaction failed (504)</span>
+              </button>
+              <button type="button" onclick="applyPromptChip('I was charged twice for order ORD-5502. Please verify and resolve the duplicate deduction.')" class="px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-medium transition-all border border-slate-200/80 shadow-sm flex items-center gap-1.5">
+                <span>💳 Charged twice for same order</span>
+              </button>
+              <button type="button" onclick="applyPromptChip('Payment of ₹1,250 is pending for over 30 minutes on my account.')" class="px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-medium transition-all border border-slate-200/80 shadow-sm flex items-center gap-1.5">
+                <span>💳 Payment pending confirmation</span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -860,9 +889,7 @@ customer_screens_html = """
                 <button onclick="handleCustomerLogout()" class="px-4 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-semibold transition-colors">
                   Sign Out
                 </button>
-                <button onclick="toggleModeSwitch()" class="px-4 py-2 rounded-xl bg-primary text-secondary-fixed text-xs font-semibold transition-all">
-                  Switch to Evaluator Console
-                </button>
+<span class="text-xs text-slate-400">Standard Customer Role</span>
               </div>
             </div>
           </div>
@@ -944,6 +971,234 @@ if """          <!-- Predefined Scenarios Quick-Picks -->
               </button>
             </div>
           </div>""")
+
+
+
+# 6.1 REPLACE SECTION 4 WITH DYNAMIC AGENT CONTRIBUTION TRACE (WHAT DID EACH AGENT DO?)
+sec4_agent_trace_html = """<!-- SECTION 4: Agent Contribution Trace (What Did Each Agent Actually Do?) -->
+        <section class="flex flex-col gap-3">
+          <div class="flex items-center justify-between px-1">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[22px] text-secondary">psychology</span>
+              <h2 class="font-grotesk text-lg font-bold text-slate-900">Agent Contribution Trace</h2>
+            </div>
+            <span class="font-grotesk text-xs text-slate-500">Live Execution Breakdown Across 6 Specialized Agents (LangGraph StateGraph DAG)</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="agent-contribution-trace-grid">
+            
+            <!-- Agent 1: Planner -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-slate-200 flex flex-col justify-between gap-3 hover:shadow-md transition-all" id="card-trace-planner">
+              <div class="flex flex-col gap-2">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-900 font-bold">
+                      <span class="material-symbols-outlined text-[20px]">account_tree</span>
+                    </div>
+                    <div>
+                      <h3 class="font-grotesk text-sm font-bold text-slate-900">Planner Agent</h3>
+                      <span class="text-[11px] text-slate-500">Task Decomposition &amp; Replanning</span>
+                    </div>
+                  </div>
+                  <span id="trace-planner-status" class="font-grotesk text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed">COMPLETED</span>
+                </div>
+                <div class="flex flex-col gap-1 text-xs">
+                  <span class="text-[10px] font-bold uppercase text-slate-400">Actual Action:</span>
+                  <p id="trace-planner-action" class="text-slate-800 leading-relaxed font-medium">Decomposed customer claim into a 7-stage structured execution plan.</p>
+                </div>
+                <div class="flex flex-col gap-1 text-xs">
+                  <span class="text-[10px] font-bold uppercase text-slate-400">Relevant Evidence / Input:</span>
+                  <div id="trace-planner-evidence" class="text-[11px] text-slate-600 bg-slate-50 p-2 rounded-xl border border-slate-100">Claim for order ORD-5501 mapped to deterministic DAG.</div>
+                </div>
+                <div class="flex flex-col gap-1 text-xs">
+                  <span class="text-[10px] font-bold uppercase text-slate-400">Output / Decision:</span>
+                  <div id="trace-planner-output" class="text-[11px] text-slate-800 font-semibold">Plan PLAN-01 generated with 7 verified subtasks.</div>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
+                <span class="text-slate-500 font-medium">Execution Latency:</span>
+                <span id="trace-planner-time" class="text-slate-700 font-mono text-[11px] font-bold">28ms • P99</span>
+              </div>
+            </div>
+
+            <!-- Agent 2: Research -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-slate-200 flex flex-col justify-between gap-3 hover:shadow-md transition-all" id="card-trace-research">
+              <div class="flex flex-col gap-2">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-10 h-10 rounded-2xl bg-[#e4e0f5] flex items-center justify-center text-[#1b1a29]">
+                      <span class="material-symbols-outlined text-[20px]">manage_search</span>
+                    </div>
+                    <div>
+                      <h3 class="font-grotesk text-sm font-bold text-slate-900">Research Agent</h3>
+                      <span class="text-[11px] text-slate-500">Evidence &amp; Grounded Policy</span>
+                    </div>
+                  </div>
+                  <span id="trace-research-status" class="font-grotesk text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed">VALIDATED</span>
+                </div>
+                <div class="flex flex-col gap-1 text-xs">
+                  <span class="text-[10px] font-bold uppercase text-slate-400">Actual Action:</span>
+                  <p id="trace-research-action" class="text-slate-800 leading-relaxed font-medium">Retrieved transactional telemetry, order ledgers, and grounded enterprise policies.</p>
+                </div>
+                <div class="flex flex-col gap-1 text-xs">
+                  <span class="text-[10px] font-bold uppercase text-slate-400">Relevant Evidence / Input:</span>
+                  <div id="trace-research-evidence" class="text-[11px] text-slate-600 bg-slate-50 p-2 rounded-xl border border-slate-100">Txn: TXN-8821 (Captured) • Order: ORD-5501 • Policy: POL-REF-01</div>
+                </div>
+                <div class="flex flex-col gap-1 text-xs">
+                  <span class="text-[10px] font-bold uppercase text-slate-400">Output / Decision:</span>
+                  <div id="trace-research-output" class="text-[11px] text-slate-800 font-semibold">Grounded context and policy criteria verified under POL-REF-01.</div>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
+                <span class="text-slate-500 font-medium">Execution Latency:</span>
+                <span id="trace-research-time" class="text-slate-700 font-mono text-[11px] font-bold">41ms • Sub-50ms</span>
+              </div>
+            </div>
+
+            <!-- Agent 3: Critic Guard -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-slate-200 flex flex-col justify-between gap-3 hover:shadow-md transition-all" id="card-trace-critic">
+              <div class="flex flex-col gap-2">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-10 h-10 rounded-2xl bg-[#bcf063]/30 flex items-center justify-center text-[#476800]">
+                      <span class="material-symbols-outlined text-[20px]">shield_lock</span>
+                    </div>
+                    <div>
+                      <h3 class="font-grotesk text-sm font-bold text-slate-900">Critic Agent</h3>
+                      <span class="text-[11px] text-slate-500">Safety, Eligibility &amp; Idempotency</span>
+                    </div>
+                  </div>
+                  <span id="trace-critic-status" class="font-grotesk text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed">APPROVED</span>
+                </div>
+                <div class="flex flex-col gap-1 text-xs">
+                  <span class="text-[10px] font-bold uppercase text-slate-400">Actual Action:</span>
+                  <p id="trace-critic-action" class="text-slate-800 leading-relaxed font-medium">Pre-execution safety gate evaluation (Idempotency, Deduplication, Risk, Ceiling).</p>
+                </div>
+                <div class="flex flex-col gap-1 text-xs">
+                  <span class="text-[10px] font-bold uppercase text-slate-400">Relevant Evidence / Input:</span>
+                  <div id="trace-critic-evidence" class="text-[11px] text-slate-600 bg-slate-50 p-2 rounded-xl border border-slate-100">Amount: ₹2,499.00 • Deduplication: PASS • Token: PASS • Ceiling: APPROVED</div>
+                </div>
+                <div class="flex flex-col gap-1 text-xs">
+                  <span class="text-[10px] font-bold uppercase text-slate-400">Output / Decision:</span>
+                  <div id="trace-critic-output" class="text-[11px] text-slate-800 font-semibold">5/5 Safety gates cleared. Execution approved.</div>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
+                <span class="text-slate-500 font-medium">Execution Latency:</span>
+                <span id="trace-critic-time" class="text-slate-700 font-mono text-[11px] font-bold">18ms • Deterministic</span>
+              </div>
+            </div>
+
+            <!-- Agent 4: Executor Agent -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-slate-200 flex flex-col justify-between gap-3 hover:shadow-md transition-all" id="card-trace-executor">
+              <div class="flex flex-col gap-2">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-10 h-10 rounded-2xl bg-primary text-secondary-fixed flex items-center justify-center">
+                      <span class="material-symbols-outlined text-[20px]">terminal</span>
+                    </div>
+                    <div>
+                      <h3 class="font-grotesk text-sm font-bold text-slate-900">Executor Agent</h3>
+                      <span class="text-[11px] text-slate-500">Controlled Business Action</span>
+                    </div>
+                  </div>
+                  <span id="trace-executor-status" class="font-grotesk text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed">COMPLETED (DISBURSEMENT)</span>
+                </div>
+                <div class="flex flex-col gap-1 text-xs">
+                  <span class="text-[10px] font-bold uppercase text-slate-400">Actual Action:</span>
+                  <p id="trace-executor-action" class="text-slate-800 leading-relaxed font-medium">Invoked controlled create_refund API for ₹2,499.00.</p>
+                </div>
+                <div class="flex flex-col gap-1 text-xs">
+                  <span class="text-[10px] font-bold uppercase text-slate-400">Relevant Evidence / Input:</span>
+                  <div id="trace-executor-evidence" class="text-[11px] text-slate-600 bg-slate-50 p-2 rounded-xl border border-slate-100">Disbursed refund RF-1ECA35 with bank tracking ARN-UPI-B80128FA.</div>
+                </div>
+                <div class="flex flex-col gap-1 text-xs">
+                  <span class="text-[10px] font-bold uppercase text-slate-400">Output / Decision:</span>
+                  <div id="trace-executor-output" class="text-[11px] text-slate-800 font-semibold">Refund RF-1ECA35 registered in ledger. Settlement committed.</div>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
+                <span class="text-slate-500 font-medium">Execution Latency:</span>
+                <span id="trace-executor-time" class="text-slate-700 font-mono text-[11px] font-bold">35ms • Gateway API</span>
+              </div>
+            </div>
+
+            <!-- Agent 5: Business Automation Agent -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-slate-200 flex flex-col justify-between gap-3 hover:shadow-md transition-all" id="card-trace-ba">
+              <div class="flex flex-col gap-2">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-900">
+                      <span class="material-symbols-outlined text-[20px]">mark_email_read</span>
+                    </div>
+                    <div>
+                      <h3 class="font-grotesk text-sm font-bold text-slate-900">Business Automation Agent</h3>
+                      <span class="text-[11px] text-slate-500">Workflow &amp; CRM Synchronization</span>
+                    </div>
+                  </div>
+                  <span id="trace-ba-status" class="font-grotesk text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed">COMPLETED</span>
+                </div>
+                <div class="flex flex-col gap-1 text-xs">
+                  <span class="text-[10px] font-bold uppercase text-slate-400">Actual Action:</span>
+                  <p id="trace-ba-action" class="text-slate-800 leading-relaxed font-medium">Synchronized CRM support case, closed ticket, and queued delivery confirmation.</p>
+                </div>
+                <div class="flex flex-col gap-1 text-xs">
+                  <span class="text-[10px] font-bold uppercase text-slate-400">Relevant Evidence / Input:</span>
+                  <div id="trace-ba-evidence" class="text-[11px] text-slate-600 bg-slate-50 p-2 rounded-xl border border-slate-100">Case #CASE-5501 updated to RESOLVED.</div>
+                </div>
+                <div class="flex flex-col gap-1 text-xs">
+                  <span class="text-[10px] font-bold uppercase text-slate-400">Output / Decision:</span>
+                  <div id="trace-ba-output" class="text-[11px] text-slate-800 font-semibold">Ticket closed. Customer notification SMS queued via gateway webhook.</div>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
+                <span class="text-slate-500 font-medium">Execution Latency:</span>
+                <span id="trace-ba-time" class="text-slate-700 font-mono text-[11px] font-bold">22ms • Event Loop</span>
+              </div>
+            </div>
+
+            <!-- Agent 6: Software Dev Agent -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-slate-200 flex flex-col justify-between gap-3 hover:shadow-md transition-all" id="card-trace-sda">
+              <div class="flex flex-col gap-2">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-900">
+                      <span class="material-symbols-outlined text-[20px]">psychology</span>
+                    </div>
+                    <div>
+                      <h3 class="font-grotesk text-sm font-bold text-slate-900">Software Development Agent</h3>
+                      <span class="text-[11px] text-slate-500">Pattern Detection &amp; Remediation</span>
+                    </div>
+                  </div>
+                  <span id="trace-sda-status" class="font-grotesk text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">STANDBY</span>
+                </div>
+                <div class="flex flex-col gap-1 text-xs">
+                  <span class="text-[10px] font-bold uppercase text-slate-400">Actual Action:</span>
+                  <p id="trace-sda-action" class="text-slate-800 leading-relaxed font-medium">STANDBY — No systemic pattern detected for this single-user case.</p>
+                </div>
+                <div class="flex flex-col gap-1 text-xs">
+                  <span class="text-[10px] font-bold uppercase text-slate-400">Relevant Evidence / Input:</span>
+                  <div id="trace-sda-evidence" class="text-[11px] text-slate-600 bg-slate-50 p-2 rounded-xl border border-slate-100">Telemetry failure rate &lt; 0.1% threshold; isolated ticket.</div>
+                </div>
+                <div class="flex flex-col gap-1 text-xs">
+                  <span class="text-[10px] font-bold uppercase text-slate-400">Output / Decision:</span>
+                  <div id="trace-sda-output" class="text-[11px] text-slate-800 font-semibold">Standby (Not required for standard resolution).</div>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
+                <span class="text-slate-500 font-medium">Execution Latency:</span>
+                <span id="trace-sda-time" class="text-slate-700 font-mono text-[11px] font-bold">0ms (Standby)</span>
+              </div>
+            </div>
+
+          </div>
+        </section>"""
+
+s_sec4 = tech_screens_html.find('<!-- SECTION 4: Active Agent Mesh Telemetry')
+if s_sec4 != -1:
+    e_sec4 = tech_screens_html.find('</section>', s_sec4) + len('</section>')
+    tech_screens_html = tech_screens_html[:s_sec4] + sec4_agent_trace_html + tech_screens_html[e_sec4:]
+    print("Replaced Section 4 in tech_screens_html successfully!")
 
 
 m_start = orig.find('id="auth-modal"')
@@ -1050,7 +1305,234 @@ sc_end = orig.rfind('</script>')
 orig_script_tag = orig[sc_start:sc_end]
 orig_js = orig_script_tag[orig_script_tag.find('>')+1:]
 
+
+if 'function updateUIWithResolutionResult(data) {' in orig_js:
+    orig_js = orig_js.replace(
+        'function updateUIWithResolutionResult(data) {',
+        'function updateUIWithResolutionResult(data) {\n      if (data && data.agent_contributions) {\n        updateAgentContributionTrace(data.agent_contributions);\n      }',
+        1
+    )
+
+
 customer_js = """
+
+    // --- Live Agent Contribution Trace Controller ---
+    function updateAgentContributionTrace(contribs) {
+      if (!contribs) return;
+      const map = {
+        planner: 'trace-planner',
+        research: 'trace-research',
+        critic: 'trace-critic',
+        executor: 'trace-executor',
+        business_automation: 'trace-ba',
+        software_dev: 'trace-sda'
+      };
+
+      for (const [key, prefix] of Object.entries(map)) {
+        const data = contribs[key];
+        if (!data) continue;
+
+        const statEl = document.getElementById(`${prefix}-status`);
+        const actEl = document.getElementById(`${prefix}-action`);
+        const evEl = document.getElementById(`${prefix}-evidence`);
+        const outEl = document.getElementById(`${prefix}-output`);
+        const timeEl = document.getElementById(`${prefix}-time`);
+
+        if (statEl) {
+          statEl.innerText = data.status;
+          const s = (data.status || '').toUpperCase();
+          if (s.includes('REPLAN')) {
+            statEl.className = "font-grotesk text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300";
+          } else if (s.includes('BLOCKED') || s.includes('HALT') || s.includes('REJECT') || s.includes('ESCALAT')) {
+            statEl.className = "font-grotesk text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-900 border border-rose-300";
+          } else if (s.includes('STANDBY')) {
+            statEl.className = "font-grotesk text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200";
+          } else if (s.includes('RULE')) {
+            statEl.className = "font-grotesk text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-900 border border-purple-300";
+          } else {
+            statEl.className = "font-grotesk text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed";
+          }
+        }
+        if (actEl) actEl.innerText = data.action || "";
+        if (evEl) evEl.innerText = data.evidence || "";
+        if (outEl) outEl.innerText = data.output || "";
+        if (timeEl) timeEl.innerText = data.time || "";
+      }
+    }
+
+    // --- Categorized Customer Issues Controller ---
+    const issueCategories = {
+      payments: [
+        { label: "💳 Money deducted, transaction failed (504)", prompt: "₹2,499 was deducted from my account but order failed with Gateway Timeout 504." },
+        { label: "💳 Charged twice for same order", prompt: "I was charged twice for order ORD-5502. Please verify and resolve the duplicate deduction." },
+        { label: "💳 Payment pending confirmation", prompt: "Payment of ₹1,250 is pending for over 30 minutes on my account." }
+      ],
+      travel: [
+        { label: "🚌 Bus ticket cancellation (Full refund)", prompt: "Please cancel my RedBus Volvo ticket #ORD-9001 and issue a full refund under policy POL-RB-01." },
+        { label: "🚌 Missed bus inquiry (<4h window)", prompt: "Bus has already left, but I missed it due to traffic. Please refund my ticket #ORD-9002 immediately." },
+        { label: "✈️ Flight cancellation / disruption", prompt: "My flight ticket #ORD-JD-101 was cancelled by the airline. Requesting immediate refund." },
+        { label: "🏨 Hotel booking cancellation", prompt: "I need to cancel my hotel reservation #ORD-JD-106 within the free cancellation window." }
+      ],
+      ecommerce: [
+        { label: "📦 Wrong product delivered (Sony headphones)", prompt: "I received an optical mouse instead of Sony WH-1000XM5 wireless headphones on Order #ORD-9004. Please dispatch correct replacement." },
+        { label: "📦 Damaged product (Monitor cracked screen)", prompt: "My LG 27-inch 4K monitor arrived with a completely shattered display panel on Order #ORD-9005. Requesting immediate replacement." },
+        { label: "📦 Missing item from parcel", prompt: "One item was missing from my delivery package for order ORD-JD-105." },
+        { label: "📦 Return & refund request (7-day window)", prompt: "I want to return order ORD-JD-102 within the 7-day return window." }
+      ],
+      food: [
+        { label: "🍲 Food spilled in transit", prompt: "Food delivery from Swiggy arrived damaged with gravy spilled completely inside the bag on Order #ORD-9006." },
+        { label: "🍲 Missing food items", prompt: "Items were missing from my food delivery order #ORD-JD-103." },
+        { label: "🍲 Wrong food delivered", prompt: "The restaurant sent completely wrong food items for order #ORD-JD-107." },
+        { label: "🍲 Restaurant cancelled order", prompt: "The restaurant cancelled my food delivery order after payment was debited." }
+      ],
+      subscriptions: [
+        { label: "🔄 Unexpected Prime annual renewal", prompt: "My Amazon Prime annual renewal of ₹1,499 was auto-debited without notification. I have not used benefits, please cancel and refund." },
+        { label: "🔄 Duplicate subscription charge", prompt: "My streaming subscription was charged twice this month." },
+        { label: "🔄 Subscription cancellation & refund", prompt: "I want to cancel my active membership on #ORD-JD-109 and stop future billing." }
+      ],
+      digital: [
+        { label: "📱 JioFiber recharge deducted but uncredited", prompt: "My JioFiber annual recharge of ₹14,148 was deducted from my account on #ORD-JD-110 but service was not credited." },
+        { label: "📱 Fastag toll auto-recharge timeout", prompt: "Fastag toll auto-recharge of ₹1,000 on #ORD-JD-108 was debited but uncredited (PG_TIMEOUT_504)." }
+      ],
+      ticketing: [
+        { label: "🎟️ Ticket confirmation missing", prompt: "Payment debited but movie ticket booking confirmation was not generated." },
+        { label: "🎟️ Event ticket cancellation & refund", prompt: "I want to cancel my event ticket booking and request an automated refund." }
+      ],
+      services: [
+        { label: "🛠️ Urban Company pro did not arrive", prompt: "Urban Company service professional did not show up for my home cleaning appointment #ORD-JD-111." },
+        { label: "🛠️ Service quality issue", prompt: "The home maintenance service completed yesterday on #ORD-RV-106 was unsatisfactory." }
+      ]
+    };
+
+    function selectIssueCategory(cat) {
+      document.querySelectorAll('.cat-pill').forEach(btn => {
+        if (btn.id === `cat-tab-${cat}`) {
+          btn.className = "cat-pill px-3 py-1 rounded-full text-xs font-grotesk font-bold bg-slate-900 text-secondary-fixed shadow-sm flex items-center gap-1";
+        } else {
+          btn.className = "cat-pill px-3 py-1 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1";
+        }
+      });
+
+      const container = document.getElementById('issue-chips-container');
+      if (!container) return;
+      const items = issueCategories[cat] || issueCategories.payments;
+      container.innerHTML = items.map(item => `
+        <button type="button" onclick="applyPromptChip('${escapeHtml(item.prompt)}')" class="px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-medium transition-all border border-slate-200/80 shadow-sm flex items-center gap-1.5 hover:border-slate-300">
+          <span>${escapeHtml(item.label)}</span>
+        </button>
+      `).join('');
+    }
+
+
+
+    // --- Live Agent Contribution Trace Controller ---
+    function updateAgentContributionTrace(contribs) {
+      if (!contribs) return;
+      const map = {
+        planner: 'trace-planner',
+        research: 'trace-research',
+        critic: 'trace-critic',
+        executor: 'trace-executor',
+        business_automation: 'trace-ba',
+        software_dev: 'trace-sda'
+      };
+
+      for (const [key, prefix] of Object.entries(map)) {
+        const data = contribs[key];
+        if (!data) continue;
+
+        const statEl = document.getElementById(`${prefix}-status`);
+        const actEl = document.getElementById(`${prefix}-action`);
+        const evEl = document.getElementById(`${prefix}-evidence`);
+        const outEl = document.getElementById(`${prefix}-output`);
+        const timeEl = document.getElementById(`${prefix}-time`);
+
+        if (statEl) {
+          statEl.innerText = data.status;
+          const s = (data.status || '').toUpperCase();
+          if (s.includes('REPLAN')) {
+            statEl.className = "font-grotesk text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300";
+          } else if (s.includes('BLOCKED') || s.includes('HALT') || s.includes('REJECT') || s.includes('ESCALAT')) {
+            statEl.className = "font-grotesk text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-900 border border-rose-300";
+          } else if (s.includes('STANDBY')) {
+            statEl.className = "font-grotesk text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200";
+          } else if (s.includes('RULE')) {
+            statEl.className = "font-grotesk text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-900 border border-purple-300";
+          } else {
+            statEl.className = "font-grotesk text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed";
+          }
+        }
+        if (actEl) actEl.innerText = data.action || "";
+        if (evEl) evEl.innerText = data.evidence || "";
+        if (outEl) outEl.innerText = data.output || "";
+        if (timeEl) timeEl.innerText = data.time || "";
+      }
+    }
+
+    // --- Categorized Customer Issues Controller ---
+    const issueCategories = {
+      payments: [
+        { label: "💳 Money deducted, transaction failed (504)", prompt: "₹2,499 was deducted from my account but order failed with Gateway Timeout 504." },
+        { label: "💳 Charged twice for same order", prompt: "I was charged twice for order ORD-5502. Please verify and resolve the duplicate deduction." },
+        { label: "💳 Payment pending confirmation", prompt: "Payment of ₹1,250 is pending for over 30 minutes on my account." }
+      ],
+      travel: [
+        { label: "🚌 Bus ticket cancellation (Full refund)", prompt: "Please cancel my RedBus Volvo ticket #ORD-9001 and issue a full refund under policy POL-RB-01." },
+        { label: "🚌 Missed bus inquiry (<4h window)", prompt: "Bus has already left, but I missed it due to traffic. Please refund my ticket #ORD-9002 immediately." },
+        { label: "✈️ Flight cancellation / disruption", prompt: "My flight ticket #ORD-JD-101 was cancelled by the airline. Requesting immediate refund." },
+        { label: "🏨 Hotel booking cancellation", prompt: "I need to cancel my hotel reservation #ORD-JD-106 within the free cancellation window." }
+      ],
+      ecommerce: [
+        { label: "📦 Wrong product delivered (Sony headphones)", prompt: "I received an optical mouse instead of Sony WH-1000XM5 wireless headphones on Order #ORD-9004. Please dispatch correct replacement." },
+        { label: "📦 Damaged product (Monitor cracked screen)", prompt: "My LG 27-inch 4K monitor arrived with a completely shattered display panel on Order #ORD-9005. Requesting immediate replacement." },
+        { label: "📦 Missing item from parcel", prompt: "One item was missing from my delivery package for order ORD-JD-105." },
+        { label: "📦 Return & refund request (7-day window)", prompt: "I want to return order ORD-JD-102 within the 7-day return window." }
+      ],
+      food: [
+        { label: "🍲 Food spilled in transit", prompt: "Food delivery from Swiggy arrived damaged with gravy spilled completely inside the bag on Order #ORD-9006." },
+        { label: "🍲 Missing food items", prompt: "Items were missing from my food delivery order #ORD-JD-103." },
+        { label: "🍲 Wrong food delivered", prompt: "The restaurant sent completely wrong food items for order #ORD-JD-107." },
+        { label: "🍲 Restaurant cancelled order", prompt: "The restaurant cancelled my food delivery order after payment was debited." }
+      ],
+      subscriptions: [
+        { label: "🔄 Unexpected Prime annual renewal", prompt: "My Amazon Prime annual renewal of ₹1,499 was auto-debited without notification. I have not used benefits, please cancel and refund." },
+        { label: "🔄 Duplicate subscription charge", prompt: "My streaming subscription was charged twice this month." },
+        { label: "🔄 Subscription cancellation & refund", prompt: "I want to cancel my active membership on #ORD-JD-109 and stop future billing." }
+      ],
+      digital: [
+        { label: "📱 JioFiber recharge deducted but uncredited", prompt: "My JioFiber annual recharge of ₹14,148 was deducted from my account on #ORD-JD-110 but service was not credited." },
+        { label: "📱 Fastag toll auto-recharge timeout", prompt: "Fastag toll auto-recharge of ₹1,000 on #ORD-JD-108 was debited but uncredited (PG_TIMEOUT_504)." }
+      ],
+      ticketing: [
+        { label: "🎟️ Ticket confirmation missing", prompt: "Payment debited but movie ticket booking confirmation was not generated." },
+        { label: "🎟️ Event ticket cancellation & refund", prompt: "I want to cancel my event ticket booking and request an automated refund." }
+      ],
+      services: [
+        { label: "🛠️ Urban Company pro did not arrive", prompt: "Urban Company service professional did not show up for my home cleaning appointment #ORD-JD-111." },
+        { label: "🛠️ Service quality issue", prompt: "The home maintenance service completed yesterday on #ORD-RV-106 was unsatisfactory." }
+      ]
+    };
+
+    function selectIssueCategory(cat) {
+      document.querySelectorAll('.cat-pill').forEach(btn => {
+        if (btn.id === `cat-tab-${cat}`) {
+          btn.className = "cat-pill px-3 py-1 rounded-full text-xs font-grotesk font-bold bg-slate-900 text-secondary-fixed shadow-sm flex items-center gap-1";
+        } else {
+          btn.className = "cat-pill px-3 py-1 rounded-full text-xs font-grotesk font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1";
+        }
+      });
+
+      const container = document.getElementById('issue-chips-container');
+      if (!container) return;
+      const items = issueCategories[cat] || issueCategories.payments;
+      container.innerHTML = items.map(item => `
+        <button type="button" onclick="applyPromptChip('${escapeHtml(item.prompt)}')" class="px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-medium transition-all border border-slate-200/80 shadow-sm flex items-center gap-1.5 hover:border-slate-300">
+          <span>${escapeHtml(item.label)}</span>
+        </button>
+      `).join('');
+    }
+
+
 
     const scenarioDataExtra = {
       'travel-cancel': {
@@ -1333,8 +1815,18 @@ customer_js = """
       document.getElementById('sidebar-mode-label').innerText = "Customer Portal";
       document.getElementById('sidebar-mode-dot').className = "w-2 h-2 rounded-full bg-secondary-fixed";
       document.getElementById('sidebar-version-badge').innerText = "CUSTOMER v4.8";
-      document.getElementById('sidebar-switch-mode-text').innerText = "Switch to Evaluator Console";
-      document.getElementById('header-switch-view-label').innerText = "Evaluator Mission Control";
+      const sideSwitch = document.getElementById('sidebar-switch-mode-text');
+      if (sideSwitch) sideSwitch.innerText = "Switch to Evaluator Console";
+            // Exactly ONE switch button: top-right header switch button
+      const switchBtn = document.getElementById('header-switch-view-btn');
+      if (switchBtn) {
+        if (currentUserSession && (currentUserSession.role === 'EVALUATOR' || currentUserSession.role === 'STAFF_ARCHITECT')) {
+          switchBtn.classList.remove('hidden');
+          document.getElementById('header-switch-view-label').innerText = "Switch to Evaluator Console";
+        } else {
+          switchBtn.classList.add('hidden');
+        }
+      }
 
       // Sync user profile labels
       const u = currentUserSession || { username: 'Rahul Sharma', user_id: 'USER-CUST-DEMO', role: 'DEMO_CUSTOMER' };
@@ -1393,7 +1885,8 @@ customer_js = """
       document.getElementById('sidebar-mode-label').innerText = "Evaluator Control";
       document.getElementById('sidebar-mode-dot').className = "w-2 h-2 rounded-full bg-secondary-fixed animate-pulse";
       document.getElementById('sidebar-version-badge').innerText = "AI-OPS v4.8";
-      document.getElementById('sidebar-switch-mode-text').innerText = "Switch to Customer View";
+      const sideSwitch = document.getElementById('sidebar-switch-mode-text');
+      if (sideSwitch) sideSwitch.innerText = "Switch to Customer View";
       document.getElementById('header-switch-view-label').innerText = "Switch to Customer View";
 
       // Profile tags for evaluator
@@ -1926,6 +2419,11 @@ customer_js = """
         if (data.pipeline_data) {
           loadCustomerHomeData();
           loadCustomerRequestsData();
+        }
+        if (data.agent_contributions) {
+          updateAgentContributionTrace(data.agent_contributions);
+        } else if (data.pipeline_data && data.pipeline_data.agent_contributions) {
+          updateAgentContributionTrace(data.pipeline_data.agent_contributions);
         }
       } catch (err) {
         const loader = document.getElementById('drawer-loading-bubble');

@@ -596,6 +596,107 @@ def run_customer_suite():
         "details": "5-point explainability breakdown (Evidence → Policy → Safety → Action → Verification) verified."
     })
 
+    
+    # -------------------------------------------------------------
+    # TEST AA: Evaluator Switch Cleanup & Header Exclusivity
+    # -------------------------------------------------------------
+    t0 = time.time()
+    tAA_pass = (
+        'id="header-switch-view-btn"' in html_text and
+        'id="sidebar-switch-mode-btn"' not in html_text and
+        'switchBtn.classList.add(\'hidden\');' in html_text and
+        'switchBtn.classList.remove(\'hidden\');' in html_text
+    )
+    tests.append({
+        "tag": "TEST AA",
+        "name": "Evaluator Switch Cleanup & Header Exclusivity",
+        "passed": tAA_pass,
+        "latency": f"{round(time.time() - t0, 3)}s",
+        "details": "Exactly ONE switch button in top-right header; zero duplicate switches in sidebar or customer account."
+    })
+
+    # -------------------------------------------------------------
+    # TEST AB: Customer Home 8-Category Issue Selector
+    # -------------------------------------------------------------
+    t0 = time.time()
+    expected_tabs = [
+        'cat-tab-payments', 'cat-tab-travel', 'cat-tab-ecommerce', 'cat-tab-food',
+        'cat-tab-subscriptions', 'cat-tab-digital', 'cat-tab-ticketing', 'cat-tab-services'
+    ]
+    tabs_present = all(tab in html_text for tab in expected_tabs)
+    tAB_pass = (
+        tabs_present and
+        'id="issue-chips-container"' in html_text and
+        'function selectIssueCategory' in html_text and
+        'const issueCategories = {' in html_text
+    )
+    tests.append({
+        "tag": "TEST AB",
+        "name": "Customer Home 8-Category Issue Selector",
+        "passed": tAB_pass,
+        "latency": f"{round(time.time() - t0, 3)}s",
+        "details": "All 8 category tabs (Payments, Travel, E-Com, Food, Subs, Digital, Tickets, Services) verified with dynamic chips."
+    })
+
+    # -------------------------------------------------------------
+    # TEST AC: Real Agent Contribution Trace (Section 4) & Dynamic State
+    # -------------------------------------------------------------
+    t0 = time.time()
+    from server import build_agent_contributions
+    
+    # 1. Test standard PG-504 auto refund
+    db.reset()
+    res_504 = run_resolution_flow("Transaction TXN-8821 failed with 504 Gateway Timeout for order ORD-5501", {"order_id": "ORD-5501", "transaction_id": "TXN-8821", "amount": 2499.0})
+    contrib_504 = build_agent_contributions(res_504, {"order_id": "ORD-5501"}, "RESOLVED_AUTONOMOUSLY", 0, "RF-TEST", "ARN-TEST")
+    
+    # 2. Test duplicate claim block (replan)
+    res_dup = run_resolution_flow("Customer submitted second claim for ORD-5502", {"order_id": "ORD-5502", "transaction_id": "TXN-8822", "amount": 2499.0})
+    contrib_dup = build_agent_contributions(res_dup, {"order_id": "ORD-5502"}, "RESOLVED_WITH_EXISTING_STATUS", 1, "RF-DUP", "ARN-DUP")
+
+    # 3. Test DOM trace elements in HTML
+    agent_trace_dom_ok = all(
+        f"trace-{a}-status" in html_text and f"trace-{a}-action" in html_text
+        for a in ["planner", "research", "critic", "executor", "ba", "sda"]
+    )
+
+    tAC_pass = (
+        agent_trace_dom_ok and
+        contrib_504["planner"]["status"] == "COMPLETED" and
+        contrib_504["critic"]["status"] == "APPROVED" and
+        contrib_504["executor"]["status"] == "COMPLETED (DISBURSEMENT)" and
+        contrib_504["software_dev"]["status"] == "STANDBY" and
+        "REPLAN" in contrib_dup["planner"]["status"] and
+        contrib_dup["software_dev"]["status"] == "STANDBY"
+    )
+    tests.append({
+        "tag": "TEST AC",
+        "name": "Real Agent Contribution Trace (Section 4) & State Verification",
+        "passed": tAC_pass,
+        "latency": f"{round(time.time() - t0, 3)}s",
+        "details": "Section 4 cards reflect real LangGraph state; unneeded agents show STANDBY without fake activity."
+    })
+
+    # -------------------------------------------------------------
+    # TEST AD: Authentication Security & Invalid Credentials Rejection
+    # -------------------------------------------------------------
+    t0 = time.time()
+    ok_bad_pwd, msg_bad_pwd, _ = sqlite_store.authenticate_user("jaydev", "wrongpassword999")
+    ok_no_user, msg_no_user, _ = sqlite_store.authenticate_user("nonexistent_user", "demo123")
+    ok_eval_bad, msg_eval_bad, _ = sqlite_store.authenticate_user("evaluator", "wrongevalpass")
+
+    tAD_pass = (
+        not ok_bad_pwd and "Invalid credentials" in msg_bad_pwd and
+        not ok_no_user and "Invalid credentials" in msg_no_user and
+        not ok_eval_bad and "Invalid credentials" in msg_eval_bad
+    )
+    tests.append({
+        "tag": "TEST AD",
+        "name": "Authentication Security & Invalid Credentials Rejection",
+        "passed": tAD_pass,
+        "latency": f"{round(time.time() - t0, 3)}s",
+        "details": "Wrong passwords and nonexistent usernames rejected with specific error messages."
+    })
+
     # -------------------------------------------------------------
     # SUMMARY
     # -------------------------------------------------------------
