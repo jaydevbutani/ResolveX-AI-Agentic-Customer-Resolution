@@ -115,8 +115,24 @@ class CriticAgent:
                 details=f"Amount INR {amount:,.2f} is within INR {MAX_AUTONOMOUS_REFUND_INR:,.2f} limit. Trust Score: {trust_score}."
             ))
 
-        # Check 4: Policy Alignment
+        # Check 4: Policy Alignment & Cancellation Window Eligibility
         policy_id = primary_policy.get("policy_id", "POL-REF-01") if primary_policy else "POL-REF-01"
+        conds = (primary_policy or {}).get("conditions", {})
+        if conds.get("cancellation_eligible") is False or policy_id in ["POL-RB-02", "POL-MMT-02"]:
+            checks.append(ValidationCheck(
+                check_name="Policy Grounding Check",
+                passed=False,
+                details=f"Ineligible under {policy_id}: Cancellation is outside permitted window or fare is non-refundable."
+            ))
+            return ValidationResult(
+                decision="ESCALATE",
+                confidence_score=0.99,
+                reason=f"Policy Restriction Enforced: Ineligible for automated refund under {policy_id}. Operator concession review required.",
+                replan_guidance="Do not issue autonomous refund. File operator support case and notify customer.",
+                policy_citation=f"{policy_id}: {primary_policy.get('title')}",
+                checks=checks
+            )
+
         checks.append(ValidationCheck(
             check_name="Policy Grounding Check",
             passed=True,

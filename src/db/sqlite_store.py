@@ -103,9 +103,21 @@ class SQLiteStore:
                 creation_timestamp TEXT NOT NULL,
                 fulfilment_status TEXT NOT NULL,
                 cancellation_status TEXT NOT NULL,
+                provider TEXT DEFAULT 'Generic Merchant',
+                item_details TEXT DEFAULT 'General Merchandise',
                 PRIMARY KEY (order_id, user_id)
             )
             """)
+
+            # Safe column additions if table already exists
+            try:
+                cur.execute("ALTER TABLE orders ADD COLUMN provider TEXT DEFAULT 'Generic Merchant'")
+            except sqlite3.OperationalError:
+                pass
+            try:
+                cur.execute("ALTER TABLE orders ADD COLUMN item_details TEXT DEFAULT 'General Merchandise'")
+            except sqlite3.OperationalError:
+                pass
 
             # Refunds table
             cur.execute("""
@@ -192,7 +204,8 @@ class SQLiteStore:
         demo_accounts = [
             ("USER-DEMO-001", "demo", "demo@resolvex.ai", "STAFF_ARCHITECT"),
             ("USER-CUST-DEMO", "customer_demo", "customer@example.in", "DEMO_CUSTOMER"),
-            ("USER-OPS-DEMO", "ops_demo", "ops@resolvex.ai", "DEMO_OPERATIONS")
+            ("USER-OPS-DEMO", "ops_demo", "ops@resolvex.ai", "DEMO_OPERATIONS"),
+            ("USER-EVALUATOR", "evaluator", "evaluator@resolvex.ai", "EVALUATOR")
         ]
         with self.get_connection() as conn:
             cur = conn.cursor()
@@ -201,13 +214,61 @@ class SQLiteStore:
                 if not cur.fetchone():
                     cur.execute(
                         "INSERT INTO users (user_id, username, email, password_hash, role, created_at) VALUES (?, ?, ?, ?, ?, ?)",
-                        (uid, uname, uemail, hash_password("demo123"), urole, datetime.now().isoformat())
+                        (uid, uname, uemail, hash_password("demo123" if uname != "evaluator" else "evaluator123"), urole, datetime.now().isoformat())
                     )
             conn.commit()
 
         # Seed realistic tenant data for all demo accounts
         for uid, _, _, _ in demo_accounts:
             self.seed_user_data(uid)
+
+    def create_guest_session(self) -> Tuple[bool, str, Dict[str, Any]]:
+        """Creates an isolated, temporary Guest session with clean state and demo cases."""
+        guest_uid = f"GUEST-{uuid.uuid4().hex[:8].upper()}"
+        guest_uname = f"guest_{uuid.uuid4().hex[:6]}"
+        guest_email = f"{guest_uname}@resolvex.ai"
+        sess_id = f"SESS-GUEST-{uuid.uuid4().hex[:10]}"
+        now = datetime.now().isoformat()
+
+        with self.get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute(
+                "INSERT INTO users (user_id, username, email, password_hash, role, created_at) VALUES (?, ?, ?, ?, ?, ?)",
+                (guest_uid, guest_uname, guest_email, hash_password("guest123"), "GUEST", now)
+            )
+            cur.execute("INSERT INTO sessions (session_id, user_id, created_at) VALUES (?, ?, ?)", (sess_id, guest_uid, now))
+            conn.commit()
+
+        # Seed realistic isolated synthetic data for this guest
+        self.seed_user_data(guest_uid)
+
+        user_info = {
+            "user_id": guest_uid,
+            "username": "Guest Customer",
+            "email": guest_email,
+            "role": "GUEST",
+            "session_id": sess_id,
+            "is_guest": True
+        }
+        return True, "Guest session initialized.", user_info
+
+    def reset_guest_data(self, guest_user_id: str) -> bool:
+        """Controlled reset for Guest mode only: deletes and reseeds ONLY the specified guest."""
+        if not guest_user_id.startswith("GUEST-"):
+            return False
+        with self.get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute("DELETE FROM customers WHERE user_id = ?", (guest_user_id,))
+            cur.execute("DELETE FROM transactions WHERE user_id = ?", (guest_user_id,))
+            cur.execute("DELETE FROM orders WHERE user_id = ?", (guest_user_id,))
+            cur.execute("DELETE FROM refunds WHERE user_id = ?", (guest_user_id,))
+            cur.execute("DELETE FROM support_cases WHERE user_id = ?", (guest_user_id,))
+            cur.execute("DELETE FROM chat_messages WHERE user_id = ?", (guest_user_id,))
+            cur.execute("DELETE FROM chat_sessions WHERE user_id = ?", (guest_user_id,))
+            cur.execute("DELETE FROM audit_logs WHERE user_id = ?", (guest_user_id,))
+            conn.commit()
+        self.seed_user_data(guest_user_id)
+        return True
 
     def seed_user_data(self, user_id: str):
         """Seeds realistic, extensive synthetic data for a specific user tenant."""
@@ -246,12 +307,26 @@ class SQLiteStore:
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, core_customers)
 
-            # 2. Seed Core Demonstration Transactions
+            # 2. Seed Core Demonstration Transactions (including 28 Curated Synthetic Cases)
             core_txns = [
+                # Existing Core Scenarios 1-4
                 ("TXN-8821", user_id, "CUST-101", "ORD-5501", 2499.00, "UPI_AUTO_DEBIT", "RAZORPAY", "2026-10-19T21:14:02", "SUCCESS", "rzp_test_8821a", "PG_TIMEOUT_504", None),
                 ("TXN-8822", user_id, "CUST-102", "ORD-5502", 2499.00, "CREDIT_CARD", "RAZORPAY", "2026-10-19T21:20:15", "SUCCESS", "rzp_test_8822b", None, "RF-40192"),
                 ("TXN-9901", user_id, "CUST-103", "ORD-5503", 48500.00, "NETBANKING_HDFC", "PAYU", "2026-10-19T21:25:30", "SUCCESS", "payu_test_9901c", "TOR_PROXY_FLAG", None),
                 ("TXN-7001", user_id, "CUST-201", "ORD-7001", 1999.00, "UPI_RAZORPAY", "RAZORPAY", "2026-10-19T21:30:00", "SUCCESS", "rzp_test_7001d", "PG_TIMEOUT_504", None),
+                
+                # Curated Service-Specific Cases (Travel, E-Commerce, Food, Subscriptions)
+                ("TXN-8824", user_id, "CUST-101", "ORD-9001", 2499.00, "UPI_GPAY", "RAZORPAY", "2026-10-19T09:00:00", "SUCCESS", "rzp_rb_8824", None, None),
+                ("TXN-8829", user_id, "CUST-101", "ORD-9002", 1850.00, "UPI_PHONEPE", "PAYU", "2026-10-20T17:00:00", "SUCCESS", "payu_rb_8829", None, None),
+                ("TXN-8830", user_id, "CUST-101", "ORD-9003", 6800.00, "CREDIT_CARD_ICICI", "PAYU", "2026-10-18T11:00:00", "SUCCESS", "payu_mmt_8830", None, None),
+                ("TXN-8832", user_id, "CUST-101", "ORD-9004", 4200.00, "NETBANKING_SBI", "RAZORPAY", "2026-10-19T15:00:00", "SUCCESS", "rzp_mmt_8832", None, None),
+                ("TXN-8833", user_id, "CUST-101", "ORD-8801", 26990.00, "AMAZON_PAY", "AMAZON_GATEWAY", "2026-10-17T14:00:00", "SUCCESS", "amz_pay_8833", None, None),
+                ("TXN-8834", user_id, "CUST-101", "ORD-8802", 14499.00, "CREDIT_CARD_HDFC", "RAZORPAY", "2026-10-18T16:00:00", "SUCCESS", "rzp_amz_8834", None, None),
+                ("TXN-8835", user_id, "CUST-101", "ORD-8803", 3999.00, "UPI_PAYTM", "PHONEPE", "2026-10-16T12:00:00", "SUCCESS", "fk_pay_8835", None, None),
+                ("TXN-8837", user_id, "CUST-101", "ORD-8805", 749.00, "SWIGGY_PAY", "JUSPAY", "2026-10-20T19:30:00", "SUCCESS", "swg_pay_8837", None, None),
+                ("TXN-9101", user_id, "CUST-101", "ORD-9101", 1499.00, "CREDIT_CARD_AUTO", "STRIPE", "2026-10-19T02:00:00", "SUCCESS", "sub_pay_9101", "RENEWAL_AFTER_CANCEL", None),
+                ("TXN-9102", user_id, "CUST-101", "ORD-9102", 799.00, "UPI_AUTO_DEBIT", "RAZORPAY", "2026-10-19T02:05:00", "SUCCESS", "sub_pay_9102", "DUPLICATE_SUB_CHARGE", None),
+                ("TXN-8828", user_id, "CUST-101", "ORD-8828", 3499.00, "UPI_GPAY", "RAZORPAY", "2026-10-20T14:00:00", "SUCCESS", "rzp_ord_8828", None, None),
             ]
 
             # Expand to 100+ transactions
@@ -270,12 +345,26 @@ class SQLiteStore:
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, core_txns)
 
-            # 3. Seed Core Orders
+            # 3. Seed Core Orders (with Provider and Item Details)
             core_orders = [
-                ("ORD-5501", user_id, "CUST-101", 2499.00, "FAILED", "CAPTURED_NO_ORDER", "2026-10-19T21:14:00", "UNFULFILLED", "NONE"),
-                ("ORD-5502", user_id, "CUST-102", 2499.00, "FAILED_REFUNDED", "REFUNDED", "2026-10-19T21:20:00", "UNFULFILLED", "PROCESSED"),
-                ("ORD-5503", user_id, "CUST-103", 48500.00, "SECURITY_HOLD", "FLAGGED_REVIEW", "2026-10-19T21:25:00", "HELD", "UNDER_REVIEW"),
-                ("ORD-7001", user_id, "CUST-201", 1999.00, "FAILED", "CAPTURED_NO_ORDER", "2026-10-19T21:30:00", "UNFULFILLED", "NONE"),
+                # Existing Core Scenarios 1-4
+                ("ORD-5501", user_id, "CUST-101", 2499.00, "FAILED", "CAPTURED_NO_ORDER", "2026-10-19T21:14:00", "UNFULFILLED", "NONE", "RedBus", "BLR -> Mumbai Intercity Bus Ticket #RB-10291"),
+                ("ORD-5502", user_id, "CUST-102", 2499.00, "FAILED_REFUNDED", "REFUNDED", "2026-10-19T21:20:00", "UNFULFILLED", "PROCESSED", "Generic Merchant", "Electronics Accessory Cart"),
+                ("ORD-5503", user_id, "CUST-103", 48500.00, "SECURITY_HOLD", "FLAGGED_REVIEW", "2026-10-19T21:25:00", "HELD", "UNDER_REVIEW", "Amazon", "Apple MacBook Pro M3 (High Risk)"),
+                ("ORD-7001", user_id, "CUST-201", 1999.00, "FAILED", "CAPTURED_NO_ORDER", "2026-10-19T21:30:00", "UNFULFILLED", "NONE", "Generic Merchant", "Razorpay Payment Gateway Checkout"),
+
+                # Curated Service-Specific Cases
+                ("ORD-9001", user_id, "CUST-101", 2499.00, "CANCELLED", "PAID", "2026-10-19T09:00:00", "UNFULFILLED", "CANCELLED_36H_PRIOR", "RedBus", "Bengaluru -> Mumbai Bus #RB-10291 (Eligible Cancellation)"),
+                ("ORD-9002", user_id, "CUST-101", 1850.00, "CANCELLED", "PAID", "2026-10-20T17:00:00", "UNFULFILLED", "CANCELLED_2H_PRIOR", "RedBus", "Delhi -> Manali Luxury Bus #RB-10492 (Late Ineligible)"),
+                ("ORD-9003", user_id, "CUST-101", 6800.00, "CANCELLED", "PAID", "2026-10-18T11:00:00", "UNFULFILLED", "CANCELLED_FREE_WINDOW", "MakeMyTrip", "Grand Hyatt Goa Resort #MMT-HOTEL-771 (Free Cancellation)"),
+                ("ORD-9004", user_id, "CUST-101", 4200.00, "CANCELLED", "PAID", "2026-10-19T15:00:00", "UNFULFILLED", "NON_REFUNDABLE_RATE", "MakeMyTrip", "Taj Santacruz Mumbai #MMT-HOTEL-882 (Non-Refundable Fare)"),
+                ("ORD-8801", user_id, "CUST-101", 26990.00, "DELIVERED", "PAID", "2026-10-17T14:00:00", "FULFILLED", "WRONG_ITEM_CLAIMED", "Amazon", "Sony WH-1000XM5 (Delivered Wrong Wired Mouse)"),
+                ("ORD-8802", user_id, "CUST-101", 14499.00, "DELIVERED", "PAID", "2026-10-18T16:00:00", "FULFILLED", "DAMAGED_CLAIMED", "Amazon", "LG 27-inch 4K Monitor (Cracked Screen on Arrival)"),
+                ("ORD-8803", user_id, "CUST-101", 3999.00, "DELIVERED", "PAID", "2026-10-16T12:00:00", "FULFILLED", "MISSING_ITEM", "Flipkart", "Noise ColorFit Smartwatch 2-Pack (1 Item Missing)"),
+                ("ORD-8805", user_id, "CUST-101", 749.00, "DELIVERED", "PAID", "2026-10-20T19:30:00", "FULFILLED", "FOOD_SPILLAGE", "Swiggy", "Meghana Special Biryani (Food Spilled in Transit)"),
+                ("ORD-9101", user_id, "CUST-101", 1499.00, "ACTIVE", "PAID", "2026-10-19T02:00:00", "FULFILLED", "CANCELLED_BEFORE_RENEWAL", "Generic Merchant", "Prime Annual Membership (Erroneous Renewal)"),
+                ("ORD-9102", user_id, "CUST-101", 799.00, "ACTIVE", "PAID", "2026-10-19T02:05:00", "FULFILLED", "DUPLICATE_CHARGE", "Generic Merchant", "Monthly Cloud Storage Subscription (Duplicate Charge)"),
+                ("ORD-8828", user_id, "CUST-101", 3499.00, "CANCELLED", "REFUNDED", "2026-10-20T14:00:00", "UNFULFILLED", "CANCELLED_IMMEDIATE", "Generic Merchant", "Smart Fitness Tracker Band (Auto-Refunded)")
             ]
             for i in range(1, 101):
                 oid = f"ORD-7{i:03d}"
@@ -283,11 +372,12 @@ class SQLiteStore:
                 amt = 1999.00 if i <= 50 else (499.00 + (i * 25))
                 ostat = "FAILED" if i <= 50 else "DELIVERED"
                 pstat = "CAPTURED_NO_ORDER" if i <= 50 else "PAID"
-                core_orders.append((oid, user_id, cid, amt, ostat, pstat, f"2026-10-19T21:{i%60:02d}:00", "UNFULFILLED" if i <= 50 else "FULFILLED", "NONE"))
+                prov = "Razorpay Gateway" if i <= 50 else "Generic Merchant"
+                core_orders.append((oid, user_id, cid, amt, ostat, pstat, f"2026-10-19T21:{i%60:02d}:00", "UNFULFILLED" if i <= 50 else "FULFILLED", "NONE", prov, f"Item SKU #{oid}"))
 
             cur.executemany("""
-            INSERT OR REPLACE INTO orders (order_id, user_id, customer_id, amount, order_status, payment_status, creation_timestamp, fulfilment_status, cancellation_status)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT OR REPLACE INTO orders (order_id, user_id, customer_id, amount, order_status, payment_status, creation_timestamp, fulfilment_status, cancellation_status, provider, item_details)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, core_orders)
 
             # 4. Seed Refunds (including RF-40192 for duplicate protection scenario)
@@ -406,6 +496,78 @@ class SQLiteStore:
             cur = conn.cursor()
             cur.execute("SELECT * FROM orders WHERE user_id = ? ORDER BY creation_timestamp DESC LIMIT ?", (user_id, limit))
             return [dict(r) for r in cur.fetchall()]
+
+    def get_customer_support_cases(self, user_id: str, limit: int = 20) -> List[Dict[str, Any]]:
+        with self.get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute("SELECT * FROM support_cases WHERE user_id = ? ORDER BY created_time DESC LIMIT ?", (user_id, limit))
+            return [dict(r) for r in cur.fetchall()]
+
+    def find_matching_customer_orders(self, user_id: str, query: str = "") -> List[Dict[str, Any]]:
+        """Finds customer orders or bookings that match search query or service name."""
+        all_orders = self.get_tenant_orders(user_id, limit=20)
+        q_low = query.lower()
+        if not q_low or q_low == "all":
+            return all_orders
+        matches = []
+        for o in all_orders:
+            prov = (o.get("provider") or "").lower()
+            item = (o.get("item_details") or "").lower()
+            oid = (o.get("order_id") or "").lower()
+            if prov in q_low or q_low in prov or q_low in item or q_low in oid:
+                matches.append(o)
+            elif ("booking" in q_low or "travel" in q_low) and (prov in ["redbus", "makemytrip"] or "bus" in item or "hotel" in item):
+                matches.append(o)
+            elif ("refund" in q_low or "cancel" in q_low) and (prov in ["redbus", "makemytrip", "amazon", "swiggy"]):
+                matches.append(o)
+            elif ("delivery" in q_low or "product" in q_low or "phone" in q_low) and (prov in ["amazon", "flipkart"]):
+                matches.append(o)
+        return matches if matches else all_orders[:3]
+
+    def get_user_recent_activity(self, user_id: str) -> Dict[str, Any]:
+        """Provides consolidated customer context for customer-first homepage."""
+        custs = self.get_tenant_customers(user_id, limit=1)
+        cust = custs[0] if custs else {"name": "Valued Customer", "customer_id": "CUST-101", "trust_score": 95}
+        orders = self.get_tenant_orders(user_id, limit=8)
+        refunds = self.get_tenant_refunds(user_id, limit=5)
+        cases = self.get_customer_support_cases(user_id, limit=5)
+
+        # Formulate chronological customer events
+        timeline = []
+        for r in refunds:
+            timeline.append({
+                "type": "REFUND",
+                "title": f"Refund Disbursed: ₹{r['amount']:,.2f}",
+                "subtitle": f"ARN: {r['bank_reference']} • Status: {r['status']}",
+                "timestamp": r["initiated_timestamp"],
+                "badge": "Refunded"
+            })
+        for c in cases:
+            timeline.append({
+                "type": "SUPPORT_CASE",
+                "title": f"Case #{c['case_id']}: {c['issue'][:45]}",
+                "subtitle": f"Status: {c['status']} • Resolution: {c.get('resolution') or 'Under review'}",
+                "timestamp": c["created_time"],
+                "badge": c["status"]
+            })
+        for o in orders[:4]:
+            timeline.append({
+                "type": "ORDER",
+                "title": f"{o.get('provider', 'Order')}: {o.get('item_details', o['order_id'])[:45]}",
+                "subtitle": f"₹{o['amount']:,.2f} • Payment: {o['payment_status']} • Order: {o['order_status']}",
+                "timestamp": o["creation_timestamp"],
+                "badge": o["order_status"]
+            })
+
+        timeline.sort(key=lambda x: x.get("timestamp", ""), reverse=True)
+
+        return {
+            "customer": cust,
+            "recent_orders": orders[:6],
+            "recent_refunds": refunds[:4],
+            "recent_cases": cases[:4],
+            "timeline": timeline[:6]
+        }
 
     def get_tenant_refunds(self, user_id: str, limit: int = 50) -> List[Dict[str, Any]]:
         with self.get_connection() as conn:

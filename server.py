@@ -59,6 +59,36 @@ def auth_demo():
     success, msg, user = sqlite_store.authenticate_user(uname, "demo123")
     return jsonify({"status": "success", "user": user, "message": label})
 
+@app.route("/api/auth/guest", methods=["POST"])
+def auth_guest():
+    success, msg, user = sqlite_store.create_guest_session()
+    return jsonify({"status": "success", "user": user, "message": "Isolated guest session started."})
+
+@app.route("/api/auth/logout", methods=["POST"])
+def auth_logout():
+    return jsonify({"status": "success", "message": "Session terminated cleanly. Local storage cleared."})
+
+@app.route("/api/auth/reset-demo", methods=["POST"])
+def auth_reset_demo():
+    data = request.json or {}
+    guest_uid = data.get("user_id", "")
+    if not guest_uid.startswith("GUEST-"):
+        return jsonify({"status": "error", "message": "Reset Demo is only available for Guest mode."}), 400
+    sqlite_store.reset_guest_data(guest_uid)
+    return jsonify({"status": "success", "message": "Guest demo environment reset to fresh state."})
+
+@app.route("/api/customer/home", methods=["GET"])
+def customer_home():
+    user_id = request.args.get("user_id", "USER-CUST-DEMO")
+    activity = sqlite_store.get_user_recent_activity(user_id)
+    return jsonify({"status": "success", "activity": activity})
+
+@app.route("/api/customer/orders", methods=["GET"])
+def customer_orders():
+    user_id = request.args.get("user_id", "USER-CUST-DEMO")
+    orders = sqlite_store.get_tenant_orders(user_id, limit=30)
+    return jsonify({"status": "success", "orders": orders})
+
 @app.route("/api/auth/me", methods=["GET"])
 def auth_me():
     user_id = request.args.get("user_id", "USER-DEMO-001")
@@ -113,6 +143,7 @@ def api_chat():
             "status": "success",
             "reply": reply_text,
             "needs_clarification": turn_res.get("needs_clarification", False),
+            "clarification_options": turn_res.get("clarification_options", []),
             "is_informational": turn_res.get("is_informational", False),
             "pipeline_data": None
         })
@@ -487,22 +518,36 @@ def api_benchmark():
     })
 
 # ==============================================================================
-# LLM ENGINE HEALTH & STATUS
+# LLM ENGINE HEALTH & STATUS WITH STRICT RUNTIME DIAGNOSTICS
 # ==============================================================================
 @app.route("/api/llm/status", methods=["GET"])
 def api_llm_status():
-    ollama_ok = llm_client.is_ollama_available()
+    diag = llm_client.get_runtime_diagnostics()
     return jsonify({
         "status": "success",
-        "ollama_available": ollama_ok,
-        "active_mode": llm_client.mode,
-        "model": llm_client.model,
-        "label": f"Ollama ({llm_client.model}) Active" if ollama_ok else "Deterministic Cognitive Fallback Active"
+        "ollama_available": diag["ollama_available"],
+        "active_mode": diag["active_mode"],
+        "model": diag["model"],
+        "label": f"Ollama ({diag['model']}) Active" if diag["ollama_available"] else "Deterministic Cognitive Fallback Active"
     })
 
-# Main entry point
+@app.route("/api/llm/diagnostics", methods=["GET"])
+def api_llm_diagnostics():
+    diag = llm_client.get_runtime_diagnostics()
+    return jsonify({
+        "status": "success",
+        "diagnostics": diag
+    })
+
+# Main entry points
 @app.route("/")
 def index():
+    return send_file(ROOT_DIR / "frontend" / "index.html")
+
+@app.route("/evaluator")
+@app.route("/admin")
+@app.route("/mission-control")
+def evaluator_portal():
     return send_file(ROOT_DIR / "frontend" / "index.html")
 
 if __name__ == "__main__":

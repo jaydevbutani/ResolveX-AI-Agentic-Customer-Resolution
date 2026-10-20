@@ -13,7 +13,11 @@ from src.db.sqlite_store import sqlite_store
 from src.llm.client import llm_client
 
 def run_all_tests():
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    if getattr(sys.stdout, 'encoding', '').lower() != 'utf-8':
+        try:
+            sys.stdout.reconfigure(encoding='utf-8')
+        except Exception:
+            pass
     print("=" * 70)
     print(" RESOLVEX AI — AUTOMATED ACCEPTANCE & BENCHMARK TEST SUITE (14/14)")
     print("=" * 70)
@@ -386,4 +390,7 @@ def run_all_tests():
     }
 
 if __name__ == "__main__":
-    run_all_tests()
+    results, metrics = run_all_tests()
+    if "--all" in sys.argv or "--customer" in sys.argv:
+        from evaluation.customer_tests import run_customer_suite
+        run_customer_suite()

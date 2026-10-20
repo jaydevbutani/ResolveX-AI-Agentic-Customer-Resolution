@@ -362,6 +362,34 @@ The acceptance test suite in [`evaluation/benchmark.py`](file:///c:/Users/jayde/
 ======================================================================
 ```
 
+### Customer-First Redesign Suite (17/17 Tests A - Q)
+```text
+===========================================================================
+ RESOLVEX AI — CUSTOMER-FIRST REDESIGN VERIFICATION SUITE (TESTS A - Q)
+===========================================================================
+ [PASS]   | TEST A: Landing page appears before authentication         | 0.001s
+ [PASS]   | TEST B: Guest mode creates isolated session                | 0.048s
+ [PASS]   | TEST C: User A cannot see User B history                   | 0.005s
+ [PASS]   | TEST D: Logout clears active agent state                   | 0.002s
+ [PASS]   | TEST E: Login reloads correct customer history             | 0.011s
+ [PASS]   | TEST F: Multiple bookings cause clarification rather than guessing | 0.001s
+ [PASS]   | TEST G: Provider is identified from evidence/user input    | 0.000s
+ [PASS]   | TEST H: Unknown provider causes clarification              | 0.000s
+ [PASS]   | TEST I: Eligible cancellation refund is approved           | 0.191s
+ [PASS]   | TEST J: Ineligible cancellation is rejected with policy reason | 0.001s
+ [PASS]   | TEST K: Wrong product creates appropriate resolution flow  | 0.001s
+ [PASS]   | TEST L: Damaged product creates appropriate resolution flow | 0.001s
+ [PASS]   | TEST M: Duplicate refund is blocked                        | 0.223s
+ [PASS]   | TEST N: High-risk case escalates                           | 0.115s
+ [PASS]   | TEST O: Technical analysis is not shown to normal customer | 0.000s
+ [PASS]   | TEST P: Customer history persists across sessions          | 0.001s
+ [PASS]   | TEST Q: Qwen3 status reflects actual runtime model         | 1.535s
+---------------------------------------------------------------------------
+ OVERALL: 17/17 Tests Passed (100.0%)
+===========================================================================
+```
+**Combined Suite Total: 31/31 Automated Tests Passing (100.0%)**
+
 ---
 
 ## 25. Installation Instructions
@@ -369,7 +397,7 @@ The acceptance test suite in [`evaluation/benchmark.py`](file:///c:/Users/jayde/
 ### Prerequisites
 - Python 3.10+ (Recommended: Python 3.11)
 - Git
-- Optional: Local [Ollama](https://ollama.ai) instance with model `qwen2.5-coder:7b`
+- Local [Ollama](https://ollama.ai) instance with model `qwen2.5-coder:7b` (automatic fallback reasoner active if Ollama is paused)
 
 ### Setup Steps
 ```bash
@@ -392,32 +420,37 @@ pip install -r requirements.txt
 
 ## 26. How to Run the Application
 
-### Option A: Launch Streamlit Web Application (Port 8501)
-```bash
-streamlit run app.py
-```
-Access at: `http://localhost:8501`
-
-### Option B: Launch Flask API & Direct Web Console (Port 5000)
+### Option A: Launch Customer Portal & API Server (Port 5000)
 ```bash
 python server.py
 ```
-Access at: `http://localhost:5000`
+- **Customer Experience:** [http://localhost:5000](http://localhost:5000) (First screen is Landing/Authentication, instant Guest demo mode, or customer login)
+- **Evaluator & Admin Console:** [http://localhost:5000/evaluator](http://localhost:5000/evaluator) (Access Mission Control, Decision Lab, Enterprise Data, and Test Suite)
 
-### Option C: Run Automated Acceptance Benchmark (14 Tests)
+### Option B: Run Automated Acceptance Suite (All 31 Tests)
 ```bash
-python evaluation/benchmark.py
+python evaluation/benchmark.py --all
+```
+Or run individual suites:
+```bash
+python evaluation/benchmark.py      # Core 14/14 Acceptance Tests
+python evaluation/customer_tests.py # Customer-First 17/17 Tests (A-Q)
 ```
 
-### Option D: Run Interactive CLI Scenario Demonstration
+### Option C: Run Interactive CLI Scenario Demonstration
 ```bash
 python run_demo.py
 ```
 
-### Demo Accounts for Evaluation
-Use the 1-click **Role Switcher** in the top navigation bar or log in with:
-- **Staff AI Architect:** `demo` / `demo123`
-- **Customer Account:** `customer_demo` / `demo123`
+### Option D: Launch Streamlit Operational Console (Port 8501)
+```bash
+streamlit run app.py
+```
+
+### Verified Demo Accounts for Evaluation
+- **Demo Customer:** `customer_demo` / `demo123` (Rahul Sharma)
+- **Guest Demo Mode:** 1-Click instant isolated guest session via the Landing Page
+- **Academic Evaluator:** `evaluator` / `evaluator123` or `demo` / `demo123` via `/evaluator`
 - **Operations Lead:** `ops_demo` / `demo123`
 
 ---

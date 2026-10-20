@@ -3,6 +3,7 @@
     "policy_id": "POL-REF-01",
     "title": "Failed Order with Successful Payment Refund Policy",
     "category": "REFUND_ELIGIBILITY",
+    "provider": "Generic Merchant",
     "description": "If payment gateway records status SUCCESS, but order creation failed due to inventory timeout or gateway communication drop, the customer is eligible for a 100% autonomous refund to the original payment method.",
     "conditions": {
       "payment_status": "SUCCESS",
@@ -17,6 +18,7 @@
     "policy_id": "POL-REF-02",
     "title": "Duplicate Payment Auto-Reversal Policy",
     "category": "DUPLICATE_PAYMENT",
+    "provider": "Generic Merchant",
     "description": "If duplicate successful transactions are identified for the same cart or order within 30 minutes, the secondary transaction must be refunded automatically without customer friction.",
     "conditions": {
       "duplicate_window_minutes": 30,
@@ -31,6 +33,7 @@
     "policy_id": "POL-REF-03",
     "title": "Duplicate Refund Prevention & Guard Policy",
     "category": "FINANCIAL_INTEGRITY",
+    "provider": "Generic Merchant",
     "description": "Under no circumstances may a new refund be initiated if an existing refund record for the given transaction is already in INITIATED, PROCESSING, or COMPLETED state. In such cases, query refund status, provide ARN tracking, and reassure the customer.",
     "conditions": {
       "existing_refund_statuses": ["INITIATED", "PROCESSING", "COMPLETED"],
@@ -44,6 +47,7 @@
     "policy_id": "POL-REF-04",
     "title": "Post-Cancellation Subscription Billing Reversal",
     "category": "SUBSCRIPTION",
+    "provider": "Generic Merchant",
     "description": "When a subscription fee is deducted subsequent to user cancellation timestamp, the charge is recognized as erroneous billing and qualifies for immediate full refund and entitlement deactivation.",
     "conditions": {
       "cancellation_prior_to_charge": true,
@@ -57,6 +61,7 @@
     "policy_id": "POL-ESC-05",
     "title": "High-Value Transaction & Fraud Risk Escalation Protocol",
     "category": "ESCALATION_EXCEPTION",
+    "provider": "Generic Merchant",
     "description": "Autonomous financial execution is strictly blocked for transactions exceeding INR 25,000, customers with trust score below 50, detected device/IP spoofing, or conflicting delivery telemetry. Must compile an evidence docket and escalate to Tier-2 Operations Lead.",
     "conditions": {
       "amount_threshold_inr": 25000,
@@ -70,6 +75,7 @@
     "policy_id": "POL-SYS-06",
     "title": "Systemic Gateway Incident Cluster Protocol",
     "category": "SYSTEMIC_INCIDENTS",
+    "provider": "Generic Merchant",
     "description": "When 5 or more transaction failures share identical error signatures within a 15-minute window, individual claims must be clustered into a Master Incident. Autonomous batch reversal applies and operations alerting is triggered.",
     "conditions": {
       "cluster_threshold_count": 5,
@@ -77,5 +83,98 @@
     },
     "action": "CREATE_PARENT_INCIDENT_AND_LINK_CASES",
     "timeline": "Batch processing with live status broadcast."
+  },
+  {
+    "policy_id": "POL-RB-01",
+    "title": "RedBus Bus Ticket Cancellation (Eligible Window)",
+    "category": "TRAVEL_CANCELLATION",
+    "provider": "RedBus",
+    "description": "Bus tickets cancelled more than 24 hours prior to scheduled departure qualify for a 100% automated refund to original payment source.",
+    "conditions": {
+      "min_hours_before_departure": 24,
+      "max_autonomous_amount_inr": 10000,
+      "requires_human_approval": false
+    },
+    "action": "INITIATE_FULL_REFUND",
+    "timeline": "Refund initiated immediately; credited in 3-5 business days."
+  },
+  {
+    "policy_id": "POL-RB-02",
+    "title": "RedBus Bus Ticket Cancellation (Post-Window Ineligible)",
+    "category": "TRAVEL_CANCELLATION",
+    "provider": "RedBus",
+    "description": "Cancellations made within 24 hours of bus departure time are non-refundable by the bus operator under standard bus fare rules. Automatic refund cannot be approved; create a support case for operator concession review.",
+    "conditions": {
+      "min_hours_before_departure": 24,
+      "cancellation_eligible": false,
+      "requires_human_approval": true
+    },
+    "action": "REJECT_REFUND_OFFER_SUPPORT_CASE",
+    "timeline": "Support case submitted to operator within 24 hours."
+  },
+  {
+    "policy_id": "POL-MMT-01",
+    "title": "MakeMyTrip Hotel Free Cancellation Policy",
+    "category": "TRAVEL_HOTEL",
+    "provider": "MakeMyTrip",
+    "description": "Hotel reservations cancelled prior to the property free cancellation deadline qualify for a 100% refund without deduction.",
+    "conditions": {
+      "cancelled_before_deadline": true,
+      "requires_human_approval": false
+    },
+    "action": "INITIATE_FULL_REFUND",
+    "timeline": "Credited in 3-5 business days."
+  },
+  {
+    "policy_id": "POL-MMT-02",
+    "title": "MakeMyTrip Non-Refundable Booking Policy",
+    "category": "TRAVEL_HOTEL",
+    "provider": "MakeMyTrip",
+    "description": "Hotels booked under non-refundable special rates cannot be cancelled for monetary refund per hotel partner agreement.",
+    "conditions": {
+      "is_non_refundable": true,
+      "cancellation_eligible": false
+    },
+    "action": "REJECT_REFUND_OFFER_HOTEL_CREDIT",
+    "timeline": "Inquiry logged; hotel credit advisory provided."
+  },
+  {
+    "policy_id": "POL-AMZ-WRONG",
+    "title": "Amazon Wrong Product Delivered Policy",
+    "category": "ECOMMERCE_RETURN",
+    "provider": "Amazon",
+    "description": "If the received item differs from the ordered item (wrong model, color, or serial number), schedule an immediate reverse pickup and initiate a zero-cost replacement or full refund.",
+    "conditions": {
+      "within_return_window_days": 7,
+      "item_mismatch_reported": true
+    },
+    "action": "SCHEDULE_PICKUP_AND_INITIATE_REMEDY",
+    "timeline": "Pickup scheduled within 24 hours; refund/replacement triggered upon pickup scan."
+  },
+  {
+    "policy_id": "POL-AMZ-DAMAGED",
+    "title": "Amazon Damaged In Transit Resolution Policy",
+    "category": "ECOMMERCE_RETURN",
+    "provider": "Amazon",
+    "description": "Products arriving damaged in transit qualify for instant replacement order dispatch or full refund with photo verification.",
+    "conditions": {
+      "within_return_window_days": 7,
+      "damage_reported": true
+    },
+    "action": "DISPATCH_REPLACEMENT_OR_REFUND",
+    "timeline": "Replacement dispatched within 12 hours."
+  },
+  {
+    "policy_id": "POL-SWG-01",
+    "title": "Swiggy Food Spillage or Missing Item Policy",
+    "category": "FOOD_DELIVERY",
+    "provider": "Swiggy",
+    "description": "In the event of wrong dish delivery, missing items, or food spillage, issue an instant autonomous refund to Swiggy Money or original payment method.",
+    "conditions": {
+      "reported_within_hours": 2,
+      "max_autonomous_amount_inr": 2000
+    },
+    "action": "INITIATE_INSTANT_FOOD_REFUND",
+    "timeline": "Credited within 15 minutes."
   }
 ]
